@@ -1,5 +1,7 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +21,7 @@ public class PaymentFrame extends JFrame {
     private String[] expenses = {"Groceries","Health","Transport"};
     JFrame payment;
     private String anAmount;
-    public PaymentFrame(){
+    public PaymentFrame(Account account){
         payment = new Template();
         JComboBox<String> cb = new JComboBox<String>(expenses);
 

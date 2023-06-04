@@ -1,5 +1,7 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +18,7 @@ public class TransactionTypeFrame extends JFrame {
     private JLabel line;
 
 
-    public TransactionTypeFrame(){
+    public TransactionTypeFrame(Account account) {
 
         frame = new Template();
 
@@ -43,7 +45,7 @@ public class TransactionTypeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 frame.dispose();
-                new DepositFrame();
+                new DepositFrame(account);
             }
         });
 
@@ -51,7 +53,7 @@ public class TransactionTypeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 frame.dispose();
-                new WithdrawFrame();
+                new WithdrawFrame(account);
             }
         });
 
@@ -59,7 +61,7 @@ public class TransactionTypeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 frame.dispose();
-                new TransferFrame();
+                new TransferFrame(account);
             }
         });
 
@@ -67,7 +69,7 @@ public class TransactionTypeFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 frame.dispose();
-                new PaymentFrame();
+                new PaymentFrame(account);
             }
         });
 

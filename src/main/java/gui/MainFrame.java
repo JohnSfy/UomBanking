@@ -33,10 +33,10 @@ public class MainFrame extends JFrame {
 
     protected static Account account;
 
+    public JFrame mainFrame;
+
     public MainFrame(Account account){
-        JFrame mainFrame = new Template();
-
-
+        mainFrame = new Template();
 
 //      Initializing components
         header = Utils.setHeader("Welcome back " + ClientDB.fetchClient(account.getClient()).getFirstName());
@@ -76,6 +76,8 @@ public class MainFrame extends JFrame {
 //      Creating account
        // account = new Account(0, "", "", client.getUsername(),"");
 
+//      Setting up newTransactionButton
+
 //      Adding components to the frame
         mainFrame.add(header);
         mainFrame.add(expensesPanel);
@@ -102,10 +104,7 @@ public class MainFrame extends JFrame {
 
             Color color = new Color(red, green, blue);
             //cardPanel.add(new PreviewCardFrame(account.getID() ,card.getType(), card.genNum(), card.getExpirationDate(), card.getCardName(), card.genCVV(),color));
-
         }
-
-
 
 //      Basic settings
         mainFrame.setVisible(true);
@@ -220,7 +219,11 @@ class SpendCategoriesPanel extends JPanel {
 class BalancePanel extends JPanel{
     private JLabel header;
     private JLabel balance;
-    private JButton newTransactionButton;
+    public static JButton newTransactionButton;
+
+    public static JButton getNewTransactionButton() {
+        return newTransactionButton;
+    }
 
     public BalancePanel(Account account) {
 //      Initializing components
@@ -228,6 +231,14 @@ class BalancePanel extends JPanel{
 
         balance = new JLabel(String.valueOf(account.getBalance()));
         newTransactionButton = new JButton("New Transaction");
+
+//      Setting up newTransactionButton
+        newTransactionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TransactionTypeFrame(account);
+            }
+        });
 
 //      Setting up header
         header.setFont(new Font("Courier", Font.PLAIN, 23));
@@ -314,18 +325,15 @@ class ExpensesPanel extends JPanel {
             }
         });
 
-
 //      Basic settings
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setBounds(50, 200, 190, 300);
 
         layoutComponents();
-
     }
 
     public LayoutManager layoutComponents() {
         setLayout(new FlowLayout(1, 10, 28));
-
 
         add(header);
         add(scrollPane);
