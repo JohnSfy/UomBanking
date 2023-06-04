@@ -1,12 +1,17 @@
 package gui;
 
 import model.Account;
+import model.Transfer;
+import model.Withdraw;
 import org.example.AccountDB;
+import org.example.TransactionsDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static java.lang.Double.parseDouble;
 
@@ -51,6 +56,9 @@ public class TransferFrame extends JFrame {
                 String amount = amountField.getText();
                 if(isCorrect(amount) && checkAmount(amount, account.getBalance())){
 //                  Setting up amountField
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    TransactionsDB.saveTransaction(new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText()));
                     account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
                     trFrame.dispose();
                     new PreviewTransferFrame(account);

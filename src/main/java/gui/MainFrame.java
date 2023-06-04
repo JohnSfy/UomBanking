@@ -1,11 +1,7 @@
 package gui;
 
-import model.Account;
-import model.Card;
-import model.Client;
-import org.example.AccountDB;
-import org.example.CardDB;
-import org.example.ClientDB;
+import model.*;
+import org.example.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -15,11 +11,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import javax.management.Query;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
     private JLabel header;
@@ -33,16 +31,20 @@ public class MainFrame extends JFrame {
 
     protected static Account account;
 
-    public JFrame mainFrame;
+    public static JFrame mainFrame;
+
+    public static JFrame getMainFrame() {
+        return mainFrame;
+    }
 
     public MainFrame(Account account){
         mainFrame = new Template();
 
 //      Initializing components
         header = Utils.setHeader("Welcome back " + ClientDB.fetchClient(account.getClient()).getFirstName());
-        expensesPanel = new ExpensesPanel();
+        expensesPanel = new ExpensesPanel(account);
         balancePanel = new BalancePanel(account);
-        spendCategoriesPanel = new SpendCategoriesPanel();
+        spendCategoriesPanel = new SpendCategoriesPanel(account);
         cardPanel = new CardPanel();
         transactionHistoryButton = new JButton("Transaction History");
         loanButton = new JButton("Apply for a loan");
@@ -159,17 +161,23 @@ class SpendCategoriesPanel extends JPanel {
     private ChartPanel chartPanel;
 
 
-    public SpendCategoriesPanel() {
+    public SpendCategoriesPanel(Account account) {
+        spendCategoriesButton = new JButton("Spend Categories");
+        chartPanel = new ChartPanel(null);
 
 //      Basic settings
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setBounds(700, 200, 470, 400);
 
+//      Fetching payments
+        ArrayList<Transactions> payments = SpendCategoriesDB.fetchAllPayments(account);
+
 //      Setting up the Chart
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Supermarket", 40);
-        dataset.setValue("Transport", 35);
-        dataset.setValue("Pharmacy", 25);
+
+        for (Transactions payment: payments) {
+            dataset.setValue(payment.getDescription(), payment.getAmount());
+        }
 
         JFreeChart chart = ChartFactory.createPieChart(
                 "Spend Categories", // chart title
@@ -193,6 +201,14 @@ class SpendCategoriesPanel extends JPanel {
         spendCategoriesButton = new JButton("Spend categories");
         spendCategoriesButton.setFont(new Font("Courier", Font.PLAIN, 12));
         spendCategoriesButton.setPreferredSize(new Dimension(180, 50));
+
+        spendCategoriesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.getMainFrame().dispose();
+                new SpendCategoriesFrame(account, payments);
+            }
+        });
 
         layoutComponents();
 
@@ -236,6 +252,7 @@ class BalancePanel extends JPanel{
         newTransactionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                MainFrame.getMainFrame().dispose();
                 new TransactionTypeFrame(account);
             }
         });
@@ -284,7 +301,7 @@ class ExpensesPanel extends JPanel {
     private JList expenseList;
     private DefaultListModel listModel;
     private JButton transactionHistoryButton;
-    public ExpensesPanel() {
+    public ExpensesPanel(Account account) {
 
 //      Initializing components
         header = Utils.setHeader("Your expenses");
@@ -301,27 +318,37 @@ class ExpensesPanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        listModel.addElement("• Expense 1, 12,00$");
-        listModel.addElement("• Expense 2, 20,00$");
-        listModel.addElement("• Expense 3, 300,00$");
-        listModel.addElement("• Expense 4, 300,00$");
-        listModel.addElement("• Expense 5, 1300,00$");
-        listModel.addElement("• Expense 6, 11300,00$");
-        listModel.addElement("• Expense 7, 200,00$");
-        listModel.addElement("• Expense 8, 1300,00$");
-        listModel.addElement("• Expense 9, 300,00$");
-        listModel.addElement("• Expense 10, 3100,00$");
-        listModel.addElement("• Expense 12, 3100,00$");
-        listModel.addElement("• Expense 13, 300,00$");
+//      Retrieving all transactions from the database
+        ArrayList<Transactions> transactions = new ArrayList<>();
+        transactions = ExpensesDB.fetchAllTransactions(account);
+
+        if (transactions != null) {
+            for (Transactions transaction : transactions) {
+                if(transaction.getClass().getName().equals("model.Deposit")){
+                    listModel.addElement("• Deposit, "+transaction.getAmount() + "$");
+                }
+                else if(transaction.getClass().getName().equals("model.Withdraw")){
+                    listModel.addElement("• Withdraw, " + transaction.getAmount() + "$");
+                }
+                else if(transaction.getClass().getName().equals("model.Transfer")){
+                    listModel.addElement("• " + transaction.getDescription() + transaction.getAmount() + "$");
+                }
+                else if(transaction.getClass().getName().equals("model.Payment")){
+                    listModel.addElement("• " + transaction.getDescription() + ", " + transaction.getAmount() + "$");
+                }
+            }
+        }
 
 //      Setting up transaction history button
         transactionHistoryButton.setFont(new Font("Courier", Font.PLAIN, 12));
         transactionHistoryButton.setPreferredSize(new Dimension(180, 50));
         transactionHistoryButton.setText("<html><center>"+"Check your transaction"+"<br>"+"history"+"</center></html>");
+        ArrayList<Transactions> finalTransactions = transactions;
         transactionHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Waiting for transaction history frame
+                MainFrame.getMainFrame().dispose();
+                new TransactionHistoryFrame(account, finalTransactions);
             }
         });
 
