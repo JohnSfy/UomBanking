@@ -30,14 +30,14 @@ public class LoanSuccessFrame extends JFrame{
 
 
 
-        Loan aLoan = new Loan(account.getID(), loanAmount,des,currentDate,expirationDate,doses,"");
+        Loan aLoan = new Loan(account.getID(),loanAmount,des,currentDate,expirationDate,doses,"");
         LoanDB.saveLoan(aLoan);
 
         label2 = new JLabel("Your loans");
         label2.setBounds(500, 250, 1000, 100 );
         label2.setFont(new Font("Courier", Font.PLAIN, 30));
 
-        returnToTheMainPageButton = Utils.returnToMainPageButton(frame, account);
+        returnToTheMainPageButton = Utils.returnToMainPageButton(frame,account);
         returnToTheMainPageButton.setBounds(480,650,200,35);
 
         receiptButton = new JButton("Download the receipt of your loan");
@@ -48,6 +48,8 @@ public class LoanSuccessFrame extends JFrame{
         //πίνακας δανείων μαζί με ημερομηνία λήξης
         Object rowData[][] = new Object[4][2];
         String columnNames[] = { "Amount", "Expiration Date"};
+        rowData[0][0] = String.valueOf(LoanDB.fetchLoan(account.getID()).getLoanAmount());
+        rowData[0][1] = String.valueOf(LoanDB.fetchLoan(account.getID()).getDateExp());
 
         table= new JTable(rowData, columnNames);
         scrollPane = new JScrollPane(table);
@@ -144,3 +146,5 @@ public class LoanSuccessFrame extends JFrame{
         return expirationDate;
     }
 }
+
+

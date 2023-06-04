@@ -1,6 +1,7 @@
 package gui;
 
 import model.Account;
+import org.example.LoanDB;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,12 @@ public class LoanFrame extends JFrame {
 
         //creating new JTable to save our loans
         String[] LoansColumns = new String[]{"Amount", "Expiration Date"};
-        String[][] LoansInfo = new String[][]{{"1000$","1/6/23"},{"90$","3/3/23"},{"250$","9/10/23"}};
+        Object[][] LoansInfo = new String[4][2];
+
+        if(!(LoanDB.fetchLoan(account.getID()) == null)) {
+            LoansInfo[0][0] = String.valueOf(LoanDB.fetchLoan(account.getID()).getLoanAmount());
+            LoansInfo[0][1] = String.valueOf(LoanDB.fetchLoan(account.getID()).getDateExp());
+        }
         LoanTable = new JTable(LoansInfo,LoansColumns);
         LoanTable.setForeground(Color.BLACK);
         LoanTable.setEnabled(false);
@@ -60,7 +66,7 @@ public class LoanFrame extends JFrame {
 
         //settings for "return to main page" button
         ReturnToTheMainPage = new JButton("Return to the main page");
-        ReturnToTheMainPage = Utils.returnToMainPageButton(Loans, account);
+        ReturnToTheMainPage = Utils.returnToMainPageButton(Loans,account);
         ReturnToTheMainPage.setBounds(1000,710,180,30);
 
         //settings for loanReceipt button
