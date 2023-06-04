@@ -7,8 +7,8 @@ import org.example.AccountDB;
 import org.example.CardDB;
 import org.example.ClientDB;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import javax.imageio.ImageIO;
@@ -57,7 +57,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainFrame.dispose();
-                new LoanFrame(account.getID());
+                new LoanFrame(account);
             }
         });
 
