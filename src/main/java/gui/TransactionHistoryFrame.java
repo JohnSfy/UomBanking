@@ -1,4 +1,5 @@
 package gui;
+import model.Account;
 import model.Transactions;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class TransactionHistoryFrame extends JFrame {
     private JButton downloadTranButton;
 
 
-    public TransactionHistoryFrame(){
+    public TransactionHistoryFrame(Account account){
 
         frame = new Template();
         downloadTranButton= new JButton("Download Transaction History");
@@ -37,7 +38,7 @@ public class TransactionHistoryFrame extends JFrame {
             }
         });
 
-        returnToMainPageButton = Utils.returnToMainPageButton(frame);
+        returnToMainPageButton = Utils.returnToMainPageButton(frame, account);
         returnToMainPageButton.setBounds(485,480,200,30);
 
 

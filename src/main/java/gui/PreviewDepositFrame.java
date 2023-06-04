@@ -26,7 +26,7 @@ public class PreviewDepositFrame extends JFrame {
         message2= new JLabel("Your new account balance");
         balance = new JLabel(String.valueOf(account.getBalance()));
         innerPanel = new JPanel();
-        returnToMainPageButton = Utils.returnToMainPageButton(successDeposit);
+        returnToMainPageButton = Utils.returnToMainPageButton(successDeposit, account);
         receiptButton = new JButton("Download receipt");
 
 
@@ -47,6 +47,9 @@ public class PreviewDepositFrame extends JFrame {
 
         returnToMainPageButton.setBounds(630,550,200,40);
 
+//      Saving account's new Balance
+        AccountDB.updateAccount(account);
+
         //Adding the elements
         innerPanel.add(message2);
         innerPanel.add(balance);
@@ -56,8 +59,7 @@ public class PreviewDepositFrame extends JFrame {
         successDeposit.add(receiptButton);
         successDeposit.add(returnToMainPageButton);
 
-//      Saving account's new Balance
-        AccountDB.updateAccount(account);
+
 
         successDeposit.setVisible(true);
         successDeposit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

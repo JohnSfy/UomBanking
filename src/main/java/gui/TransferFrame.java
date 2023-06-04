@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.lang.Double.parseDouble;
+
 public class TransferFrame extends JFrame {
     private JFrame trFrame;
     private JLabel header;
@@ -46,12 +48,17 @@ public class TransferFrame extends JFrame {
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                trFrame.dispose();
-                new PreviewTransferFrame(account);
+                String amount = amountField.getText();
+                if(isCorrect(amount) && checkAmount(amount, account.getBalance())){
+//                  Setting up amountField
+                    account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
+                    trFrame.dispose();
+                    new PreviewTransferFrame(account);
+                }
             }
         });
 
-        returnToMainPageButton = Utils.returnToMainPageButton(trFrame);
+        returnToMainPageButton = Utils.returnToMainPageButton(trFrame, account);
         returnToMainPageButton.setBounds(970,710,200,30);
 
         trFrame.add(header);
@@ -67,5 +74,36 @@ public class TransferFrame extends JFrame {
         trFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         trFrame.setBackground(Color.LIGHT_GRAY);
 
+    }
+
+    public boolean isCorrect(String anAmount){
+        boolean flag = true;
+        if(anAmount.isBlank()) {
+            JOptionPane.showMessageDialog(trFrame, "Please enter an amount!",
+                    "Warning", JOptionPane.WARNING_MESSAGE);
+            flag=false;
+            return flag;
+        }
+        for(int i = 0; i < anAmount.length(); i++){
+            if(!Character.isDigit(anAmount.charAt(i))){
+                flag=false;
+                JOptionPane.showMessageDialog(trFrame, "Please enter an amount!",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public boolean checkAmount(String anAmount, double balance){
+        double amount = Double.parseDouble(anAmount);
+        boolean flag=true;
+        if(amount>balance)
+        {
+            JOptionPane.showMessageDialog(trFrame, "Please enter a smaller amount!",
+                    "Warning", JOptionPane.ERROR_MESSAGE);
+            flag=false;
+        }
+        return flag;
     }
 }

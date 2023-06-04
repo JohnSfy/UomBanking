@@ -1,5 +1,7 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,7 @@ public class LoanFrame extends JFrame {
 
 
 
-    public LoanFrame(String accountId){
+    public LoanFrame(Account account){
 
         //Setting template
         JFrame Loans = new Template();
@@ -58,7 +60,7 @@ public class LoanFrame extends JFrame {
 
         //settings for "return to main page" button
         ReturnToTheMainPage = new JButton("Return to the main page");
-        ReturnToTheMainPage = Utils.returnToMainPageButton(Loans);
+        ReturnToTheMainPage = Utils.returnToMainPageButton(Loans, account);
         ReturnToTheMainPage.setBounds(1000,710,180,30);
 
         //settings for loanReceipt button
@@ -75,7 +77,7 @@ public class LoanFrame extends JFrame {
         NewLoan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CreateLoanFrame(accountId);
+                new CreateLoanFrame(account);
             }
         });
 

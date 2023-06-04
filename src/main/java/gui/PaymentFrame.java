@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static java.lang.Double.parseDouble;
+
 public class PaymentFrame extends JFrame {
     private JLabel header;
     private JLabel message;
@@ -34,7 +36,7 @@ public class PaymentFrame extends JFrame {
         amountField = new JTextField();
         expensesLabel = new JLabel("Type of expense");
         submitButton = new JButton("Submit");
-        returnToMainPageButton = Utils.returnToMainPageButton(payment);
+        returnToMainPageButton = Utils.returnToMainPageButton(payment, account);
 
         //Placing the elements
         header.setBounds(325, 100, 1000, 100);
@@ -60,9 +62,11 @@ public class PaymentFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                anAmount=amountField.getText();
-               if(isCorrect(anAmount) && checkAmount(anAmount,0)){
+               if(isCorrect(anAmount) && checkAmount(anAmount,account.getBalance())){
+//                 Setting up amountField
+                   account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
                    payment.dispose();
-                   new PreviewPaymentFrame();
+                   new PreviewPaymentFrame(account);
                }
 
             }

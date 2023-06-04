@@ -1,6 +1,7 @@
 package gui;
 
 import model.Account;
+import org.example.AccountDB;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,10 +23,10 @@ public class PreviewTransferFrame {
         header = Utils.setHeader("Your money has been successfully transferred!");
         message = new JLabel("The recipient will receive the money soon");
         message2= new JLabel("Your new account balance");
-        balance = new JLabel("1500$");
+        balance = new JLabel(account.getBalance() + " €");
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
-        returnToMainPageButton = Utils.returnToMainPageButton(successTransfer);
+        returnToMainPageButton = Utils.returnToMainPageButton(successTransfer, account);
 
         //Placing the elements
         header.setBounds(300, 100, 1000, 100);
@@ -45,6 +46,8 @@ public class PreviewTransferFrame {
 
         returnToMainPageButton.setBounds(630,550,200,40);
 
+//      Saving account's new Balance
+        AccountDB.updateAccount(account);
 
         //Adding the elements
         innerPanel.add(message2);

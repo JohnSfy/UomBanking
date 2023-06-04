@@ -1,5 +1,7 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,7 +27,7 @@ public class Utils {
         return header;
     }
 
-    public static JButton returnToMainPageButton(JFrame frame)  {
+    public static JButton returnToMainPageButton(JFrame frame, Account account)  {
         JButton returnToMainPageButton = new JButton("Return to main page");
         returnToMainPageButton.addActionListener(new ActionListener() {
             @Override
@@ -34,7 +36,7 @@ public class Utils {
 
                 if (result == JOptionPane.YES_OPTION) {
                     frame.dispose();
-//                    new MainFrame();
+                    new MainFrame(account);
                 }
             }
         });

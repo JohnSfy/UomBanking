@@ -38,7 +38,7 @@ public class TransactionTypeFrame extends JFrame {
         transferButton.setBounds(520,390,120,30);
         paymentButton.setBounds(520,460,120,30);
 
-        returnToMainPageButton = Utils.returnToMainPageButton(frame);
+        returnToMainPageButton = Utils.returnToMainPageButton(frame, account);
         returnToMainPageButton.setBounds(480,560,200,30);
 
         depositButton.addActionListener(new ActionListener() {

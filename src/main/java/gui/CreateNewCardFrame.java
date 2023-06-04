@@ -1,5 +1,6 @@
 package gui;
 
+import model.Account;
 import model.Card;
 import org.example.CardDB;
 
@@ -35,7 +36,7 @@ public class CreateNewCardFrame extends JFrame {
     String pin2;
     Color color;
 
-    public CreateNewCardFrame(String accountID) {
+    public CreateNewCardFrame(Account account) {
         this.setLayout(null);
 
         fr = new Template();
@@ -108,7 +109,7 @@ public class CreateNewCardFrame extends JFrame {
                 else
                 {
                     //Δημιουργείται η κάρτα
-                    Card card = new Card(accountID,0,"",0,"MasterCard", color.toString(),"");
+                    Card card = new Card(account.getID(),0,"",0,"MasterCard", color.toString(),"");
                     CardDB.saveCard(card);
                     long cardNum = card.getCardNumber();
                     int cardCVV = card.getCvv();
@@ -123,13 +124,13 @@ public class CreateNewCardFrame extends JFrame {
 
                     else {
                         fr.dispose();
-                        new PreviewCardFrame(accountID ,typedText, cardNum, cardExp, cardName, cardCVV, color);
+                        new PreviewCardFrame(account,typedText, cardNum, cardExp, cardName, cardCVV, color);
                     }
                 }
             }
         });
 
-        returnToMainPageButton = Utils.returnToMainPageButton(fr);
+        returnToMainPageButton = Utils.returnToMainPageButton(fr, account);
         returnToMainPageButton.setBounds(450, 550, 200, 25);
 
 

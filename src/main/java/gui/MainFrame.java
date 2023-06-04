@@ -57,7 +57,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mainFrame.dispose();
-                new LoanFrame(account.getID());
+                new LoanFrame(account);
             }
         });
 
@@ -68,7 +68,7 @@ public class MainFrame extends JFrame {
         createCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CreateNewCardFrame(account.getID());
+                new CreateNewCardFrame(account);
                 mainFrame.dispose();
             }
         });

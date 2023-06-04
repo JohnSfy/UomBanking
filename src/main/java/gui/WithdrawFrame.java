@@ -28,7 +28,7 @@ public class WithdrawFrame extends JFrame {
         amountLabel = new JLabel("Enter amount");
         amountField = new JTextField();
         continueButton = new JButton("Continue");
-        returnToMainPageButton = Utils.returnToMainPageButton(withdraw);
+        returnToMainPageButton = Utils.returnToMainPageButton(withdraw, account);
 
         //Placing the elements
         header.setBounds(500, 100, 1000, 100);
@@ -45,19 +45,19 @@ public class WithdrawFrame extends JFrame {
 
         returnToMainPageButton.setBounds(950,700,200,35);
 
-//      Setting up amountField
-        account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
+
 
         //ActionListener
         continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 amount = amountField.getText();
-                if(isCorrect(amount) && checkAmount(amount,0)){
+                if(isCorrect(amount) && checkAmount(amount, account.getBalance())){
+//                  Setting up amountField
+                    account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
                     withdraw.dispose();
                     new PreviewWithdrawFrame(account);
                 }
-
             }
         });
 
@@ -75,13 +75,13 @@ public class WithdrawFrame extends JFrame {
 
     public boolean isCorrect(String anAmount){
         boolean flag = true;
-        if(amount.isBlank()) {
+        if(anAmount.isBlank()) {
             JOptionPane.showMessageDialog(withdraw, "Please enter an amount!",
                     "Warning", JOptionPane.WARNING_MESSAGE);
             flag=false;
             return flag;
         }
-        for(int i=0;i<anAmount.length();i++){
+        for(int i = 0; i < anAmount.length(); i++){
             if(!Character.isDigit(anAmount.charAt(i))){
                 flag=false;
                 JOptionPane.showMessageDialog(withdraw, "Please enter an amount!",
@@ -101,9 +101,6 @@ public class WithdrawFrame extends JFrame {
                     "Warning", JOptionPane.ERROR_MESSAGE);
             flag=false;
         }
-
         return flag;
-
     }
-
 }

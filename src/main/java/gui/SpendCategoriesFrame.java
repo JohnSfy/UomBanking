@@ -1,5 +1,7 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +20,7 @@ public class SpendCategoriesFrame extends JFrame {
 
 
 
-    public SpendCategoriesFrame(){
+    public SpendCategoriesFrame(Account account){
 
         //setting template
         JFrame SpendCategories = new Template();
@@ -47,7 +49,7 @@ public class SpendCategoriesFrame extends JFrame {
 
         //settings for "return to main page" button
         ReturnToTheMainPage = new JButton("Return to the main page");
-        ReturnToTheMainPage = Utils.returnToMainPageButton(SpendCategories);
+        ReturnToTheMainPage = Utils.returnToMainPageButton(SpendCategories, account);
         ReturnToTheMainPage.setBounds(530,440,180,30);
 
 
@@ -59,11 +61,6 @@ public class SpendCategoriesFrame extends JFrame {
         SpendCategories.setVisible(true);
         SpendCategories.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SpendCategories.getContentPane().setBackground(Color.LIGHT_GRAY);
-
-
-
-
-
     }
 
 }

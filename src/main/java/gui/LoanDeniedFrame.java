@@ -1,5 +1,7 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +20,7 @@ public class LoanDeniedFrame extends JFrame {
     private JButton returnToTheMainPageButton;
 
 
-    public LoanDeniedFrame(String accountId){
+    public LoanDeniedFrame(Account account){
         header = Utils.setHeader("Your loan request was denied!");
         header.setBounds(300,100,900,50);
 
@@ -51,12 +53,12 @@ public class LoanDeniedFrame extends JFrame {
         enterInfoAgainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CreateLoanFrame(accountId);
+                new CreateLoanFrame(account);
                 frame.dispose();
             }
         });
 
-        returnToTheMainPageButton = Utils.returnToMainPageButton(frame);
+        returnToTheMainPageButton = Utils.returnToMainPageButton(frame, account);
         returnToTheMainPageButton.setBounds(485,650,200,35);
 
         frame.add(header);

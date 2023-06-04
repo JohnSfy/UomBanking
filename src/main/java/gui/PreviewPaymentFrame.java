@@ -1,5 +1,8 @@
 package gui;
 
+import model.Account;
+import org.example.AccountDB;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,17 +16,17 @@ public class PreviewPaymentFrame extends JFrame {
     private JButton receiptButton;
     JFrame successPayment;
 
-    public PreviewPaymentFrame() {
+    public PreviewPaymentFrame(Account account) {
 
         successPayment= new Template();
 
         //Initializing elements
         header = Utils.setHeader("Your payment was made successfully!");
         message = new JLabel("Your new account balance");
-        balance = new JLabel("1500$");
+        balance = new JLabel(account.getBalance() + "€");
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
-        returnToMainPageButton = Utils.returnToMainPageButton(successPayment);
+        returnToMainPageButton = Utils.returnToMainPageButton(successPayment, account);
 
 
         //Placing the elements
@@ -48,6 +51,9 @@ public class PreviewPaymentFrame extends JFrame {
         successPayment.add(innerPanel);
         successPayment.add(receiptButton);
         successPayment.add(returnToMainPageButton);
+
+//      Saving account's new Balance
+        AccountDB.updateAccount(account);
 
         successPayment.setVisible(true);
         successPayment.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

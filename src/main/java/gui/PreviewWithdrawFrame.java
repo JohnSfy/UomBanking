@@ -26,7 +26,7 @@ public class PreviewWithdrawFrame extends JFrame{
         balance = new JLabel(String.valueOf(account.getBalance()));
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
-        returnToMainPageButton = Utils.returnToMainPageButton(successWithdraw);
+        returnToMainPageButton = Utils.returnToMainPageButton(successWithdraw, account);
 
         //Placing the elements
         header.setBounds(300, 100, 1000, 100);

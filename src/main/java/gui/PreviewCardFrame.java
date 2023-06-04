@@ -1,5 +1,6 @@
 package gui;
 
+import model.Account;
 import model.Card;
 
 import javax.swing.*;
@@ -36,7 +37,7 @@ public class PreviewCardFrame extends JFrame {
 
 
 
-    public PreviewCardFrame(String accountID, String type, long cardNum, String cardExp, String cardName, int cardCVV, Color cardColor) {
+    public PreviewCardFrame(Account account, String type, long cardNum, String cardExp, String cardName, int cardCVV, Color cardColor) {
 
         //Arxikopoihsh metavlhtwn
         prFrame = new Template();
@@ -74,10 +75,10 @@ public class PreviewCardFrame extends JFrame {
 
         carNum = new JLabel(cardNumberBuilder.toString());
 
-        Card aCard = new Card(accountID,cardNum, cardExp, cardCVV, type, cardColor.toString(), cardName);
+        Card aCard = new Card(account.getID(),cardNum, cardExp, cardCVV, type, cardColor.toString(), cardName);
         this.buildCard(type,cardNum,cardExp,cardName,cardCVV,cardColor); //method for adding card details in panel
 
-        returnToMainPageButton = Utils.returnToMainPageButton(prFrame);
+        returnToMainPageButton = Utils.returnToMainPageButton(prFrame, account);
         returnToMainPageButton.setBounds(550, 550, 200, 30);
 
         prFrame.add(returnToMainPageButton);

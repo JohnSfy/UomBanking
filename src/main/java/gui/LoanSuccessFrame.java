@@ -1,5 +1,6 @@
 package gui;
 
+import model.Account;
 import model.Loan;
 import org.example.LoanDB;
 
@@ -18,7 +19,7 @@ public class LoanSuccessFrame extends JFrame{
     private JButton returnToTheMainPageButton;
     private JButton receiptButton;
 
-    public LoanSuccessFrame(String accountId, double loanAmount, String des, String currentDate, int doses) {
+    public LoanSuccessFrame(Account account, double loanAmount, String des, String currentDate, int doses) {
 
         header = Utils.setHeader("Your loan was made successfully!");
         header.setBounds(300,100,900,50);
@@ -29,14 +30,14 @@ public class LoanSuccessFrame extends JFrame{
 
 
 
-        Loan aLoan = new Loan(accountId,loanAmount,des,currentDate,expirationDate,doses,"");
+        Loan aLoan = new Loan(account.getID(), loanAmount,des,currentDate,expirationDate,doses,"");
         LoanDB.saveLoan(aLoan);
 
         label2 = new JLabel("Your loans");
         label2.setBounds(500, 250, 1000, 100 );
         label2.setFont(new Font("Courier", Font.PLAIN, 30));
 
-        returnToTheMainPageButton = Utils.returnToMainPageButton(frame);
+        returnToTheMainPageButton = Utils.returnToMainPageButton(frame, account);
         returnToTheMainPageButton.setBounds(480,650,200,35);
 
         receiptButton = new JButton("Download the receipt of your loan");
