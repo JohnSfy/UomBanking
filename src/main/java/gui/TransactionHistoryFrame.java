@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class TransactionHistoryFrame extends JFrame {
     private JButton returnToMainPageButton;
@@ -15,14 +16,14 @@ public class TransactionHistoryFrame extends JFrame {
     private JButton downloadTranButton;
 
 
-    public TransactionHistoryFrame(Account account){
+    public TransactionHistoryFrame(Account account, ArrayList<Transactions> transactions){
 
         frame = new Template();
         downloadTranButton= new JButton("Download Transaction History");
         header = Utils.setHeader("Transaction history");
         subheader = new JLabel("See what you spend in detail");
 
-        Transactions[][] trans = new Transactions[5][5];
+        String[][] trans = new String[transactions.size()][5];
         String[] column={"Transaction","Amount","Date","ID","DESCRIPTION"};
 
         JTable jt = new JTable(trans,column);
@@ -30,6 +31,17 @@ public class TransactionHistoryFrame extends JFrame {
         jt.setEnabled(false);
         sc.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         jt.setForeground(Color.BLACK);
+
+//      Appending the transaction history to the table
+        int i = 0;
+        for (Transactions tr : transactions) {
+            trans[i][0] = tr.getDescription();
+            trans[i][1] = String.valueOf(tr.getAmount());
+            trans[i][2] = tr.getDate();
+            trans[i][3] = tr.getID();
+            trans[i][4] = tr.getDescription();
+            i++;
+        }
 
         downloadTranButton.addActionListener(new ActionListener() {
             @Override

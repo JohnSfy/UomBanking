@@ -1,11 +1,13 @@
 package gui;
 
 import model.Account;
+import model.Transactions;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class SpendCategoriesFrame extends JFrame {
 
@@ -20,15 +22,24 @@ public class SpendCategoriesFrame extends JFrame {
 
 
 
-    public SpendCategoriesFrame(Account account){
+    public SpendCategoriesFrame(Account account, ArrayList<Transactions> payments){
 
         //setting template
         JFrame SpendCategories = new Template();
 
         //make a new JTable for our purchases
-        String[] Columns = new String[]{"Transaction", "Amount"};
-        String[][] SCInfo = new String[][]{{"Supermarket","190.70$"},{"Pharmacy","380.76$"},{"Transport","100$"}};
-        SCTable = new JTable(SCInfo,Columns);
+        String[] columns = new String[]{"Transaction", "Amount"};
+        String[][] info = new String[payments.size()][2];
+
+//      Appending the transaction history to the table
+        int i = 0;
+
+        for (Transactions tr : payments) {
+            info[i][0] = tr.getDescription();
+            info[i][1] = String.valueOf(tr.getAmount());
+            i++;
+        }
+        SCTable = new JTable(info,columns);
 
         //setting scrollpane to table
         JScrollPane jp = new JScrollPane(SCTable);

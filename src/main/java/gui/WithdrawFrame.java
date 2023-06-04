@@ -2,11 +2,16 @@ package gui;
 
 import jdk.jshell.execution.Util;
 import model.Account;
+import model.Deposit;
+import model.Withdraw;
+import org.example.TransactionsDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static java.lang.Double.parseDouble;
 
@@ -55,6 +60,9 @@ public class WithdrawFrame extends JFrame {
                 if(isCorrect(amount) && checkAmount(amount, account.getBalance())){
 //                  Setting up amountField
                     account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    TransactionsDB.saveTransaction(new Withdraw("", dtf.format(now), parseDouble(amount), "Withdraw", account.getClient()));
                     withdraw.dispose();
                     new PreviewWithdrawFrame(account);
                 }

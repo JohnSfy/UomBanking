@@ -1,11 +1,16 @@
 package gui;
 
 import model.Account;
+import model.Deposit;
+import model.Transactions;
+import org.example.TransactionsDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
@@ -53,6 +58,9 @@ public class  DepositFrame extends JFrame {
                 amount = amountField.getText();
                 if(isCorrect(amount)){
                     account.setBalance(account.getBalance() + parseDouble(amountField.getText()));
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    TransactionsDB.saveTransaction(new Deposit("", dtf.format(now), parseDouble(amount), "Deposit", account.getClient()));
                     deposit.dispose();
                     new PreviewDepositFrame(account);
 
