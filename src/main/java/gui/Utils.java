@@ -34,7 +34,7 @@ public class Utils {
 
                 if (result == JOptionPane.YES_OPTION) {
                     frame.dispose();
-//                    new MainFrame();
+                    new MainFrame();
                 }
             }
         });
