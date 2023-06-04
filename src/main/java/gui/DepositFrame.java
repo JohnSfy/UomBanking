@@ -1,9 +1,13 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static java.lang.Double.parseDouble;
 
 public class  DepositFrame extends JFrame {
     JLabel header;
@@ -14,7 +18,7 @@ public class  DepositFrame extends JFrame {
     JButton returnToMainPageButton;
     String amount;
     JFrame deposit;
-    public DepositFrame(){
+    public DepositFrame(Account account){
 
         deposit = new Template();
 
@@ -37,6 +41,9 @@ public class  DepositFrame extends JFrame {
 
         amountField.setBounds(500,370,150,25);
 
+//      Setting up amountField
+        account.setBalance(account.getBalance() + parseDouble(amountField.getText()));
+
         continueButton.setBounds(525,550,100,30);
 
         returnToMainPageButton.setBounds(950,700,200,35);
@@ -48,7 +55,7 @@ public class  DepositFrame extends JFrame {
                 amount = amountField.getText();
                 if(isCorrect(amount)){
                     deposit.dispose();
-                    new PreviewDepositFrame();
+                    new PreviewDepositFrame(account);
 
                 }
             }

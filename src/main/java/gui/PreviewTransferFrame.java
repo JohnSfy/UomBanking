@@ -1,5 +1,7 @@
 package gui;
 
+import model.Account;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +15,7 @@ public class PreviewTransferFrame {
     private JButton receiptButton;
     JFrame successTransfer;
 
-    public PreviewTransferFrame(){
+    public PreviewTransferFrame(Account account){
         successTransfer = new Template();
 
         //Initializing elements

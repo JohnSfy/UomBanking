@@ -1,5 +1,8 @@
 package gui;
 
+import model.Account;
+import org.example.AccountDB;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +16,7 @@ public class PreviewDepositFrame extends JFrame {
     JFrame successDeposit;
     private JButton receiptButton;
 
-    public PreviewDepositFrame(){
+    public PreviewDepositFrame(Account account){
 
         successDeposit = new Template();
 
@@ -21,7 +24,7 @@ public class PreviewDepositFrame extends JFrame {
         header = Utils.setHeader("Your money has been successfully deposited!");
         message = new JLabel("You have 10 days to deliver the money to the bank");
         message2= new JLabel("Your new account balance");
-        balance = new JLabel("1500$");
+        balance = new JLabel(String.valueOf(account.getBalance()));
         innerPanel = new JPanel();
         returnToMainPageButton = Utils.returnToMainPageButton(successDeposit);
         receiptButton = new JButton("Download receipt");
@@ -53,12 +56,13 @@ public class PreviewDepositFrame extends JFrame {
         successDeposit.add(receiptButton);
         successDeposit.add(returnToMainPageButton);
 
+//      Saving account's new Balance
+        AccountDB.updateAccount(account);
+
         successDeposit.setVisible(true);
         successDeposit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
 }
 
 
