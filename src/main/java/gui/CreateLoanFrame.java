@@ -2,6 +2,8 @@ package gui;
 
 import model.Account;
 import model.Loan;
+import org.example.AccountDB;
+import org.example.LoanDB;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,15 +23,14 @@ public class CreateLoanFrame extends JFrame{
     private JLabel dosesLabel;
     private JLabel dosesInformation;
     private JLabel reasonLabel;
-    private JComboBox<String> dropDownList;
     private JButton submitButton;
     private JButton returnToTheMainPageButton;
     private double loanAmount;
     private double balance = 1000; //ΘΑ ΠΑΙΡΝΕΙ ΤΙΜΗ ΑΠΟ ΤΗΝ ΒΑΣΗ
     private int doses;
-    String des;
 
     public CreateLoanFrame(Account account){
+        //balance = AccountDB.fetchAccount(accountId).getBalance();
         header = Utils.setHeader("Take a loan");
         header.setBounds(500,100,300,50);
 
@@ -40,6 +41,7 @@ public class CreateLoanFrame extends JFrame{
         amountLabel = new JLabel("Amount");
         amountLabel.setBounds(450,250,50,50);
         amountField.setBounds(500,260,230,35);
+
         amountField.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -71,9 +73,10 @@ public class CreateLoanFrame extends JFrame{
         //dropdownlist με τους λόγους αίτησης δανείου
         reasonLabel = new JLabel("Reason");
         String[] choices = { "I want to make a big purchace","I want to start my business", "I have a health issue","I want to buy a house","Other"};
-        dropDownList = new JComboBox<String>(choices);
 
-        des = ((JTextField)dropDownList.getEditor().getEditorComponent()).getText();
+        final JComboBox<String> dropDownList = new JComboBox<String>(choices);
+
+
 
         reasonLabel.setBounds(450,390,50,50);
         dropDownList.setBounds(500,400,200,35);
@@ -81,7 +84,7 @@ public class CreateLoanFrame extends JFrame{
         submitButton = new JButton("Submit");
         submitButton.setBounds(500,550,200,35);
 
-        returnToTheMainPageButton = Utils.returnToMainPageButton(frame, account);
+        returnToTheMainPageButton = Utils.returnToMainPageButton(frame,account);
         returnToTheMainPageButton.setBounds(970,720,200,35);
 
 
@@ -89,6 +92,7 @@ public class CreateLoanFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String loanAmountString = amountField.getText();
                 String dosesString = dosesField.getText();
+                String des = ((JTextField)dropDownList.getEditor().getEditorComponent()).getText();
 
                 //έλεγχος αν το πεδιο loan είναι αριθμός
                 if(loanAmountString.matches("[0-9]+"))
