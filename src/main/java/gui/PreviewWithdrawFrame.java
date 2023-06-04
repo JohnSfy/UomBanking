@@ -1,5 +1,8 @@
 package gui;
 
+import model.Account;
+import org.example.AccountDB;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,14 +16,14 @@ public class PreviewWithdrawFrame extends JFrame{
     private JButton receiptButton;
     private JButton returnToMainPageButton;
     JFrame successWithdraw;
-    public PreviewWithdrawFrame(){
+    public PreviewWithdrawFrame(Account account){
         successWithdraw = new Template();
 
         //Initializing components
         header = Utils.setHeader("Your money has been successfully withdrawn!");
         message = new JLabel("You have 10 days to receive the money from the bank");
         message2= new JLabel("Your new account balance");
-        balance = new JLabel("1500$");
+        balance = new JLabel(String.valueOf(account.getBalance()));
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
         returnToMainPageButton = Utils.returnToMainPageButton(successWithdraw);
@@ -43,6 +46,9 @@ public class PreviewWithdrawFrame extends JFrame{
 
         returnToMainPageButton.setBounds(630,550,200,40);
 
+//      Saving account's new Balance
+        AccountDB.updateAccount(account);
+
         //Adding the elements
         innerPanel.add(message2);
         innerPanel.add(balance);
@@ -54,7 +60,5 @@ public class PreviewWithdrawFrame extends JFrame{
 
         successWithdraw.setVisible(true);
         successWithdraw.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
     }
 }

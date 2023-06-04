@@ -1,11 +1,14 @@
 package gui;
 
 import jdk.jshell.execution.Util;
+import model.Account;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static java.lang.Double.parseDouble;
 
 public class WithdrawFrame extends JFrame {
     JLabel header;
@@ -16,7 +19,7 @@ public class WithdrawFrame extends JFrame {
     JButton returnToMainPageButton;
     String amount;
     JFrame withdraw;
-    public WithdrawFrame(){
+    public WithdrawFrame(Account account){
         withdraw = new Template();
 
         //Initializing elements;
@@ -42,6 +45,9 @@ public class WithdrawFrame extends JFrame {
 
         returnToMainPageButton.setBounds(950,700,200,35);
 
+//      Setting up amountField
+        account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
+
         //ActionListener
         continueButton.addActionListener(new ActionListener() {
             @Override
@@ -49,8 +55,7 @@ public class WithdrawFrame extends JFrame {
                 amount = amountField.getText();
                 if(isCorrect(amount) && checkAmount(amount,0)){
                     withdraw.dispose();
-                    new PreviewWithdrawFrame();
-
+                    new PreviewWithdrawFrame(account);
                 }
 
             }

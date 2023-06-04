@@ -1,5 +1,8 @@
 package gui;
 
+import model.Account;
+import org.example.AccountDB;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +18,7 @@ public class TransferFrame extends JFrame {
     private JButton continueButton;
     private JButton returnToMainPageButton;
     private JLabel line;
-    public TransferFrame(){
+    public TransferFrame(Account account){
 
         trFrame = new Template();
         this.setLayout(null);
@@ -23,7 +26,6 @@ public class TransferFrame extends JFrame {
         amountField = new JTextField();
         continueButton = new JButton("Continue");
         returnToMainPageButton = new JButton("Return to the main page");
-
 
         header = Utils.setHeader("Transfer money to others");
         header.setBounds(400,100,1000,100);
@@ -45,7 +47,7 @@ public class TransferFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 trFrame.dispose();
-                new PreviewTransferFrame();
+                new PreviewTransferFrame(account);
             }
         });
 
