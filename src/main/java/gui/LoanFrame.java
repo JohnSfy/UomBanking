@@ -1,5 +1,6 @@
 package gui;
 
+import model.Account;
 import org.example.LoanDB;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class LoanFrame extends JFrame {
 
 
 
-    public LoanFrame(String accountId){
+    public LoanFrame(Account account){
 
         //Setting template
         JFrame Loans = new Template();
@@ -35,9 +36,9 @@ public class LoanFrame extends JFrame {
         String[] LoansColumns = new String[]{"Amount", "Expiration Date"};
         Object[][] LoansInfo = new String[4][2];
 
-        if(!(LoanDB.fetchLoan(accountId) == null)) {
-            LoansInfo[0][0] = String.valueOf(LoanDB.fetchLoan(accountId).getLoanAmount());
-            LoansInfo[0][1] = String.valueOf(LoanDB.fetchLoan(accountId).getDateExp());
+        if(!(LoanDB.fetchLoan(account.getID()) == null)) {
+            LoansInfo[0][0] = String.valueOf(LoanDB.fetchLoan(account.getID()).getLoanAmount());
+            LoansInfo[0][1] = String.valueOf(LoanDB.fetchLoan(account.getID()).getDateExp());
         }
         LoanTable = new JTable(LoansInfo,LoansColumns);
         LoanTable.setForeground(Color.BLACK);
@@ -65,7 +66,7 @@ public class LoanFrame extends JFrame {
 
         //settings for "return to main page" button
         ReturnToTheMainPage = new JButton("Return to the main page");
-        ReturnToTheMainPage = Utils.returnToMainPageButton(Loans);
+        ReturnToTheMainPage = Utils.returnToMainPageButton(Loans,account);
         ReturnToTheMainPage.setBounds(1000,710,180,30);
 
         //settings for loanReceipt button
@@ -82,7 +83,7 @@ public class LoanFrame extends JFrame {
         NewLoan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CreateLoanFrame(accountId);
+                new CreateLoanFrame(account);
             }
         });
 

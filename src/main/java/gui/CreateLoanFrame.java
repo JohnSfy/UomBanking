@@ -29,7 +29,7 @@ public class CreateLoanFrame extends JFrame{
     private double balance = 1000; //ΘΑ ΠΑΙΡΝΕΙ ΤΙΜΗ ΑΠΟ ΤΗΝ ΒΑΣΗ
     private int doses;
 
-    public CreateLoanFrame(String accountId){
+    public CreateLoanFrame(Account account){
         //balance = AccountDB.fetchAccount(accountId).getBalance();
         header = Utils.setHeader("Take a loan");
         header.setBounds(500,100,300,50);
@@ -116,14 +116,14 @@ public class CreateLoanFrame extends JFrame{
                     Date date = new Date();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
                     String currentDate = formatter.format(date);
-                    new LoanSuccessFrame(accountId,loanAmount,des,currentDate, doses);
+                    new LoanSuccessFrame(account,loanAmount,des,currentDate, doses);
                     frame.dispose(); //με το που πατάμε το κουμπί ανοίγει το LoanSuccessFrame και κλείνει το παράθυρο των δανείων.
                 }
 
                 //αν δεν τηρείται η συνθήκη για το δάνειο, εμφανίζεται το LoanDeniedFrame
                 if(!CheckLoanAmount(loanAmount, balance)){
                     //frame denied
-                    new LoanDeniedFrame(accountId);
+                    new LoanDeniedFrame(account);
                     frame.dispose();
                 }
             }

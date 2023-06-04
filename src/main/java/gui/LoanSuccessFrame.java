@@ -1,5 +1,6 @@
 package gui;
 
+import model.Account;
 import model.Loan;
 import org.example.LoanDB;
 
@@ -18,7 +19,7 @@ public class LoanSuccessFrame extends JFrame{
     private JButton returnToTheMainPageButton;
     private JButton receiptButton;
 
-    public LoanSuccessFrame(String accountId, double loanAmount, String des, String currentDate, int doses) {
+    public LoanSuccessFrame(Account account, double loanAmount, String des, String currentDate, int doses) {
 
         header = Utils.setHeader("Your loan was made successfully!");
         header.setBounds(300,100,900,50);
@@ -29,7 +30,7 @@ public class LoanSuccessFrame extends JFrame{
 
 
 
-        Loan aLoan = new Loan(accountId,loanAmount,des,currentDate,expirationDate,doses,"");
+        Loan aLoan = new Loan(account.getID(),loanAmount,des,currentDate,expirationDate,doses,"");
         LoanDB.saveLoan(aLoan);
 
         label2 = new JLabel("Your loans");
@@ -47,8 +48,8 @@ public class LoanSuccessFrame extends JFrame{
         //πίνακας δανείων μαζί με ημερομηνία λήξης
         Object rowData[][] = new Object[4][2];
         String columnNames[] = { "Amount", "Expiration Date"};
-        rowData[0][0] = String.valueOf(LoanDB.fetchLoan(accountId).getLoanAmount());
-        rowData[0][1] = String.valueOf(LoanDB.fetchLoan(accountId).getDateExp());
+        rowData[0][0] = String.valueOf(LoanDB.fetchLoan(account.getID()).getLoanAmount());
+        rowData[0][1] = String.valueOf(LoanDB.fetchLoan(account.getID()).getDateExp());
 
         table= new JTable(rowData, columnNames);
         scrollPane = new JScrollPane(table);
