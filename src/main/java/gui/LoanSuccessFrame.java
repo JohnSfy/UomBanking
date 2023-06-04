@@ -47,6 +47,8 @@ public class LoanSuccessFrame extends JFrame{
         //πίνακας δανείων μαζί με ημερομηνία λήξης
         Object rowData[][] = new Object[4][2];
         String columnNames[] = { "Amount", "Expiration Date"};
+        rowData[0][0] = String.valueOf(LoanDB.fetchLoan(accountId).getLoanAmount());
+        rowData[0][1] = String.valueOf(LoanDB.fetchLoan(accountId).getDateExp());
 
         table= new JTable(rowData, columnNames);
         scrollPane = new JScrollPane(table);

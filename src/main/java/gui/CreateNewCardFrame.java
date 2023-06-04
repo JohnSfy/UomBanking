@@ -17,7 +17,6 @@ public class CreateNewCardFrame extends JFrame {
     private JLabel nameLabel; //θα φιλοξενήσει το όνομα
     private JTextField nameText;
     private JLabel typeLabel;
-    private JComboBox type; //για την επιλογη του τυπυ της καρτας
     private JLabel colorLabel; //θα φιλοξενήσει το χρώμα
     private JButton colorButton; //κουμπί για αλλαγή χρώματος
     private JLabel pinLabel; //θα φιλοξενήσει το πιν
@@ -40,7 +39,6 @@ public class CreateNewCardFrame extends JFrame {
 
         fr = new Template();
         nameText = new JTextField();
-        type = new JComboBox();
         pinField = new JPasswordField(4);
         conPinField = new JPasswordField(4);
         createCardButton = new JButton("Create card");
