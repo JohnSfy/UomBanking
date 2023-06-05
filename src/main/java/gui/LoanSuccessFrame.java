@@ -2,11 +2,13 @@ package gui;
 
 import model.Account;
 import model.Loan;
+import org.example.AccountDB;
 import org.example.LoanDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class LoanSuccessFrame extends JFrame{
@@ -32,6 +34,9 @@ public class LoanSuccessFrame extends JFrame{
 
         Loan aLoan = new Loan(account.getID(),loanAmount,des,currentDate,expirationDate,doses,"");
         LoanDB.saveLoan(aLoan);
+        
+        account.setBalance(account.getBalance() + loanAmount);
+        AccountDB.updateAccount(account);
 
         label2 = new JLabel("Your loans");
         label2.setBounds(500, 250, 1000, 100 );
@@ -44,16 +49,24 @@ public class LoanSuccessFrame extends JFrame{
         receiptButton.setBounds(460,500,250,35);
 
 
-
+        ArrayList<Loan> loan = LoanDB.fetchAllLoans(account);
         //πίνακας δανείων μαζί με ημερομηνία λήξης
-        Object rowData[][] = new Object[4][2];
+        String rowData[][] = new String[loan.size()][2];
         String columnNames[] = { "Amount", "Expiration Date"};
-        rowData[0][0] = String.valueOf(LoanDB.fetchLoan(account.getID()).getLoanAmount());
-        rowData[0][1] = String.valueOf(LoanDB.fetchLoan(account.getID()).getDateExp());
+
+        int i = 0;
+        for(Loan loans: loan){
+            rowData[i][0] = String.valueOf(loans.getLoanAmount());
+            rowData[i][1] = String.valueOf(loans.getDateExp());
+            i++;
+        }
+
 
         table= new JTable(rowData, columnNames);
+        table.setForeground(Color.BLACK);
         scrollPane = new JScrollPane(table);
         scrollPane.setBounds(270,350,600,100);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         table.setEnabled(false);
 
 
