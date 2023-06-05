@@ -28,7 +28,7 @@ public class SpendCategoriesDB {
 //      Fetching the transactions
         tx = session.beginTransaction();
 
-        String hql = "FROM Transactions WHERE TransactionType = 'Payment'";
+        String hql = "FROM Transactions WHERE TransactionType = 'Payment' AND ClientUsername = '" + account.getClient() + "'";
         Query query = session.createQuery(hql);
 
         List results = query.list();
