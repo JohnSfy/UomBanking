@@ -38,11 +38,11 @@
     <!-- Loan Mapping-->
     <class name="Loan" table="Loan">
 
-        <id name="accountID" column="AccountID" type="string">
+        <id name="id" column="ID" type="string">
             <generator class="assigned"/>
         </id>
 
-        <property name="id" column="ID" type="string"/>
+        <property name="accountID" column="AccountID" type="string"/>
         <property name="loanAmount" column="LoanAmount" type="double"/>
         <property name="date" column="DateOfApply" type="string"/>
         <property name="description" column="Description" type="string"/>

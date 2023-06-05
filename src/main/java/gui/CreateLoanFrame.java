@@ -26,7 +26,7 @@ public class CreateLoanFrame extends JFrame{
     private JButton submitButton;
     private JButton returnToTheMainPageButton;
     private double loanAmount;
-    private double balance = 1000; //ΘΑ ΠΑΙΡΝΕΙ ΤΙΜΗ ΑΠΟ ΤΗΝ ΒΑΣΗ
+    private double balance; //ΘΑ ΠΑΙΡΝΕΙ ΤΙΜΗ ΑΠΟ ΤΗΝ ΒΑΣΗ
     private int doses;
 
     public CreateLoanFrame(Account account){
@@ -37,6 +37,7 @@ public class CreateLoanFrame extends JFrame{
         label1 = new JLabel("Enter your information to register the loan");
         label1.setBounds(500, 110, 500, 100 );
 
+        balance = account.getBalance();
         amountField = new JTextField("The max amount you can loan is: " +balance*5);
         amountLabel = new JLabel("Amount");
         amountLabel.setBounds(450,250,50,50);

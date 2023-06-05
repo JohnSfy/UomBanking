@@ -1,12 +1,14 @@
 package gui;
 
 import model.Account;
+import model.Loan;
 import org.example.LoanDB;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class LoanFrame extends JFrame {
 
@@ -32,14 +34,19 @@ public class LoanFrame extends JFrame {
         //Setting template
         JFrame Loans = new Template();
 
+        ArrayList<Loan> aLoan = LoanDB.fetchAllLoans(account);
+
+
         //creating new JTable to save our loans
         String[] LoansColumns = new String[]{"Amount", "Expiration Date"};
-        Object[][] LoansInfo = new String[4][2];
+        String[][] LoansInfo = new String[aLoan.size()][2];
 
-        if(!(LoanDB.fetchLoan(account.getID()) == null)) {
-            LoansInfo[0][0] = String.valueOf(LoanDB.fetchLoan(account.getID()).getLoanAmount());
-            LoansInfo[0][1] = String.valueOf(LoanDB.fetchLoan(account.getID()).getDateExp());
-        }
+            int i=0;
+            for(Loan loans:aLoan){
+                LoansInfo[i][0] = String.valueOf(loans.getLoanAmount());
+                LoansInfo[i][1] = String.valueOf(loans.getDateExp());
+                i++;
+            }
         LoanTable = new JTable(LoansInfo,LoansColumns);
         LoanTable.setForeground(Color.BLACK);
         LoanTable.setEnabled(false);
@@ -83,6 +90,7 @@ public class LoanFrame extends JFrame {
         NewLoan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Loans.dispose();
                 new CreateLoanFrame(account);
             }
         });
