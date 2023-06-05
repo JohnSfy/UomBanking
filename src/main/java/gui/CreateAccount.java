@@ -54,22 +54,28 @@ public class CreateAccount extends JFrame {
 //              Checking data validity
                 String phoneNumber = infoPanel.getPhoneNumber().getText();
                 String email = infoPanel.getEmail().getText();
-                String password =  infoPanel.getPasswordField().getText();
-                String confirmPassword  = infoPanel.getPasswordField2().getText();
+                String password = infoPanel.getPasswordField().getText();
+                String confirmPassword = infoPanel.getPasswordField2().getText();
                 JComboBox costPerTransaction = infoPanel.getCostPerTransaction();
 
 
-                if(checkData(email, phoneNumber, password, confirmPassword)) {
+                if (checkData(email, phoneNumber, password, confirmPassword)) {
 
-                    //      Creating the client and the clients account
+//                  Creating the client and the client's account
                     client = new Client(infoPanel.getFirstName().getText(), infoPanel.getLastName().getText(), infoPanel.getPhoneNumber().getText(),
                             infoPanel.getEmail().getText(), infoPanel.getUsername().getText(), infoPanel.getPasswordField().getText());
-                    ClientDB.saveClient(client);
 
-                    account = new Account(0,"","",infoPanel.getUsername().getText(),(String) infoPanel.getCostPerTransaction().getSelectedItem());
-                    AccountDB.saveAccount(account);
-                    createAccount.dispose();
-                    new MainFrame(account);
+//                  Checking if client already exists
+                    if (!ClientDB.findClient(client)) {
+                        ClientDB.saveClient(client);
+                        account = new Account(0, "", "", infoPanel.getUsername().getText(), (String) infoPanel.getCostPerTransaction().getSelectedItem());
+                        AccountDB.saveAccount(account);
+                        createAccount.dispose();
+                        new MainFrame(account);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "There is already an account with this email or username.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
@@ -88,11 +94,6 @@ public class CreateAccount extends JFrame {
                 new WelcomePage();
             }
         });
-
-//      Creating the client
-
-
-
 
 //      Adding components to the frame
         createAccount.add(header);
@@ -113,16 +114,15 @@ public class CreateAccount extends JFrame {
     public boolean checkPhoneNumber(String number) {
         char[] array = number.toCharArray();
         boolean flag = true;
-        if(array.length == 10) {
-            for (char c: array) {
+        if (array.length == 10) {
+            for (char c : array) {
                 if (!Character.isDigit(c)) {
                     System.out.println(!Character.isDigit(c));
                     flag = false;
                 }
                 break;
             }
-        }
-        else{
+        } else {
             flag = false;
         }
 
@@ -133,7 +133,7 @@ public class CreateAccount extends JFrame {
         char[] array = email.toCharArray();
         boolean flag = false;
         int i = 0;
-        while (!flag && i < array.length){
+        while (!flag && i < array.length) {
             if (array[i] == '@') {
                 flag = true;
             }
@@ -146,12 +146,11 @@ public class CreateAccount extends JFrame {
         char[] array = text1.toCharArray();
         char[] array2 = text2.toCharArray();
         boolean flag = true;
-        if (array != null && array2 != null){
+        if (array != null && array2 != null) {
             if (!Arrays.equals(array, array2)) {
                 flag = false;
             }
-        }
-        else if (array == null && array2 == null) {
+        } else if (array == null && array2 == null) {
             flag = false;
         }
         return flag;
@@ -162,13 +161,11 @@ public class CreateAccount extends JFrame {
             JOptionPane.showMessageDialog(null, "Please insert a valid email",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }
-        else if (!checkPhoneNumber(phoneNumber)) {
+        } else if (!checkPhoneNumber(phoneNumber)) {
             JOptionPane.showMessageDialog(null, "Please insert a valid phone number",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
-        }
-        else if (!checkPasswordConfirmation(pass1, pass2)) {
+        } else if (!checkPasswordConfirmation(pass1, pass2)) {
             JOptionPane.showMessageDialog(null, "Confirm password failed",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;

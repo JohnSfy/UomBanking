@@ -19,71 +19,66 @@ public class WelcomePage extends JFrame {
     private JButton createAccountButton;
     private JLabel message;
     public JFrame welcomePage;
-
     private Client client;
     private Account account;
-
     private JTextField username;
+
     public JTextField getUsername() {
         return username;
     }
 
-
-
-
-
-     public WelcomePage(){
-         welcomePage = new TemplateNotLoggedIn();
+    public WelcomePage() {
+        welcomePage = new TemplateNotLoggedIn();
 
 //       Setting layout manager to null for absolute positioning
-         welcomePage.setLayout(null);
+        welcomePage.setLayout(null);
 
 //       Initializing components
-         header = Utils.setHeader("Welcome to UoMBanking");
-         signIn = new JLabel("Sign In");
-         infoPanel = new JPanel();
-         createAccountButton = new JButton("Create an account");
-         message = new JLabel("New Here?");
+        header = Utils.setHeader("Welcome to UoMBanking");
+        signIn = new JLabel("Sign In");
+        infoPanel = new JPanel();
+        createAccountButton = new JButton("Create an account");
+        message = new JLabel("New Here?");
 
 //       Setting up JLabel signIn
-         signIn.setBounds(550, 300, 1000, 100);
-         signIn.setFont(new Font("Courier", Font.PLAIN, 25));
+        signIn.setBounds(550, 300, 1000, 100);
+        signIn.setFont(new Font("Courier", Font.PLAIN, 25));
 
 //       Setting up the information panel
-         infoPanel = new InfoPanel();
+        infoPanel = new InfoPanel();
 
 //       Setting up createAccountButton
-         createAccountButton.setBounds(590, 675, 200, 50);
-         createAccountButton.setFont(new Font("Courier", Font.PLAIN, 15));
-         createAccountButton.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 welcomePage.dispose();
-                 new CreateAccount();
-             }
-         });
+        createAccountButton.setBounds(590, 675, 200, 50);
+        createAccountButton.setFont(new Font("Courier", Font.PLAIN, 15));
+        createAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                welcomePage.dispose();
+                new CreateAccount();
+            }
+        });
 
 //       Setting up message
-         message.setBounds(500, 650, 300, 100);
-         message.setFont(new Font("Courier", Font.PLAIN, 15));
+        message.setBounds(500, 650, 300, 100);
+        message.setFont(new Font("Courier", Font.PLAIN, 15));
 
 //       Adding components to the frame
-         welcomePage.add(header);
-         welcomePage.add(signIn);
-         welcomePage.add(infoPanel);
-         welcomePage.add(createAccountButton);
-         welcomePage.add(message);
+        welcomePage.add(header);
+        welcomePage.add(signIn);
+        welcomePage.add(infoPanel);
+        welcomePage.add(createAccountButton);
+        welcomePage.add(message);
 
-         client = new Client();
+        client = new Client();
 
 //       Basic setup for the frame
-         welcomePage.setVisible(true);
-         welcomePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         welcomePage.getContentPane().setBackground(Color.LIGHT_GRAY);
-         welcomePage.validate(); //validates the images
-     }
+        welcomePage.setVisible(true);
+        welcomePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        welcomePage.getContentPane().setBackground(Color.LIGHT_GRAY);
+        welcomePage.validate(); //validates the images
+    }
 
-    class InfoPanel extends JPanel{
+    class InfoPanel extends JPanel {
         private JCheckBox showPassword;
         private JPasswordField passwordField;
         public JButton signInButton;
