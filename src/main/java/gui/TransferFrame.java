@@ -4,6 +4,7 @@ import model.Account;
 import model.Transfer;
 import model.Withdraw;
 import org.example.AccountDB;
+import org.example.SendMoneyDB;
 import org.example.TransactionsDB;
 
 import javax.swing.*;
@@ -55,13 +56,19 @@ public class TransferFrame extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 String amount = amountField.getText();
                 if(isCorrect(amount) && checkAmount(amount, account.getBalance())){
-//                  Setting up amountField
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
-                    LocalDateTime now = LocalDateTime.now();
-                    TransactionsDB.saveTransaction(new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText()));
-                    account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
-                    trFrame.dispose();
-                    new PreviewTransferFrame(account);
+
+                    String iban = ibanField.getText();
+                    if (SendMoneyDB.findAccountAndUpdateBalance(iban, parseDouble(amount))) {
+//                      Setting up amountField
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
+                        LocalDateTime now = LocalDateTime.now();
+                        TransactionsDB.saveTransaction(new Transfer("", dtf.format(now), parseDouble(amount),"Transfer to " +
+                                ibanField.getText() + ", ",account.getClient(), ibanField.getText()));
+                        System.out.println("Transfer successful");
+                        account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
+                        trFrame.dispose();
+                        new PreviewTransferFrame(account);
+                    }
                 }
             }
         });
