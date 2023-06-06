@@ -73,8 +73,9 @@ public class PaymentFrame extends JFrame {
                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
                    LocalDateTime now = LocalDateTime.now();
                    TransactionsDB.saveTransaction(new Payment("", dtf.format(now), parseDouble(anAmount), "Paid for " + cb.getSelectedItem().toString(), account.getClient(), cb.getSelectedItem().toString()));
+                   Payment pay = new Payment("", dtf.format(now), parseDouble(anAmount), "Paid for " + cb.getSelectedItem().toString(), account.getClient(),  cb.getSelectedItem().toString());
                    payment.dispose();
-                   new PreviewPaymentFrame(account);
+                   new PreviewPaymentFrame(account,pay);
                }
 
             }

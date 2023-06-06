@@ -1,10 +1,14 @@
 package gui;
 
+import files.TransReceipt;
 import model.Account;
+import model.Withdraw;
 import org.example.AccountDB;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PreviewWithdrawFrame extends JFrame{
 
@@ -16,7 +20,7 @@ public class PreviewWithdrawFrame extends JFrame{
     private JButton receiptButton;
     private JButton returnToMainPageButton;
     JFrame successWithdraw;
-    public PreviewWithdrawFrame(Account account){
+    public PreviewWithdrawFrame(Account account, Withdraw withd){
         successWithdraw = new Template();
 
         //Initializing components
@@ -27,6 +31,14 @@ public class PreviewWithdrawFrame extends JFrame{
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
         returnToMainPageButton = Utils.returnToMainPageButton(successWithdraw, account);
+
+        receiptButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                new TransReceipt(account,withd);
+            }
+        });
 
         //Placing the elements
         header.setBounds(300, 100, 1000, 100);

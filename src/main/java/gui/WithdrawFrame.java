@@ -63,8 +63,10 @@ public class WithdrawFrame extends JFrame {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
                     LocalDateTime now = LocalDateTime.now();
                     TransactionsDB.saveTransaction(new Withdraw("", dtf.format(now), parseDouble(amount), "Withdraw", account.getClient()));
+
+                    Withdraw withd = new Withdraw("", dtf.format(now), parseDouble(amount), "Withdraw", account.getClient());
                     withdraw.dispose();
-                    new PreviewWithdrawFrame(account);
+                    new PreviewWithdrawFrame(account,withd);
                 }
             }
         });

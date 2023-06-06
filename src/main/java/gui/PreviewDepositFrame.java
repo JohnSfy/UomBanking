@@ -1,10 +1,15 @@
 package gui;
 
+import files.TransHistoryPDF;
+import files.TransReceipt;
 import model.Account;
+import model.Deposit;
 import org.example.AccountDB;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PreviewDepositFrame extends JFrame {
     private JPanel innerPanel = new JPanel();
@@ -16,7 +21,7 @@ public class PreviewDepositFrame extends JFrame {
     JFrame successDeposit;
     private JButton receiptButton;
 
-    public PreviewDepositFrame(Account account){
+    public PreviewDepositFrame(Account account, Deposit dep){
 
         successDeposit = new Template();
 
@@ -44,6 +49,14 @@ public class PreviewDepositFrame extends JFrame {
 
         balance.setFont(new Font("Courier", Font.PLAIN, 50));
         receiptButton.setBounds(380,550,200,40);
+
+        receiptButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                new TransReceipt(account,dep);
+            }
+        });
 
         returnToMainPageButton.setBounds(630,550,200,40);
 

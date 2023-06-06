@@ -1,10 +1,14 @@
 package gui;
 
+import files.TransReceipt;
 import model.Account;
+import model.Transactions;
 import org.example.AccountDB;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PreviewPaymentFrame extends JFrame {
     private JPanel innerPanel = new JPanel();
@@ -16,7 +20,7 @@ public class PreviewPaymentFrame extends JFrame {
     private JButton receiptButton;
     JFrame successPayment;
 
-    public PreviewPaymentFrame(Account account) {
+    public PreviewPaymentFrame(Account account, Transactions pay) {
 
         successPayment= new Template();
 
@@ -27,6 +31,14 @@ public class PreviewPaymentFrame extends JFrame {
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
         returnToMainPageButton = Utils.returnToMainPageButton(successPayment, account);
+
+        receiptButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                new TransReceipt(account,pay);
+            }
+        });
 
 
         //Placing the elements
