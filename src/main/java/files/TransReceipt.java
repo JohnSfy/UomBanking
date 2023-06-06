@@ -115,12 +115,12 @@ public class TransReceipt {
 
 
                 data = new String[][]{
-                        {transaction.getID(), transaction.getDate(), transaction.getDescription(), "+100.00"},
+                        {transaction.getID(), transaction.getDate(), transaction.getDescription(), "+" + String.valueOf(transaction.getAmount())},
                 };
             } else {
 
                 data = new String[][]{
-                        {transaction.getID(), transaction.getDate(), transaction.getDescription(), "-100.00"},
+                        {transaction.getID(), transaction.getDate(), transaction.getDescription(),"-" + String.valueOf(transaction.getAmount()) },
                 };
 
             }
