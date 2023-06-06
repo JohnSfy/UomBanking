@@ -146,20 +146,20 @@ class CardPanel extends JPanel {
 
 
 
-        carNumber = CardDB.fetchCard(account.getID()).getCardNumber();
-
-        cardNumberBuilder = new StringBuilder(String.valueOf(carNumber));
-        for (int i = 4; i < cardNumberBuilder.length(); i += 6) {
-            cardNumberBuilder.insert(i, "  ");
-        }
-
-        cardNum = new JLabel(String.valueOf(carNumber));
-        cardNum.setBounds(350,600,200,100);
-        add(cardNum);
-
-        nameInTheCard = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardName()));
-        nameInTheCard.setBounds(350,500,200,100);
-        add(nameInTheCard);
+//        carNumber = CardDB.fetchCard(account.getID()).getCardNumber();
+//
+//        cardNumberBuilder = new StringBuilder(String.valueOf(carNumber));
+//        for (int i = 4; i < cardNumberBuilder.length(); i += 6) {
+//            cardNumberBuilder.insert(i, "  ");
+//        }
+//
+//        cardNum = new JLabel(String.valueOf(carNumber));
+//        cardNum.setBounds(350,600,200,100);
+//        add(cardNum);
+//
+//        nameInTheCard = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardName()));
+//        nameInTheCard.setBounds(350,500,200,100);
+//        add(nameInTheCard);
 
 
 //        layoutComponents();
@@ -267,7 +267,7 @@ class BalancePanel extends JPanel{
 //      Initializing components
         header = Utils.setHeader("Your account balance");
 
-        balance = new JLabel(String.valueOf(account.getBalance()));
+        balance = new JLabel(String.valueOf(account.getBalance())+"€");
         newTransactionButton = new JButton("New Transaction");
 
 //      Setting up newTransactionButton
@@ -347,16 +347,16 @@ class ExpensesPanel extends JPanel {
         if (transactions != null) {
             for (Transactions transaction : transactions) {
                 if(transaction.getClass().getName().equals("model.Deposit")){
-                    listModel.addElement("• Deposit, "+transaction.getAmount() + "$");
+                    listModel.addElement("• Deposit, "+transaction.getAmount() +"€");
                 }
                 else if(transaction.getClass().getName().equals("model.Withdraw")){
-                    listModel.addElement("• Withdraw, " + transaction.getAmount() + "$");
+                    listModel.addElement("• Withdraw, " + transaction.getAmount() +"€");
                 }
                 else if(transaction.getClass().getName().equals("model.Transfer")){
-                    listModel.addElement("• " + transaction.getDescription() + transaction.getAmount() + "$");
+                    listModel.addElement("• " + transaction.getDescription() + transaction.getAmount() +"€");
                 }
                 else if(transaction.getClass().getName().equals("model.Payment")){
-                    listModel.addElement("• " + transaction.getDescription() + ", " + transaction.getAmount() + "$");
+                    listModel.addElement("• " + transaction.getDescription() + ", " + transaction.getAmount() +"€");
                 }
             }
         }
