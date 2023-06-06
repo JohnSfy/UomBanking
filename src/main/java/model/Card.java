@@ -30,12 +30,10 @@ public class Card{
     @Column(name = "Color", nullable = false, length = 20)
     private String color;
 
-    @Column(name = "cardName", nullable = false, length = 20)
+    @Column(name = "CardName", nullable = false, length = 20)
     private String cardName;
 
 
-
-    
     public Card(){
 
     }

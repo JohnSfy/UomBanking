@@ -316,6 +316,7 @@ class ExpensesPanel extends JPanel {
         expenseList.setModel(listModel);
         scrollPane = new JScrollPane(expenseList);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 //      Retrieving all transactions from the database

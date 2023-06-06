@@ -24,7 +24,6 @@ public class Account {
     @Column(name = "CostPerTransaction", nullable = false, length = 10)
     private String costPerTransaction;
 
-
     @Transient
     private ArrayList<Transactions> tList = new ArrayList<>(); //λίστα που περιέχει transactions
     @Transient

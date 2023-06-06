@@ -60,6 +60,7 @@
             <generator class="assigned"/>
         </id>
 
+        <property name="cardName"  column="CardName" type="string"/>
         <property name="cardNumber" column="CardNumber" type="long"/>
         <property name="expirationDate" column="ExpirationDate" type="string"/>
         <property name="cvv" column="CVV" type="int"/>
