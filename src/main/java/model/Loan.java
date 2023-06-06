@@ -46,9 +46,9 @@ public class Loan {
         this.description = description;
     }
 
-    public double loanDose(double loanAmount,int doses){
-        double payableDose=0;
-        payableDose=loanAmount/doses;
+    public double loanDose(double loanAmount, int doses) {
+        double payableDose = 0;
+        payableDose = loanAmount / doses;
 
 
         return payableDose;
@@ -62,24 +62,24 @@ public class Loan {
         this.accountID = accountID;
     }
 
-    public void calculateNewLoanAmount(double loanAmaount, int doses, double balance, Account a1){
-        double pDose= loanDose(loanAmount, doses);
+    public void calculateNewLoanAmount(double loanAmaount, int doses, double balance, Account a1) {
+        double pDose = loanDose(loanAmount, doses);
         double newLoanAmount;
-        a1.setBalance(calculateNewBalanace(balance,pDose)); 
-        newLoanAmount=loanAmaount-pDose;
+        a1.setBalance(calculateNewBalanace(balance, pDose));
+        newLoanAmount = loanAmaount - pDose;
         setLoanAmount(newLoanAmount);
         doses--;
         setDoses(doses);
     }
 
-    public double calculateNewBalanace(double balance,double payableDose){
-            balance=balance-payableDose;  //ipologizo to kainourgio balance
-            return balance;
+    public double calculateNewBalanace(double balance, double payableDose) {
+        balance = balance - payableDose;  //ipologizo to kainourgio balance
+        return balance;
     }
 
-    public String genID(){
+    public String genID() {
         //Δημιουργία ενός τυχαίου ID με 8 χαρακτήρες π.χ. kHFujh%4
-        String characters ="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
         int length = 8;
         Random random = new Random();
         StringBuilder builder = new StringBuilder();
@@ -89,7 +89,6 @@ public class Loan {
         }
         return builder.toString();
     }
-
 
 
     public double getLoanAmount() {
@@ -116,16 +115,8 @@ public class Loan {
         this.doses = doses;
     }
 
-    public String toString(){
-        return "To poso twn dosewn pou apomenei: "+doses;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public String toString() {
+        return "To poso twn dosewn pou apomenei: " + doses;
     }
 
     public String getDate() {
@@ -143,6 +134,16 @@ public class Loan {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
+
 
 
