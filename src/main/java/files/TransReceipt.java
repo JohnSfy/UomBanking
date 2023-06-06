@@ -115,7 +115,7 @@ public class TransReceipt {
 
 
                 data = new String[][]{
-                        {transaction.getID(), transaction.getDate(), transaction.getDescription(), "+" + String.valueOf(transaction.getAmount())},
+                        {transaction.getID(), transaction.getDate(),transaction.getDescription(), "+" + String.valueOf(transaction.getAmount())},
                 };
             } else {
 
