@@ -56,7 +56,7 @@ public class LoanSuccessFrame extends JFrame{
 
         int i = 0;
         for(Loan loans: loan){
-            rowData[i][0] = String.valueOf(loans.getLoanAmount());
+            rowData[i][0] = String.valueOf(loans.getLoanAmount() +"€");
             rowData[i][1] = String.valueOf(loans.getDateExp());
             i++;
         }

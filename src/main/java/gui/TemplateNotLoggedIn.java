@@ -20,10 +20,10 @@ public class TemplateNotLoggedIn extends JFrame{
         logo.setBounds(0, 0, 150, 30);
         logo.setSize(100, 100);
 
-        logo.setIcon(Utils.setLabelIcon("/Users/dimsparagis/Documents/UomBankingApp/src/main/java/images/UOM_LOGO_3.png", logo));
+        logo.setIcon(Utils.setLabelIcon("src/main/java/images/UOM_LOGO_3.png", logo));
 
 //      Setting up JLabel name
-        name.setBounds(10, 730, 150, 30);
+        name.setBounds(10, 730, 250, 30);
         name.setFont(new Font("Courier", Font.PLAIN, 25));
 
 //      Adding components to the frame

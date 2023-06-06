@@ -43,7 +43,7 @@ public class LoanFrame extends JFrame {
 
             int i=0;
             for(Loan loans:aLoan){
-                LoansInfo[i][0] = String.valueOf(loans.getLoanAmount());
+                LoansInfo[i][0] = String.valueOf(loans.getLoanAmount() +"€");
                 LoansInfo[i][1] = String.valueOf(loans.getDateExp());
                 i++;
             }

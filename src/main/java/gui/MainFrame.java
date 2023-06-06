@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
         expensesPanel = new ExpensesPanel(account);
         balancePanel = new BalancePanel(account);
         spendCategoriesPanel = new SpendCategoriesPanel(account);
-        cardPanel = new CardPanel();
+        cardPanel = new CardPanel(account);
         transactionHistoryButton = new JButton("Transaction History");
         loanButton = new JButton("Apply for a loan");
         createCardButton = new JButton("Create your new card today!");
@@ -67,6 +67,10 @@ public class MainFrame extends JFrame {
         createCardButton.setBounds(370, 710, 250, 30);
 
 
+
+
+
+
         createCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +78,8 @@ public class MainFrame extends JFrame {
                 mainFrame.dispose();
             }
         });
+
+
 
 //      Creating account
        // account = new Account(0, "", "", client.getUsername(),"");
@@ -90,23 +96,14 @@ public class MainFrame extends JFrame {
 
 
         // if user has already create the card
-        if(CardDB.fetchCard(account.getID()) == null){
+//        if(CardDB.fetchCard(account.getID()) == null){
             mainFrame.add(createCardButton);
-
-        }
-        else {
+//
+//        }
+      //  else {
             Card card = CardDB.fetchCard(account.getID());
-            String colorString = card.getColor();
-            String rgbString = colorString.substring(colorString.indexOf("[") + 1, colorString.indexOf("]"));
-            String[] rgbValues = rgbString.split(",");
 
-            int red = Integer.parseInt(rgbValues[0].substring(rgbValues[0].indexOf("=") + 1).trim());
-            int green = Integer.parseInt(rgbValues[1].substring(rgbValues[1].indexOf("=") + 1).trim());
-            int blue = Integer.parseInt(rgbValues[2].substring(rgbValues[2].indexOf("=") + 1).trim());
-
-            Color color = new Color(red, green, blue);
-            //cardPanel.add(new PreviewCardFrame(account.getID() ,card.getType(), card.genNum(), card.getExpirationDate(), card.getCardName(), card.genCVV(),color));
-        }
+         //   }
 
 //      Basic settings
         mainFrame.setVisible(true);
@@ -122,8 +119,11 @@ public class MainFrame extends JFrame {
 class CardPanel extends JPanel {
     private JLabel cardLabel;
     private JLabel cardIcon;
-
-    public CardPanel() {
+    private StringBuilder cardNumberBuilder;
+    private Long carNumber;
+    private JLabel cardNum;
+    private JLabel nameInTheCard;
+    public CardPanel(Account account) {
         cardLabel = new JLabel("Cards");
         cardIcon = new JLabel();
 
@@ -138,7 +138,29 @@ class CardPanel extends JPanel {
         setBounds(320, 480, 350, 200);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+
         add(cardIcon);
+
+//        JLabel carNumber = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardNumber()));
+
+
+
+
+//        carNumber = CardDB.fetchCard(account.getID()).getCardNumber();
+//
+//        cardNumberBuilder = new StringBuilder(String.valueOf(carNumber));
+//        for (int i = 4; i < cardNumberBuilder.length(); i += 6) {
+//            cardNumberBuilder.insert(i, "  ");
+//        }
+//
+//        cardNum = new JLabel(String.valueOf(carNumber));
+//        cardNum.setBounds(350,600,200,100);
+//        add(cardNum);
+//
+//        nameInTheCard = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardName()));
+//        nameInTheCard.setBounds(350,500,200,100);
+//        add(nameInTheCard);
+
 
 //        layoutComponents();
     }
@@ -245,7 +267,7 @@ class BalancePanel extends JPanel{
 //      Initializing components
         header = Utils.setHeader("Your account balance");
 
-        balance = new JLabel(String.valueOf(account.getBalance()));
+        balance = new JLabel(String.valueOf(account.getBalance())+"€");
         newTransactionButton = new JButton("New Transaction");
 
 //      Setting up newTransactionButton
@@ -325,16 +347,16 @@ class ExpensesPanel extends JPanel {
         if (transactions != null) {
             for (Transactions transaction : transactions) {
                 if(transaction.getClass().getName().equals("model.Deposit")){
-                    listModel.addElement("• Deposit, "+transaction.getAmount() + "$");
+                    listModel.addElement("• Deposit, "+transaction.getAmount() +"€");
                 }
                 else if(transaction.getClass().getName().equals("model.Withdraw")){
-                    listModel.addElement("• Withdraw, " + transaction.getAmount() + "$");
+                    listModel.addElement("• Withdraw, " + transaction.getAmount() +"€");
                 }
                 else if(transaction.getClass().getName().equals("model.Transfer")){
-                    listModel.addElement("• " + transaction.getDescription() + transaction.getAmount() + "$");
+                    listModel.addElement("• " + transaction.getDescription() + transaction.getAmount() +"€");
                 }
                 else if(transaction.getClass().getName().equals("model.Payment")){
-                    listModel.addElement("• " + transaction.getDescription() + ", " + transaction.getAmount() + "$");
+                    listModel.addElement("• " + transaction.getDescription() + ", " + transaction.getAmount() +"€");
                 }
             }
         }
