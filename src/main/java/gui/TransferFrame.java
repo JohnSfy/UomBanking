@@ -1,6 +1,7 @@
 package gui;
 
 import model.Account;
+import model.Transactions;
 import model.Transfer;
 import model.Withdraw;
 import org.example.AccountDB;
@@ -59,9 +60,10 @@ public class TransferFrame extends JFrame {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
                     LocalDateTime now = LocalDateTime.now();
                     TransactionsDB.saveTransaction(new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText()));
+                    Transactions trans = new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText());
                     account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
                     trFrame.dispose();
-                    new PreviewTransferFrame(account);
+                    new PreviewTransferFrame(account,trans);
                 }
             }
         });
