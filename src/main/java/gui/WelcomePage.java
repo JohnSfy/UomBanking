@@ -11,6 +11,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class WelcomePage extends JFrame {
     private JLabel header;
@@ -22,6 +25,8 @@ public class WelcomePage extends JFrame {
     private Client client;
     private Account account;
     private JTextField username;
+    private ProgressBar progressBar;
+    private SwingWorker<List, Integer> worker;
 
     public JTextField getUsername() {
         return username;
@@ -39,6 +44,15 @@ public class WelcomePage extends JFrame {
         infoPanel = new JPanel();
         createAccountButton = new JButton("Create an account");
         message = new JLabel("New Here?");
+        progressBar = new ProgressBar(welcomePage, "Loading...");
+        progressBar.setListener(new ProgressBarListener() {
+            @Override
+            public void progressBarCancelled() {
+                if(worker != null) {
+                    worker.cancel(true);
+                }
+            }
+        });
 
 //       Setting up JLabel signIn
         signIn.setBounds(550, 300, 1000, 100);
@@ -116,6 +130,8 @@ public class WelcomePage extends JFrame {
                     if (ClientDB.fetchClient(username) != null) {
                         if (ClientDB.fetchClient(username).getPassword().equals(password)) {
                             account = AccountDB.fetchAccount(username);
+                            progressBar.setVisible(true);
+                            logIn();
                             welcomePage.dispose();
                             new MainFrame(account);
                         } else {
@@ -199,7 +215,31 @@ public class WelcomePage extends JFrame {
 
             return null;
         }
+    }
 
+    public void logIn() {
+
+        progressBar.setMaximum(100);
+
+        progressBar.setVisible(true);
+
+        worker = new SwingWorker<List, Integer>() {
+
+            @Override
+            protected List doInBackground() throws Exception {
+                return null;
+            }
+
+            @Override
+            protected void done() {
+
+                progressBar.setVisible(false);
+
+                if(isCancelled()) return;
+            }
+        };
+
+        worker.execute();
     }
 }
 
