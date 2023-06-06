@@ -36,7 +36,7 @@ public class SpendCategoriesFrame extends JFrame {
 
         for (Transactions tr : payments) {
             info[i][0] = tr.getDescription();
-            info[i][1] = String.valueOf(tr.getAmount());
+            info[i][1] = String.valueOf(tr.getAmount() +"€");
             i++;
         }
         SCTable = new JTable(info,columns);

@@ -24,7 +24,7 @@ public class PreviewDepositFrame extends JFrame {
         header = Utils.setHeader("Your money has been successfully deposited!");
         message = new JLabel("You have 10 days to deliver the money to the bank");
         message2= new JLabel("Your new account balance");
-        balance = new JLabel(String.valueOf(account.getBalance()));
+        balance = new JLabel(String.valueOf(account.getBalance())+"€");
         innerPanel = new JPanel();
         returnToMainPageButton = Utils.returnToMainPageButton(successDeposit, account);
         receiptButton = new JButton("Download receipt");

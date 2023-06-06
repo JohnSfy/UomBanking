@@ -23,7 +23,7 @@ public class PreviewWithdrawFrame extends JFrame{
         header = Utils.setHeader("Your money has been successfully withdrawn!");
         message = new JLabel("You have 10 days to receive the money from the bank");
         message2= new JLabel("Your new account balance");
-        balance = new JLabel(String.valueOf(account.getBalance()));
+        balance = new JLabel(String.valueOf(account.getBalance()) +"€");
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
         returnToMainPageButton = Utils.returnToMainPageButton(successWithdraw, account);

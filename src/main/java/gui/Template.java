@@ -41,7 +41,7 @@ public class Template extends JFrame {
         accountIcon.setIcon(Utils.setLabelIcon("src/main/java/images/UserIcon.png", accountIcon));
 
 //      Setting up JLabel name
-        name.setBounds(10, 730, 150, 30);
+        name.setBounds(10, 730, 250, 30);
         name.setFont(new Font("Courier", Font.PLAIN, 25));
 
 //      Setting up JLabel clientName
