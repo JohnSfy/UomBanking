@@ -2,6 +2,10 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Template extends JFrame {
 
@@ -10,7 +14,8 @@ public class Template extends JFrame {
     private JLabel name;
     private JLabel accountIcon;
     private JLabel clientName;
-
+    private JComboBox<JButton> dropdown;
+    private JButton logOut;
     public Template() {
 //      Setting layout manager to null for absolute positioning
         setLayout(null);
@@ -20,6 +25,8 @@ public class Template extends JFrame {
         name = new JLabel("UOMSystemX");
         accountIcon = new JLabel("Account");
         clientName = new JLabel();
+        logOut = new JButton("Log out");
+        logOut.setVisible(false);
 
 //      Setting up JLabel logo
         logo.setBounds(0, 0, 150, 30);
@@ -41,13 +48,29 @@ public class Template extends JFrame {
         clientName.setBounds(1115, 65, 150, 30);
         clientName.setFont(new Font("Courier", Font.PLAIN, 15));
 
+        logOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new WelcomePage();
+            }
+        });
 
+//      Setting up Log out
+        accountIcon.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                System.out.println("Label is pressed");
+                logOut.setBounds(1080, 65, 120, 60);
+                logOut.setVisible(!logOut.isVisible());
+            }
+        });
 
 //      Adding components to the frame
         add(logo);
         add(name);
         add(accountIcon);
         add(clientName);
+        add(logOut);
 
 //      Basic setup for the frame
         setVisible(true);
@@ -56,7 +79,5 @@ public class Template extends JFrame {
         setSize(1200, 800);
         getContentPane().setBackground(Color.LIGHT_GRAY);
         validate(); //validates the images
-
-
     }
 }

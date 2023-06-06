@@ -72,8 +72,6 @@ public class PreviewDepositFrame extends JFrame {
         successDeposit.add(receiptButton);
         successDeposit.add(returnToMainPageButton);
 
-
-
         successDeposit.setVisible(true);
         successDeposit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
