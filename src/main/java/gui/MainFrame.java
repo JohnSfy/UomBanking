@@ -141,7 +141,9 @@ class CardPanel extends JPanel {
 
 //        JLabel carNumber = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardNumber()));
 
-
+        String color = CardDB.fetchCard(account.getID()).getColor();
+        Color c = Color.decode(color);
+        this.setBackground(c);
 
 
 //        carNumber = CardDB.fetchCard(account.getID()).getCardNumber();
