@@ -6,6 +6,7 @@ import org.example.AccountDB;
 import org.example.LoanDB;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -36,11 +37,13 @@ public class CreateLoanFrame extends JFrame{
 
         label1 = new JLabel("Enter your information to register the loan");
         label1.setBounds(500, 110, 500, 100 );
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         balance = account.getBalance();
         amountField = new JTextField("The max amount you can loan is: " +balance*5);
         amountLabel = new JLabel("Amount");
         amountLabel.setBounds(450,250,50,50);
+        amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         amountField.setBounds(500,260,230,35);
 
         amountField.addMouseListener(new MouseListener() {
@@ -73,9 +76,10 @@ public class CreateLoanFrame extends JFrame{
 
         //dropdownlist με τους λόγους αίτησης δανείου
         reasonLabel = new JLabel("Reason");
+        reasonLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         String[] choices = { "I want to make a big purchace","I want to start my business", "I have a health issue","I want to buy a house","Other"};
-
         final JComboBox<String> dropDownList = new JComboBox<String>(choices);
+        dropDownList.setFont(new Font("Tahoma", Font.PLAIN, 10));
 
 
 
