@@ -119,7 +119,6 @@ public class CreateNewCardFrame extends JFrame {
                 {
                     //Δημιουργείται η κάρτα
                     Card card = new Card(account.getID(),0,"",0,"MasterCard", color.toString(),"");
-                    CardDB.saveCard(card);
                     long cardNum = card.getCardNumber();
                     int cardCVV = card.getCvv();
                     String cardExp = card.getExpirationDate();
@@ -133,7 +132,9 @@ public class CreateNewCardFrame extends JFrame {
 
                     else {
                         fr.dispose();
+                        Card acard = new Card(account.getID(),cardNum,cardExp,cardCVV,typedText, color.toString(),cardName);
                         new PreviewCardFrame(account,typedText, cardNum, cardExp, cardName, cardCVV, color);
+                        CardDB.saveCard(acard);
                     }
                 }
             }
