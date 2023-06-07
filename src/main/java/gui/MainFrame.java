@@ -443,7 +443,7 @@ class LoanPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = loanList.getSelectedIndex();
-                if (index > 0) {
+                if (index >=  0) {
                     Loan loanSelected = finalLoans.get(index);
                     MainFrame.getMainFrame().dispose();
                     new PayLoanFrame(account, loanSelected);
