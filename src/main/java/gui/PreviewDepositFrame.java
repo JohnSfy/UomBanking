@@ -49,7 +49,10 @@ public class PreviewDepositFrame extends JFrame {
 
         balance.setFont(new Font("Tahoma", Font.PLAIN, 50));
         receiptButton.setBounds(380,550,200,40);
+
         receiptButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
+        
         receiptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -57,6 +60,7 @@ public class PreviewDepositFrame extends JFrame {
                 new TransReceipt(account,dep);
             }
         });
+
         returnToMainPageButton.setBounds(630,550,200,40);
 
 //      Saving account's new Balance

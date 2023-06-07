@@ -51,7 +51,7 @@ public class CreateNewCardFrame extends JFrame {
 
         String[] choices = {"VISA", "MasterCard"}; //δυο τυποί κάρτας
         message = new JLabel("Enter 4 digits");
-        message.setFont(new Font("Courier", Font.PLAIN, 10));
+        message.setFont(new Font("Tahoma", Font.PLAIN, 10));
 
         header = Utils.setHeader("Enter card details");
         header.setBounds(400,100,1000,100);
@@ -59,15 +59,23 @@ public class CreateNewCardFrame extends JFrame {
         line.setBounds(180,140,900,100);
 
         nameLabel = new JLabel("Name in the card");
+        nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         typeLabel = new JLabel("Type");
+        typeLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         final JComboBox<String> cb = new JComboBox<String>(choices); //για επιλογή τύπου κάρτας
 
         colorLabel = new JLabel("Color");
+        colorLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         colorButton = new JButton("Choose Color");
+        colorButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
 
         pinLabel = new JLabel("Pin");
+        pinLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         conPinLabel = new JLabel("Confirm Pin");
+        conPinLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        colorButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        createCardButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
         //Με το πάτημα του κουμπιού θα εμφανίζονται τα διαθέσιμα χρώματα για επιλογή
         colorButton.addActionListener(new ActionListener() {
@@ -81,16 +89,17 @@ public class CreateNewCardFrame extends JFrame {
         });
 
         //Τοποθέτηση στοιχείων στις κατάλληλες διαστάσεις
-        nameLabel.setBounds(380, 200, 1000, 100);
+        nameLabel.setBounds(360, 200, 1000, 100);
         nameText.setBounds(480, 240, 150, 20);
-        typeLabel.setBounds(450, 250, 1000, 100);
+        typeLabel.setBounds(445, 250, 1000, 100);
         cb.setBounds(480, 290, 150, 20);
+        cb.setFont(new Font("Tahoma", Font.PLAIN, 10));
         colorLabel.setBounds(445, 310, 1000, 100);
         colorButton.setBounds(480, 350, 100, 20);
         pinLabel.setBounds(460, 350, 1000, 100);
         pinField.setBounds(480, 390, 150, 20);
         message.setBounds(480, 405, 1000, 20);
-        conPinLabel.setBounds(410, 400, 1000, 100);
+        conPinLabel.setBounds(400, 400, 1000, 100);
         conPinField.setBounds(480, 440, 150, 20);
         createCardButton.setBounds(500, 480, 100, 25);
         //  returnToMainPageButton.setBounds(450, 550, 200, 25);
@@ -110,7 +119,6 @@ public class CreateNewCardFrame extends JFrame {
                 {
                     //Δημιουργείται η κάρτα
                     Card card = new Card(account.getID(),0,"",0,"MasterCard", color.toString(),"");
-                    CardDB.saveCard(card);
                     long cardNum = card.getCardNumber();
                     int cardCVV = card.getCvv();
                     String cardExp = card.getExpirationDate();
@@ -124,7 +132,9 @@ public class CreateNewCardFrame extends JFrame {
 
                     else {
                         fr.dispose();
+                        Card acard = new Card(account.getID(),cardNum,cardExp,cardCVV,typedText, color.toString(),cardName);
                         new PreviewCardFrame(account,typedText, cardNum, cardExp, cardName, cardCVV, color);
+                        CardDB.saveCard(acard);
                     }
                 }
             }

@@ -28,6 +28,7 @@ public class LoanSuccessFrame extends JFrame{
 
         String expirationDate = calcDate(currentDate, doses);
         label1 = new JLabel("Make sure to pay it off by "+expirationDate);
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         label1.setBounds(500, 110, 700, 100 );
 
 
@@ -40,7 +41,7 @@ public class LoanSuccessFrame extends JFrame{
 
         label2 = new JLabel("Your loans");
         label2.setBounds(500, 250, 1000, 100 );
-        label2.setFont(new Font("Courier", Font.PLAIN, 30));
+        label2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 
         returnToTheMainPageButton = Utils.returnToMainPageButton(frame,account);
         returnToTheMainPageButton.setBounds(480,650,200,35);
@@ -63,6 +64,7 @@ public class LoanSuccessFrame extends JFrame{
 
         table= new JTable(rowData, columnNames);
         table.setForeground(Color.BLACK);
+        table.setFont(new Font("Tahoma", Font.PLAIN, 12));
         scrollPane = new JScrollPane(table);
         scrollPane.setBounds(270,350,600,100);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
