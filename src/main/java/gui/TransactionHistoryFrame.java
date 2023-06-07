@@ -21,8 +21,10 @@ public class TransactionHistoryFrame extends JFrame {
 
         frame = new Template();
         downloadTranButton= new JButton("Download Transaction History");
+        downloadTranButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         header = Utils.setHeader("Transaction history");
         subheader = new JLabel("See what you spend in detail");
+        subheader.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         String[][] trans = new String[transactions.size()][5];
         String[] column={"Transaction","Amount","Date","ID","DESCRIPTION"};
@@ -32,6 +34,7 @@ public class TransactionHistoryFrame extends JFrame {
         jt.setEnabled(false);
         sc.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         jt.setForeground(Color.BLACK);
+        jt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
 //      Appending the transaction history to the table
         int i = 0;

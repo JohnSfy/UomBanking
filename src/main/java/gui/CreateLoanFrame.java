@@ -42,7 +42,7 @@ public class CreateLoanFrame extends JFrame{
         balance = account.getBalance();
         amountField = new JTextField("The max amount you can loan is: " +balance*5);
         amountLabel = new JLabel("Amount");
-        amountLabel.setBounds(450,250,50,50);
+        amountLabel.setBounds(440,250,100,50);
         amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         amountField.setBounds(500,260,230,35);
 
@@ -70,8 +70,10 @@ public class CreateLoanFrame extends JFrame{
         dosesField = new JTextField();
         dosesLabel = new JLabel("Doses");
         dosesInformation = new JLabel("You can select 1 to 12 doses");
+        dosesInformation.setFont(new Font("Tahoma", Font.PLAIN, 13));
         dosesLabel.setBounds(450,310,50,50);
-        dosesField.setBounds(500,320,230,35);
+        dosesLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        dosesField.setBounds(500,320,200,35);
         dosesInformation.setBounds(500,350,200,35);
 
         //dropdownlist με τους λόγους αίτησης δανείου
@@ -79,15 +81,17 @@ public class CreateLoanFrame extends JFrame{
         reasonLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         String[] choices = { "I want to make a big purchace","I want to start my business", "I have a health issue","I want to buy a house","Other"};
         final JComboBox<String> dropDownList = new JComboBox<String>(choices);
-        dropDownList.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        dropDownList.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 
 
         reasonLabel.setBounds(450,390,50,50);
+        reasonLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         dropDownList.setBounds(500,400,200,35);
 
         submitButton = new JButton("Submit");
         submitButton.setBounds(500,550,200,35);
+        submitButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
         returnToTheMainPageButton = Utils.returnToMainPageButton(frame,account);
         returnToTheMainPageButton.setBounds(970,720,200,35);

@@ -46,17 +46,18 @@ public class SpendCategoriesFrame extends JFrame {
         jp.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         SCTable.setForeground(Color.BLACK);
         SCTable.setEnabled(false);
+        SCTable.setFont(new Font("Tahoma", Font.PLAIN, 12));
         jp.setBounds(440,280,350,130);
 
         //settings for header
         header = Utils.setHeader("Spend Categories");
         header.setBounds(440, 100, 800, 100);
-        header.setFont(new Font("Courier",Font.PLAIN,40));
+        header.setFont(new Font("Tahoma",Font.PLAIN,40));
 
         //settings for message
         message = new JLabel("See what you spend in each category");
         message.setBounds(480,140,600,80);
-        message.setFont(new Font("Courier",Font.PLAIN,15));
+        message.setFont(new Font("Tahoma",Font.PLAIN,15));
 
         //settings for "return to main page" button
         ReturnToTheMainPage = new JButton("Return to the main page");
