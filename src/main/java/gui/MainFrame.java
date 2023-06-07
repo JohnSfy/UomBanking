@@ -335,6 +335,7 @@ class ExpensesPanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        scrollPane.setSize(new Dimension(200, 200));
 
 //      Retrieving all transactions from the database
         ArrayList<Transactions> transactions = new ArrayList<>();
@@ -372,7 +373,7 @@ class ExpensesPanel extends JPanel {
 
 //      Basic settings
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        setBounds(50, 200, 190, 300);
+        setBounds(50, 200, 220, 300);
 
         layoutComponents();
     }
