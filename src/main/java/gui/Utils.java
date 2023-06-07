@@ -23,12 +23,13 @@ public class Utils {
     public static JLabel setHeader(String text) {
         JLabel header = new JLabel(text);
         header.setBounds(350, 100, 1000, 100);
-        header.setFont(new Font("Courier", Font.PLAIN, 45));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 45));
         return header;
     }
 
     public static JButton returnToMainPageButton(JFrame frame, Account account)  {
         JButton returnToMainPageButton = new JButton("Return to main page");
+        returnToMainPageButton.setFont(new Font("Tahoma", Font.PLAIN,15));
         returnToMainPageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

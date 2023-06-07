@@ -45,21 +45,25 @@ public class PaymentFrame extends JFrame {
 
         //Placing the elements
         header.setBounds(325, 100, 1000, 100);
-        header.setFont(new Font("Courier", Font.PLAIN, 30));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 30));
 
         message.setBounds(450,150,800,80);
-        message.setFont(new Font("Courier", Font.PLAIN, 20));
+        message.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        IBANLabel.setBounds(470, 290,50,50);
+        IBANLabel.setBounds(460, 290,50,50);
+        IBANLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         IBANField.setBounds(500,300,200,35);
 
-        amountLabel.setBounds(455,350,50,50);
+        amountLabel.setBounds(440,350,100,50);
+        amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         amountField.setBounds(500,360,200,35);
 
-        expensesLabel.setBounds(400,420,100,50);
+        expensesLabel.setBounds(380,420,150,50);
+        expensesLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         cb.setBounds(500,430,150,35);
 
-        submitButton.setBounds(570,600,80,35);
+        submitButton.setBounds(570,600,100,35);
+        submitButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         returnToMainPageButton.setBounds(950,700,200,35);
 
         //Action Listeners

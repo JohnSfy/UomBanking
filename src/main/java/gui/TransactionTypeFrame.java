@@ -33,6 +33,11 @@ public class TransactionTypeFrame extends JFrame {
         transferButton = new JButton("Transfer");
         paymentButton = new JButton("Payment");
 
+        depositButton.setFont(new Font("Tahoma",Font.PLAIN,15));
+        withdrawButton.setFont(new Font("Tahoma",Font.PLAIN,15));
+        transferButton.setFont(new Font("Tahoma",Font.PLAIN,15));
+        paymentButton.setFont(new Font("Tahoma",Font.PLAIN,15));
+
         depositButton.setBounds(520,250,120,30);
         withdrawButton.setBounds(520,320,120,30);
         transferButton.setBounds(520,390,120,30);

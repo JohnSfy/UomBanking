@@ -24,7 +24,7 @@ public class TemplateNotLoggedIn extends JFrame{
 
 //      Setting up JLabel name
         name.setBounds(10, 730, 250, 30);
-        name.setFont(new Font("Courier", Font.PLAIN, 25));
+        name.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
 //      Adding components to the frame
         add(logo);
