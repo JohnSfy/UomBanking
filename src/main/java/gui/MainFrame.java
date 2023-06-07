@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
 
 
 
-      //  if(CardDB.fetchCard(account.getID()) == null){
+        if(CardDB.fetchCard(account.getID()) == null){
               createCardButton.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
@@ -86,7 +86,18 @@ public class MainFrame extends JFrame {
 
                   }
               });
-     //   }
+        }
+        else {
+
+            createCardButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    JOptionPane.showMessageDialog(createCardButton, "You can create only one card",
+                            "Card Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
+        }
 
 
 
@@ -190,6 +201,7 @@ class CardPanel extends JPanel {
         add(cardL);
         add(cardL1);
         add(cardButton);
+
     }
 
         private Color decodeColor(String colorString) {
@@ -437,18 +449,6 @@ class ExpensesPanel extends JPanel {
         return null;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
