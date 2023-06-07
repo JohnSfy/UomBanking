@@ -38,16 +38,17 @@ public class  DepositFrame extends JFrame {
 
         //Placing the elements
         header.setBounds(500, 100, 1000, 100);
-        header.setFont(new Font("Courier", Font.PLAIN, 40));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 40));
 
         line.setBounds(325,150,500,100);
 
         amountLabel.setBounds(515,300,400,50);
-        amountLabel.setFont(new Font("Courier", Font.PLAIN, 20));
+        amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         amountField.setBounds(500,370,150,25);
 
         continueButton.setBounds(525,550,100,30);
+        continueButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         returnToMainPageButton.setBounds(950,700,200,35);
 

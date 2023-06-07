@@ -37,18 +37,21 @@ public class PreviewDepositFrame extends JFrame {
 
         //Placing the elements
         header.setBounds(300, 100, 1000, 100);
-        header.setFont(new Font("Courier", Font.PLAIN, 30));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 30));
 
         message.setBounds(400,150,800,80);
-        message.setFont(new Font("Courier", Font.PLAIN, 20));
+        message.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         innerPanel.setBounds(450, 275, 300, 200);
         innerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        message2.setFont(new Font("Courier", Font.PLAIN, 25));
+        message2.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
-        balance.setFont(new Font("Courier", Font.PLAIN, 50));
+        balance.setFont(new Font("Tahoma", Font.PLAIN, 50));
         receiptButton.setBounds(380,550,200,40);
+<<<<<<< HEAD
+        receiptButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+=======
 
         receiptButton.addActionListener(new ActionListener() {
             @Override
@@ -58,6 +61,7 @@ public class PreviewDepositFrame extends JFrame {
             }
         });
 
+>>>>>>> 90dfb3c6cf6b7be3b1d30bf1311021fc1b4da5c9
         returnToMainPageButton.setBounds(630,550,200,40);
 
 //      Saving account's new Balance

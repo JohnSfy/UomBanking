@@ -56,14 +56,14 @@ public class WelcomePage extends JFrame {
 
 //       Setting up JLabel signIn
         signIn.setBounds(550, 300, 1000, 100);
-        signIn.setFont(new Font("Courier", Font.PLAIN, 25));
+        signIn.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
 //       Setting up the information panel
         infoPanel = new InfoPanel();
 
 //       Setting up createAccountButton
         createAccountButton.setBounds(590, 675, 200, 50);
-        createAccountButton.setFont(new Font("Courier", Font.PLAIN, 15));
+        createAccountButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,7 +74,7 @@ public class WelcomePage extends JFrame {
 
 //       Setting up message
         message.setBounds(500, 650, 300, 100);
-        message.setFont(new Font("Courier", Font.PLAIN, 15));
+        message.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 //       Adding components to the frame
         welcomePage.add(header);
@@ -100,8 +100,10 @@ public class WelcomePage extends JFrame {
         public InfoPanel() {
 //      Initializing components
             showPassword = new JCheckBox("Show Password");
+            showPassword.setFont(new Font("Tahoma", Font.PLAIN,15));
             passwordField = new JPasswordField(10);
             signInButton = new JButton("Sign In");
+            signInButton.setFont(new Font("Tahoma", Font.PLAIN,15));
 
 //      Setting up showPassword button
             passwordField.setEchoChar('•');
@@ -175,7 +177,9 @@ public class WelcomePage extends JFrame {
             gc.gridx = 0;
             gc.anchor = GridBagConstraints.LINE_END;
             gc.insets = new Insets(0, 0, 0, 5);
-            add(new JLabel("Username"), gc);
+            JLabel username = new JLabel("Username");
+            username.setFont(new Font("Tahoma",Font.PLAIN,15));
+            add(username, gc);
 
 //      First row-Second column
             gc.gridx = 1;
@@ -191,7 +195,9 @@ public class WelcomePage extends JFrame {
             gc.gridx = 0;
             gc.anchor = GridBagConstraints.FIRST_LINE_END;
             gc.insets = new Insets(0, 0, 0, 5);
-            add(new JLabel("Password"), gc);
+            JLabel password = new JLabel("Password");
+            password.setFont(new Font("Tahoma",Font.PLAIN,15));
+            add(password, gc);
 
 //      Second row-Second column
             gc.gridx = 1;

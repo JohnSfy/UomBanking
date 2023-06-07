@@ -48,11 +48,12 @@ public class PreviewPaymentFrame extends JFrame {
         innerPanel.setBounds(450, 275, 300, 200);
         innerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        message.setFont(new Font("Courier", Font.PLAIN, 25));
+        message.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
-        balance.setFont(new Font("Courier", Font.PLAIN, 50));
+        balance.setFont(new Font("Tahoma", Font.PLAIN, 50));
 
         receiptButton.setBounds(380,550,200,40);
+        receiptButton.setFont(new Font("Tahoma",Font.PLAIN,15));
 
         returnToMainPageButton.setBounds(630,550,200,40);
 

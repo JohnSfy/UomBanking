@@ -41,13 +41,14 @@ public class CreateAccount extends JFrame {
 
 //      Setting up the subHeader
         subHeader.setBounds(450, 100, 1000, 100);
-        subHeader.setFont(new Font("Courier", Font.PLAIN, 20));
+        subHeader.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 //      Setting up the panel
         infoPanel = new CreateAccountPanel();
 
 //      Setting up the create your account button
         createAccountButton.setBounds(450, 700, 200, 50);
+        createAccountButton.setFont(new Font("Tahoma",Font.PLAIN,15));
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,10 +83,11 @@ public class CreateAccount extends JFrame {
 
 //      Setting up the login label
         loginLabel.setBounds(920, 700, 200, 50);
-        loginLabel.setFont(new Font("Courier", Font.PLAIN, 12));
+        loginLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 //      Setting up login button
         loginButton.setBounds(1090, 700, 100, 50);
+        loginButton.setFont(new Font("Tahoma",Font.PLAIN,15));
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

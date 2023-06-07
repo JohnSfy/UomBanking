@@ -69,7 +69,9 @@ public class CreateAccountPanel extends JPanel {
         costPerTransaction = new JComboBox();
 
 //      Setting up the message label
-        message.setFont(new Font("Courier", Font.PLAIN, 10));
+        message.setFont(new Font("Tahoma", Font.PLAIN, 10));
+
+        showPassword.setFont(new Font("Tahoma",Font.PLAIN,15));
 
 //      Setting up showPassword button
         passwordField.setEchoChar('•');
@@ -104,13 +106,13 @@ public class CreateAccountPanel extends JPanel {
                         checkLabel.setVisible(true);
                         checkLabel.setSize(18, 20);
                         checkLabel.setIcon(Utils.setLabelIcon("src/main/java/images/Valid.png", checkLabel));
-                        checkLabel.setFont(new Font("Courier", Font.PLAIN, 10));
+                        checkLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 
                     } else {
                         checkLabel.setSize(18, 20);
                         checkLabel.setVisible(true);
                         checkLabel.setIcon(Utils.setLabelIcon("src/main/java/images/invalid.png", checkLabel));
-                        checkLabel.setFont(new Font("Courier", Font.PLAIN, 10));
+                        checkLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
                     }
                 }
             }
@@ -138,7 +140,9 @@ public class CreateAccountPanel extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(0, 0, 0, 5);
-        add(new JLabel("First Name"), gc);
+        JLabel fName = new JLabel("First Name");
+        fName.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(fName, gc);
 
 //      First row-Second column
         gc.gridx = 1;
@@ -154,7 +158,9 @@ public class CreateAccountPanel extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 0, 0, 5);
-        add(new JLabel("Last Name"), gc);
+        JLabel lName = new JLabel("Last Name");
+        lName.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(lName, gc);
 
 //      Second row-Second column
         gc.gridx = 1;
@@ -169,7 +175,9 @@ public class CreateAccountPanel extends JPanel {
         gc.weightx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 0, 0, 0);
-        add(new JLabel("Phone Number"), gc);
+        JLabel phoneNum = new JLabel("Phone Number");
+        phoneNum.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(phoneNum, gc);
 
 //      Third row-Second column
         gc.gridx++;
@@ -184,7 +192,9 @@ public class CreateAccountPanel extends JPanel {
         gc.weightx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 0, 0, 0);
-        add(new JLabel("Email"), gc);
+        JLabel emailL = new JLabel("Email");
+        emailL.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(emailL, gc);
 
 //      Fourth row-Second column
         gc.gridx++;
@@ -198,7 +208,9 @@ public class CreateAccountPanel extends JPanel {
         gc.weightx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 0, 0, 0);
-        add(new JLabel("Username"), gc);
+        JLabel userName = new JLabel("Username");
+        userName.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(userName, gc);
 
         gc.gridx++;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -212,7 +224,9 @@ public class CreateAccountPanel extends JPanel {
         gc.weightx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 0, 0, 0);
-        add(new JLabel("Password"), gc);
+        JLabel password = new JLabel("Password");
+        password.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(password, gc);
 
 //      Fifth row-Second column
         gc.gridx++;
@@ -242,7 +256,9 @@ public class CreateAccountPanel extends JPanel {
         gc.weightx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 0, 0, 0);
-        add(new JLabel("Confirm Password"), gc);
+        JLabel conPassword = new JLabel("Confirm Password");
+        conPassword.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(conPassword, gc);
 
 //      Seventh row-Second column
         gc.gridx++;
@@ -262,7 +278,9 @@ public class CreateAccountPanel extends JPanel {
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 0, 0, 0);
-        add(new JLabel("Cost per transaction"), gc);
+        JLabel costPerTrans = new JLabel("Cost Per transaction");
+        costPerTrans.setFont(new Font("Tahoma",Font.PLAIN,15));
+        add(costPerTrans, gc);
 
 //      Eighth row-Second column
         gc.gridx++;
