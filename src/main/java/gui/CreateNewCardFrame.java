@@ -132,12 +132,7 @@ public class CreateNewCardFrame extends JFrame {
                     }
 
                     else {
-//                        String red,green,blue,hex;
-//                        red = Integer.toHexString(color.getRed());
-//                        green = Long.toHexString(color.getGreen());
-//                        blue = Long.toHexString(color.getBlue());
 //
-//                        hex = "#" + red + green + blue;
                         fr.dispose();
                         Card acard = new Card(account.getID(),cardNum,cardExp,cardCVV,typedText,color.toString(),cardName);
                         new PreviewCardFrame(account,typedText, cardNum, cardExp, cardName, cardCVV, color);

@@ -18,25 +18,22 @@ import static java.lang.Double.parseDouble;
 public class PaymentFrame extends JFrame {
     private JLabel header;
     private JLabel message;
-    private JLabel IBANLabel;
-    private JTextField IBANField;
     private JLabel amountLabel;
     private JTextField amountField;
     private JLabel expensesLabel;
     private JButton submitButton;
     private JButton returnToMainPageButton;
-    private String[] expenses = {"Groceries","Health","Transport"};
+    private String[] expenses = {"Groceries","Health","Transport","Other"};
     JFrame payment;
     private String anAmount;
     public PaymentFrame(Account account){
         payment = new Template();
         JComboBox<String> cb = new JComboBox<String>(expenses);
+        cb.setEditable(true);
 
         //Initializing elements
         header = Utils.setHeader("Make your own expenses with our app");
         message = new JLabel("Shops, Pharmacies and more!");
-        IBANLabel =new JLabel("IBAN");
-        IBANField = new JTextField();
         amountLabel = new JLabel("Amount");
         amountField = new JTextField();
         expensesLabel = new JLabel("Type of expense");
@@ -45,25 +42,19 @@ public class PaymentFrame extends JFrame {
 
         //Placing the elements
         header.setBounds(325, 100, 1000, 100);
-        header.setFont(new Font("Tahoma", Font.PLAIN, 30));
+        header.setFont(new Font("Courier", Font.PLAIN, 30));
 
         message.setBounds(450,150,800,80);
-        message.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        message.setFont(new Font("Courier", Font.PLAIN, 20));
 
-        IBANLabel.setBounds(460, 290,50,50);
-        IBANLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        IBANField.setBounds(500,300,200,35);
 
-        amountLabel.setBounds(440,350,100,50);
-        amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        amountLabel.setBounds(455,350,50,50);
         amountField.setBounds(500,360,200,35);
 
-        expensesLabel.setBounds(380,420,150,50);
-        expensesLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        expensesLabel.setBounds(400,420,100,50);
         cb.setBounds(500,430,150,35);
 
-        submitButton.setBounds(570,600,100,35);
-        submitButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        submitButton.setBounds(570,600,80,35);
         returnToMainPageButton.setBounds(950,700,200,35);
 
         //Action Listeners
@@ -88,8 +79,6 @@ public class PaymentFrame extends JFrame {
         //Adding the elements
         payment.add(header);
         payment.add(message);
-        payment.add(IBANLabel);
-        payment.add(IBANField);
         payment.add(amountLabel);
         payment.add(amountField);
         payment.add(expensesLabel);

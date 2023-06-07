@@ -81,6 +81,7 @@ public class CreateLoanFrame extends JFrame{
         reasonLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         String[] choices = { "I want to make a big purchace","I want to start my business", "I have a health issue","I want to buy a house","Other"};
         final JComboBox<String> dropDownList = new JComboBox<String>(choices);
+        dropDownList.setSelectedIndex(0);
         dropDownList.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
 

@@ -34,6 +34,7 @@ public class MainFrame extends JFrame {
     private JButton createCardButton;
 
     protected static Account account;
+    private JPanel loanPanel;
 
     public static JFrame mainFrame;
 
@@ -55,6 +56,7 @@ public class MainFrame extends JFrame {
         loanButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
         createCardButton = new JButton("Create your new card today!");
         createCardButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        loanPanel = new LoanPanel(account);
 
         cardPanel.setBackground(Color.WHITE);
 //      Setting up header
@@ -75,6 +77,7 @@ public class MainFrame extends JFrame {
 
 
 
+<<<<<<< HEAD
 
 
       //  if(CardDB.fetchCard(account.getID()) == null){
@@ -90,6 +93,10 @@ public class MainFrame extends JFrame {
 
 
 
+=======
+//      Creating account
+       // account = new Account(0, "", "", client.getUsername(),"");
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
 
 //      Setting up newTransactionButton
 
@@ -100,7 +107,11 @@ public class MainFrame extends JFrame {
         mainFrame.add(spendCategoriesPanel);
         mainFrame.add(loanButton);
         mainFrame.add(cardPanel);
+<<<<<<< HEAD
         mainFrame.add(createCardButton);
+=======
+        mainFrame.add(loanPanel);
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
 
 
 
@@ -142,7 +153,17 @@ class CardPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 
+<<<<<<< HEAD
         if (CardDB.fetchCard(account.getID()) != null) {
+=======
+        add(cardIcon);
+
+//        JLabel carNumber = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardNumber()));
+
+//        String color = CardDB.fetchCard(account.getID()).getColor();
+//        Color c = Color.decode(color);
+//        this.setBackground(c);
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
 
 
             cardButton.addActionListener(new ActionListener() {
@@ -385,6 +406,7 @@ class ExpensesPanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        scrollPane.setMaximumSize(new Dimension(150, 200));
 
 //      Retrieving all transactions from the database
         ArrayList<Transactions> transactions = new ArrayList<>();
@@ -422,7 +444,7 @@ class ExpensesPanel extends JPanel {
 
 //      Basic settings
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        setBounds(50, 200, 190, 300);
+        setBounds(20, 160, 280, 300);
 
         layoutComponents();
     }
@@ -438,6 +460,7 @@ class ExpensesPanel extends JPanel {
     }
 }
 
+<<<<<<< HEAD
 
 
 
@@ -452,3 +475,80 @@ class ExpensesPanel extends JPanel {
 
 
 
+=======
+class LoanPanel extends JPanel {
+
+    private JLabel header;
+    private JScrollPane scrollPane;
+    private JList loanList;
+    private DefaultListModel listModel;
+    private JButton payLoanButton;
+    public LoanPanel(Account account) {
+
+//      Initializing components
+        header = Utils.setHeader("Your Loans");
+        payLoanButton = new JButton();
+
+        ArrayList<Loan> loans = new ArrayList<>();
+        loans = LoanDB.fetchAllLoans(account);
+
+//      Setting up header
+        header.setFont(new Font("Tahoma", Font.PLAIN, 18));
+
+//      Setting up scrollPane
+        loanList = new JList();
+        listModel = new DefaultListModel();
+        loanList.setModel(listModel);
+        loanList.setFont(new Font("Tahoma", Font.PLAIN, 10));
+        scrollPane = new JScrollPane(loanList);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        scrollPane.setPreferredSize(new Dimension(150, 100));
+
+        if(loans != null){
+            for(Loan loan : loans){
+                listModel.addElement("• " + loan.getDescription() + ", " + loan.getLoanAmount() + "€");
+            }
+        }
+
+//      Setting up transaction history button
+        payLoanButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        payLoanButton.setPreferredSize(new Dimension(180, 50));
+        payLoanButton.setText("<html><center>"+"Select your loan"+"<br>"+"and pay it"+"</center></html>");
+
+        ArrayList<Loan> finalLoans = loans;
+        payLoanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = loanList.getSelectedIndex();
+                if (index >=  0) {
+                    Loan loanSelected = finalLoans.get(index);
+                    MainFrame.getMainFrame().dispose();
+                    new PayLoanFrame(account, loanSelected);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Please select a loan to pay");
+                }
+
+            }
+        });
+
+//      Basic settings
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        setBounds(40, 470, 200, 250);
+
+        layoutComponents();
+    }
+
+    public LayoutManager layoutComponents() {
+        setLayout(new FlowLayout(1, 8, 25));
+
+        add(header);
+        add(scrollPane);
+        add(payLoanButton);
+
+        return null;
+    }
+}
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
