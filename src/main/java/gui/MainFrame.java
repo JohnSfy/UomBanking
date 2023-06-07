@@ -77,9 +77,6 @@ public class MainFrame extends JFrame {
 
 
 
-<<<<<<< HEAD
-
-
       //  if(CardDB.fetchCard(account.getID()) == null){
               createCardButton.addActionListener(new ActionListener() {
                   @Override
@@ -93,11 +90,6 @@ public class MainFrame extends JFrame {
 
 
 
-=======
-//      Creating account
-       // account = new Account(0, "", "", client.getUsername(),"");
->>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
-
 //      Setting up newTransactionButton
 
 //      Adding components to the frame
@@ -107,11 +99,9 @@ public class MainFrame extends JFrame {
         mainFrame.add(spendCategoriesPanel);
         mainFrame.add(loanButton);
         mainFrame.add(cardPanel);
-<<<<<<< HEAD
         mainFrame.add(createCardButton);
-=======
         mainFrame.add(loanPanel);
->>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
+
 
 
 
@@ -153,18 +143,8 @@ class CardPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 
-<<<<<<< HEAD
+
         if (CardDB.fetchCard(account.getID()) != null) {
-=======
-        add(cardIcon);
-
-//        JLabel carNumber = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardNumber()));
-
-//        String color = CardDB.fetchCard(account.getID()).getColor();
-//        Color c = Color.decode(color);
-//        this.setBackground(c);
->>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
-
 
             cardButton.addActionListener(new ActionListener() {
                 @Override
@@ -187,8 +167,6 @@ class CardPanel extends JPanel {
                     int blue = Integer.parseInt(rgbValues[2].split("=")[1]);
 
                     Color finalColor = new Color(red,green,blue);
-
-
 
                     new PreviewCardFrame(account, type, cardNum, cardExp, cardName, cardCvv, finalColor);
                     MainFrame.mainFrame.dispose();
@@ -460,7 +438,6 @@ class ExpensesPanel extends JPanel {
     }
 }
 
-<<<<<<< HEAD
 
 
 
@@ -475,7 +452,8 @@ class ExpensesPanel extends JPanel {
 
 
 
-=======
+
+
 class LoanPanel extends JPanel {
 
     private JLabel header;
@@ -551,4 +529,4 @@ class LoanPanel extends JPanel {
         return null;
     }
 }
->>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
+
