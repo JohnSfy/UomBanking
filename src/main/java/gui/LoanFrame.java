@@ -51,6 +51,7 @@ public class LoanFrame extends JFrame {
         LoanTable = new JTable(LoansInfo,LoansColumns);
         LoanTable.setForeground(Color.BLACK);
         LoanTable.setEnabled(false);
+        LoanTable.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
         //putting scrollpane in table
         JScrollPane jp = new JScrollPane(LoanTable);
@@ -60,17 +61,17 @@ public class LoanFrame extends JFrame {
         //settings for header
         header = Utils.setHeader("Take loans with our bank system!");
         header.setBounds(320, 100, 800, 100);
-        header.setFont(new Font("Courier",Font.PLAIN,35));
+        header.setFont(new Font("Tahoma",Font.PLAIN,35));
 
         //settings for message
         message = new JLabel("Manage and pay your loans fast and easy");
         message.setBounds(400,140,600,80);
-        message.setFont(new Font("Courier",Font.PLAIN,20));
+        message.setFont(new Font("Tahoma",Font.PLAIN,20));
 
         //settings for message1
         message1 = new JLabel("Your loans");
         message1.setBounds(520,300,500,60);
-        message1.setFont(new Font("Courier", Font.PLAIN,30));
+        message1.setFont(new Font("Tahoma", Font.PLAIN,30));
 
         //settings for "return to main page" button
         ReturnToTheMainPage = new JButton("Return to the main page");
@@ -80,10 +81,12 @@ public class LoanFrame extends JFrame {
         //settings for loanReceipt button
         loanReceipt = new JButton("Download loan receipt");
         loanReceipt.setBounds(480,680,200,30);
+        loanReceipt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
         //settings for new loan button
         NewLoan = new JButton("New Loan");
         NewLoan.setBounds(500,580,150,30);
+        NewLoan.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         loanReceipt.addActionListener(new ActionListener() {
             @Override
