@@ -66,11 +66,6 @@ public class MainFrame extends JFrame {
 //      Setting up createCard button
         createCardButton.setBounds(370, 710, 250, 30);
 
-
-
-
-
-
         createCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -338,6 +333,7 @@ class ExpensesPanel extends JPanel {
         expenseList.setModel(listModel);
         scrollPane = new JScrollPane(expenseList);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 //      Retrieving all transactions from the database

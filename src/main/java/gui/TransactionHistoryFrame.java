@@ -1,4 +1,5 @@
 package gui;
+import files.TransHistoryPDF;
 import model.Account;
 import model.Transactions;
 
@@ -47,6 +48,7 @@ public class TransactionHistoryFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
 
+                new TransHistoryPDF(transactions);
             }
         });
 

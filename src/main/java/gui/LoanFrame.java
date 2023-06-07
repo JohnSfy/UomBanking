@@ -1,5 +1,6 @@
 package gui;
 
+import files.LoanHistory;
 import model.Account;
 import model.Loan;
 import org.example.LoanDB;
@@ -84,6 +85,12 @@ public class LoanFrame extends JFrame {
         NewLoan = new JButton("New Loan");
         NewLoan.setBounds(500,580,150,30);
 
+        loanReceipt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoanHistory(account,aLoan);
+            }
+        });
 
 
         //add actionlistener to new loan button

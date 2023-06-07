@@ -1,10 +1,17 @@
 package gui;
 
+import files.TransReceipt;
 import model.Account;
+import model.Transactions;
+import model.Withdraw;
 import org.example.AccountDB;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static java.lang.Double.parseDouble;
 
 public class PreviewTransferFrame {
     private JLabel header;
@@ -16,7 +23,7 @@ public class PreviewTransferFrame {
     private JButton receiptButton;
     JFrame successTransfer;
 
-    public PreviewTransferFrame(Account account){
+    public PreviewTransferFrame(Account account, Transactions trans){
         successTransfer = new Template();
 
         //Initializing elements
@@ -27,6 +34,14 @@ public class PreviewTransferFrame {
         innerPanel = new JPanel();
         receiptButton = new JButton("Download receipt");
         returnToMainPageButton = Utils.returnToMainPageButton(successTransfer, account);
+
+        receiptButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                new TransReceipt(account,trans);
+            }
+        });
 
         //Placing the elements
         header.setBounds(300, 100, 1000, 100);
