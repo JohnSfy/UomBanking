@@ -48,7 +48,9 @@ public class MainFrame extends JFrame {
         cardPanel = new CardPanel(account);
         transactionHistoryButton = new JButton("Transaction History");
         loanButton = new JButton("Apply for a loan");
+        loanButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
         createCardButton = new JButton("Create your new card today!");
+        createCardButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
 //      Setting up header
         header.setBounds(250, 50, 1000, 100);
@@ -65,6 +67,7 @@ public class MainFrame extends JFrame {
 
 //      Setting up createCard button
         createCardButton.setBounds(370, 710, 250, 30);
+
 
         createCardButton.addActionListener(new ActionListener() {
             @Override
@@ -123,7 +126,7 @@ class CardPanel extends JPanel {
         cardIcon = new JLabel();
 
 //      Setting up cardLabel
-        cardLabel.setFont(new Font("Courier", Font.BOLD, 20));
+        cardLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 
 //      Setting up cardIcon
         cardIcon.setSize(50, 50);
@@ -216,7 +219,7 @@ class SpendCategoriesPanel extends JPanel {
 
 //      Setting up spendCategoriesButton
         spendCategoriesButton = new JButton("Spend categories");
-        spendCategoriesButton.setFont(new Font("Courier", Font.PLAIN, 12));
+        spendCategoriesButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
         spendCategoriesButton.setPreferredSize(new Dimension(180, 50));
 
         spendCategoriesButton.addActionListener(new ActionListener() {
@@ -264,6 +267,7 @@ class BalancePanel extends JPanel{
 
         balance = new JLabel(String.valueOf(account.getBalance())+"€");
         newTransactionButton = new JButton("New Transaction");
+        newTransactionButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
 //      Setting up newTransactionButton
         newTransactionButton.addActionListener(new ActionListener() {
@@ -275,10 +279,10 @@ class BalancePanel extends JPanel{
         });
 
 //      Setting up header
-        header.setFont(new Font("Courier", Font.PLAIN, 23));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 23));
 
 //      Setting up balance
-        balance.setFont(new Font("Courier", Font.PLAIN, 55));
+        balance.setFont(new Font("Tahoma", Font.PLAIN, 55));
 
 //      Basic settings
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -325,12 +329,13 @@ class ExpensesPanel extends JPanel {
         transactionHistoryButton = new JButton();
 
 //      Setting up header
-        header.setFont(new Font("Courier", Font.PLAIN, 18));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 //      Setting up scrollPane
         expenseList = new JList();
         listModel = new DefaultListModel();
         expenseList.setModel(listModel);
+        expenseList.setFont(new Font("Tahoma", Font.PLAIN, 10));
         scrollPane = new JScrollPane(expenseList);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -358,7 +363,7 @@ class ExpensesPanel extends JPanel {
         }
 
 //      Setting up transaction history button
-        transactionHistoryButton.setFont(new Font("Courier", Font.PLAIN, 12));
+        transactionHistoryButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
         transactionHistoryButton.setPreferredSize(new Dimension(180, 50));
         transactionHistoryButton.setText("<html><center>"+"Check your transaction"+"<br>"+"history"+"</center></html>");
         ArrayList<Transactions> finalTransactions = transactions;

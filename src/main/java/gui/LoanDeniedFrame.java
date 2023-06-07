@@ -26,19 +26,20 @@ public class LoanDeniedFrame extends JFrame {
 
         label1 = new JLabel("Ask for a smaller amount or increase your balance");
         label1.setBounds(400, 110, 700, 100 );
-        label1.setFont(new Font("Courier", Font.PLAIN, 18));
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
         innerPanel = new JPanel();
         innerPanel.setBounds(450, 275, 300, 200);
         innerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         label2 = new JLabel("What to do?");
-        label2.setFont(new Font("Courier", Font.PLAIN, 25));
+        label2.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
         label3 = new JLabel("Read about our loan policy and enter again your information");
-        label3.setFont(new Font("Courier", Font.BOLD, 9));
+        label3.setFont(new Font("Tahoma", Font.PLAIN, 10));
 
         loanPolicyButton = new JButton("Loan Policy");
+        loanPolicyButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
         //ρύθμιση loanPolicyButton που εμφανίζει τις προυποθέσεις δανέιου
         loanPolicyButton.addActionListener(new ActionListener() {
@@ -49,6 +50,7 @@ public class LoanDeniedFrame extends JFrame {
         });
 
         enterInfoAgainButton = new JButton("Enter again your information");
+        enterInfoAgainButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
         //ρύθμιση enterInfoAgainButton όπου επιστρέφει τον χρήστη στην CreateLoanFrame
         enterInfoAgainButton.addActionListener(new ActionListener() {
             @Override
