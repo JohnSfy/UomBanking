@@ -18,6 +18,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HexFormat;
+import java.util.stream.Collectors;
+
+
 
 public class MainFrame extends JFrame {
     private JLabel header;
@@ -54,8 +58,9 @@ public class MainFrame extends JFrame {
         createCardButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
         loanPanel = new LoanPanel(account);
 
+        cardPanel.setBackground(Color.WHITE);
 //      Setting up header
-        header.setBounds(250, 50, 1000, 100);
+        header.setBounds(380, 50, 1000, 100);
 
 //      Setting up loanButton
         loanButton.setBounds(850, 670, 200, 50);
@@ -71,16 +76,27 @@ public class MainFrame extends JFrame {
         createCardButton.setBounds(370, 710, 250, 30);
 
 
-        createCardButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new CreateNewCardFrame(account);
-                mainFrame.dispose();
-            }
-        });
 
+<<<<<<< HEAD
+
+
+      //  if(CardDB.fetchCard(account.getID()) == null){
+              createCardButton.addActionListener(new ActionListener() {
+                  @Override
+                  public void actionPerformed(ActionEvent e) {
+
+                      new CreateNewCardFrame(account);
+
+                  }
+              });
+     //   }
+
+
+
+=======
 //      Creating account
        // account = new Account(0, "", "", client.getUsername(),"");
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
 
 //      Setting up newTransactionButton
 
@@ -91,20 +107,15 @@ public class MainFrame extends JFrame {
         mainFrame.add(spendCategoriesPanel);
         mainFrame.add(loanButton);
         mainFrame.add(cardPanel);
+<<<<<<< HEAD
+        mainFrame.add(createCardButton);
+=======
         mainFrame.add(loanPanel);
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
 
 
-        // if user has already create the card
-//        if(CardDB.fetchCard(account.getID()) == null){
-            mainFrame.add(createCardButton);
-//
-//        }
-      //  else {
-            Card card = CardDB.fetchCard(account.getID());
 
-         //   }
-
-//      Basic settings
+     //Basic settings
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -117,27 +128,34 @@ public class MainFrame extends JFrame {
 
 class CardPanel extends JPanel {
     private JLabel cardLabel;
-    private JLabel cardIcon;
-    private StringBuilder cardNumberBuilder;
-    private Long carNumber;
-    private JLabel cardNum;
-    private JLabel nameInTheCard;
+    private JLabel cardL,cardL1;
+    private JButton cardButton;
+
+
     public CardPanel(Account account) {
-        cardLabel = new JLabel("Cards");
-        cardIcon = new JLabel();
+        cardLabel = new JLabel("Card  details");
+        cardL = new JLabel("______________________________________________");
+        cardL1 = new JLabel("_____________________________________________");
+        cardButton = new JButton("See your card");
+        cardButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        cardButton.setBounds(500, 500, 150, 20);
 
 //      Setting up cardLabel
-        cardLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+        cardLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
 //      Setting up cardIcon
-        cardIcon.setSize(50, 50);
-        cardIcon.setIcon(Utils.setLabelIcon("src/main/resources/images/card.png", cardIcon));
+        cardL.setFont(new Font("Tahoma", Font.BOLD, 20));
+        cardL1.setForeground(Color.white);
+        cardL1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 //      Basic Settings
         setBounds(320, 480, 350, 200);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 
+<<<<<<< HEAD
+        if (CardDB.fetchCard(account.getID()) != null) {
+=======
         add(cardIcon);
 
 //        JLabel carNumber = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardNumber()));
@@ -145,24 +163,69 @@ class CardPanel extends JPanel {
 //        String color = CardDB.fetchCard(account.getID()).getColor();
 //        Color c = Color.decode(color);
 //        this.setBackground(c);
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
 
 
-//        carNumber = CardDB.fetchCard(account.getID()).getCardNumber();
-//
-//        cardNumberBuilder = new StringBuilder(String.valueOf(carNumber));
-//        for (int i = 4; i < cardNumberBuilder.length(); i += 6) {
-//            cardNumberBuilder.insert(i, "  ");
-//        }
-//
-//        cardNum = new JLabel(String.valueOf(carNumber));
-//        cardNum.setBounds(350,600,200,100);
-//        add(cardNum);
-//
-//        nameInTheCard = new JLabel(String.valueOf(CardDB.fetchCard(account.getID()).getCardName()));
-//        nameInTheCard.setBounds(350,500,200,100);
-//        add(nameInTheCard);
+            cardButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
 
 
+                    String type = CardDB.fetchCard(account.getID()).getType();
+                    long cardNum = CardDB.fetchCard(account.getID()).getCardNumber();
+                    String cardExp = CardDB.fetchCard(account.getID()).getExpirationDate();
+                    String cardName = CardDB.fetchCard(account.getID()).getCardName();
+                    int cardCvv = CardDB.fetchCard(account.getID()).getCvv();
+
+                    //Initialize color
+                    String color = CardDB.fetchCard(account.getID()).getColor();
+                    color = color.replace("java.awt.color[","").replace("]","");
+                    String[] rgbValues = color.split(",");
+
+                    int red = Integer.parseInt(rgbValues[0].split("=")[1]);
+                    int green = Integer.parseInt(rgbValues[1].split("=")[1]);
+                    int blue = Integer.parseInt(rgbValues[2].split("=")[1]);
+
+                    Color finalColor = new Color(red,green,blue);
+
+
+
+                    new PreviewCardFrame(account, type, cardNum, cardExp, cardName, cardCvv, finalColor);
+                    MainFrame.mainFrame.dispose();
+
+
+                }
+            });
+        }
+        else {
+            cardButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+
+                    JOptionPane.showMessageDialog(cardButton, "You don't have a card!",
+                            "Card Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            });
+       }
+
+        add(cardLabel);
+        add(cardL);
+        add(cardL1);
+        add(cardButton);
+    }
+
+        private Color decodeColor(String colorString) {
+            // Use the Color class to decode the named color string
+            try {
+                // Use reflection to get the named color field from the Color class
+                java.lang.reflect.Field field = Color.class.getField(colorString);
+                return (Color) field.get(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Handle the case where the named color is not found
+                return Color.BLACK;
+            }
+        }
 //        layoutComponents();
     }
 
@@ -177,7 +240,7 @@ class CardPanel extends JPanel {
 //
 //        return null;
 //    }
-}
+
 
 class SpendCategoriesPanel extends JPanel {
     private JButton spendCategoriesButton;
@@ -397,6 +460,22 @@ class ExpensesPanel extends JPanel {
     }
 }
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
 class LoanPanel extends JPanel {
 
     private JLabel header;
@@ -472,3 +551,4 @@ class LoanPanel extends JPanel {
         return null;
     }
 }
+>>>>>>> b79d258fd1c8584e0314a70c07decbf6e687fb17
