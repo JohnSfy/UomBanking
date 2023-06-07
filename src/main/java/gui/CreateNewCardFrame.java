@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import static java.awt.Color.BLACK;
 import static java.awt.Color.getColor;
+import static java.lang.Long.toHexString;
 
 public class CreateNewCardFrame extends JFrame {
 
@@ -131,8 +132,14 @@ public class CreateNewCardFrame extends JFrame {
                     }
 
                     else {
+//                        String red,green,blue,hex;
+//                        red = Integer.toHexString(color.getRed());
+//                        green = Long.toHexString(color.getGreen());
+//                        blue = Long.toHexString(color.getBlue());
+//
+//                        hex = "#" + red + green + blue;
                         fr.dispose();
-                        Card acard = new Card(account.getID(),cardNum,cardExp,cardCVV,typedText, color.toString(),cardName);
+                        Card acard = new Card(account.getID(),cardNum,cardExp,cardCVV,typedText,color.toString(),cardName);
                         new PreviewCardFrame(account,typedText, cardNum, cardExp, cardName, cardCVV, color);
                         CardDB.saveCard(acard);
                     }

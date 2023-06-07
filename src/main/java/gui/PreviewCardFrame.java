@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.lang.Long.toHexString;
+
 public class PreviewCardFrame extends JFrame {
 
     private JLabel header; //επικεφαλίδα
@@ -55,6 +57,8 @@ public class PreviewCardFrame extends JFrame {
         chipPanel = new JPanel();
         line = new JLabel("__________________________________________________________________________________________________________________________________________");
         deblabel = new JLabel("Debit card");
+        String red,green,blue,hex;
+
 
         this.setLayout(null);
         frontCardPanel.setLayout(null);
@@ -66,6 +70,7 @@ public class PreviewCardFrame extends JFrame {
         expCard.setText(cardExp);
         nameLabel.setText(cardName);
 
+
         //add spaces between Number of card
 
         cardNumberBuilder = new StringBuilder(String.valueOf(cardNum));
@@ -75,7 +80,8 @@ public class PreviewCardFrame extends JFrame {
 
         carNum = new JLabel(cardNumberBuilder.toString());
 
-        Card aCard = new Card(account.getID(),cardNum, cardExp, cardCVV, type, cardColor.toString(), cardName);
+
+        Card aCard = new Card(account.getID(),cardNum, cardExp, cardCVV, type,cardColor.toString(), cardName);
         this.buildCard(type,cardNum,cardExp,cardName,cardCVV,cardColor); //method for adding card details in panel
 
         returnToMainPageButton = Utils.returnToMainPageButton(prFrame, account);
@@ -92,8 +98,8 @@ public class PreviewCardFrame extends JFrame {
         frontCardPanel.setBackground(cardColor);
         backCardPanel.setBackground(cardColor);
 
-        header = Utils.setHeader("Your card was created successfully!");
-        header.setBounds(300, 100, 1000, 100);
+        header = Utils.setHeader("The card you created!");
+        header.setBounds(430, 100, 1000, 100);
 
         prFrame.add(line);
         line.setBounds(200,140,900,100);
