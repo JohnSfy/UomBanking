@@ -64,7 +64,7 @@ public class PayLoanFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 amount = amountField.getText();
                 if (isCorrect(amount) && isAmountValid(parseInt(amount), loan.getLoanAmount())) {
-                    account.setBalance(account.getBalance() + parseDouble(amountField.getText()));
+                    account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
                     LocalDateTime now = LocalDateTime.now();
                     loan.setLoanAmount(loan.getLoanAmount() - parseInt(amount));

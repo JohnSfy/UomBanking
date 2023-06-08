@@ -7,21 +7,11 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.management.Query;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HexFormat;
-import java.util.stream.Collectors;
-
-
 
 public class MainFrame extends JFrame {
     private JLabel header;
@@ -99,10 +89,6 @@ public class MainFrame extends JFrame {
 
         }
 
-
-
-//      Setting up newTransactionButton
-
 //      Adding components to the frame
         mainFrame.add(header);
         mainFrame.add(expensesPanel);
@@ -128,24 +114,24 @@ public class MainFrame extends JFrame {
 }
 
 class CardPanel extends JPanel {
-    private JLabel cardLabel;
+    private JLabel header;
     private JLabel cardL,cardL1;
     private JButton cardButton;
 
 
     public CardPanel(Account account) {
-        cardLabel = new JLabel("Card  details");
-        cardL = new JLabel("______________________________________________");
+        header = Utils.setHeader("Card details");
+        cardL = new JLabel("________________________________________________________________________----");
         cardL1 = new JLabel("_____________________________________________");
         cardButton = new JButton("See your card");
         cardButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         cardButton.setBounds(500, 500, 150, 20);
 
 //      Setting up cardLabel
-        cardLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        header.setFont(new Font("Tahoma", Font.PLAIN, 25));
 
 //      Setting up cardIcon
-        cardL.setFont(new Font("Tahoma", Font.BOLD, 20));
+        cardL.setFont(new Font("Tahoma", Font.BOLD, 10));
         cardL1.setForeground(Color.white);
         cardL1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -197,7 +183,7 @@ class CardPanel extends JPanel {
             });
        }
 
-        add(cardLabel);
+        add(header);
         add(cardL);
         add(cardL1);
         add(cardButton);
