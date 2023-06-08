@@ -3,6 +3,7 @@ package gui;
 import model.Account;
 import model.Deposit;
 import model.Payment;
+import org.example.AccountDB;
 import org.example.TransactionsDB;
 
 import javax.swing.*;
@@ -23,10 +24,14 @@ public class PaymentFrame extends JFrame {
     private JLabel expensesLabel;
     private JButton submitButton;
     private JButton returnToMainPageButton;
-    private String[] expenses = {"Groceries","Health","Transport","Other"};
+    private String[] expenses = {"Groceries", "Health", "Transport", "Other"};
     JFrame payment;
     private String anAmount;
-    public PaymentFrame(Account account){
+    private String amountCheck;
+
+
+
+    public PaymentFrame(Account account) {
         payment = new Template();
         JComboBox<String> cb = new JComboBox<String>(expenses);
         cb.setEditable(true);
@@ -40,41 +45,59 @@ public class PaymentFrame extends JFrame {
         submitButton = new JButton("Submit");
         returnToMainPageButton = Utils.returnToMainPageButton(payment, account);
 
+
         //Placing the elements
         header.setBounds(325, 100, 1000, 100);
         header.setFont(new Font("Courier", Font.PLAIN, 30));
 
-        message.setBounds(450,150,800,80);
+        message.setBounds(450, 150, 800, 80);
         message.setFont(new Font("Courier", Font.PLAIN, 20));
 
 
-        amountLabel.setBounds(455,350,50,50);
-        amountField.setBounds(500,360,200,35);
+        amountLabel.setBounds(455, 350, 50, 50);
+        amountField.setBounds(500, 360, 200, 35);
 
-        expensesLabel.setBounds(400,420,100,50);
-        cb.setBounds(500,430,150,35);
+        expensesLabel.setBounds(400, 420, 100, 50);
+        cb.setBounds(500, 430, 150, 35);
 
-        submitButton.setBounds(570,600,80,35);
-        returnToMainPageButton.setBounds(950,700,200,35);
+        submitButton.setBounds(570, 600, 80, 35);
+        returnToMainPageButton.setBounds(950, 700, 200, 35);
 
-        //Action Listeners
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               anAmount=amountField.getText();
-               if(isCorrect(anAmount) && checkAmount(anAmount,account.getBalance())){
-//                 Setting up amountField
-                   account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
-                   DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
-                   LocalDateTime now = LocalDateTime.now();
-                   TransactionsDB.saveTransaction(new Payment("", dtf.format(now), parseDouble(anAmount), "Paid for " + cb.getSelectedItem().toString(), account.getClient(), cb.getSelectedItem().toString()));
-                   Payment pay = new Payment("", dtf.format(now), parseDouble(anAmount), "Paid for " + cb.getSelectedItem().toString(), account.getClient(),  cb.getSelectedItem().toString());
-                   payment.dispose();
-                   new PreviewPaymentFrame(account,pay);
-               }
 
-            }
-        });
+        amountCheck = AccountDB.fetchAccount(account.getClient()).getCostPerTransaction();
+
+
+            //Action Listeners
+            submitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    amountCheck = AccountDB.fetchAccount(account.getClient()).getCostPerTransaction();
+                    anAmount = amountField.getText();
+                    if (Integer.parseInt(amountCheck) >= Integer.parseInt(anAmount)) {
+                        if (isCorrect(anAmount) && checkAmount(anAmount, account.getBalance())) {
+
+                            //Setting up amountField
+                            account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
+                            LocalDateTime now = LocalDateTime.now();
+                            TransactionsDB.saveTransaction(new Payment("", dtf.format(now), parseDouble(anAmount), "Paid for " + cb.getSelectedItem().toString(), account.getClient(), cb.getSelectedItem().toString()));
+                            Payment pay = new Payment("", dtf.format(now), parseDouble(anAmount), "Paid for " + cb.getSelectedItem().toString(), account.getClient(), cb.getSelectedItem().toString());
+                            payment.dispose();
+                            new PreviewPaymentFrame(account, pay);
+                        }
+
+                    }
+                    else{
+                            JOptionPane.showMessageDialog(submitButton, "The payment cannot be carried out. Your limit per transaction is "+ amountCheck +"€.Please give a smaller amount",
+                                    "Amount Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            });
+
+
+
+
 
         //Adding the elements
         payment.add(header);
@@ -91,17 +114,17 @@ public class PaymentFrame extends JFrame {
 
     }
 
-    public boolean isCorrect(String amount){
+    public boolean isCorrect(String amount) {
         boolean flag = true;
-        if(amount.isBlank()) {
+        if (amount.isBlank()) {
             JOptionPane.showMessageDialog(payment, "Please enter an amount!",
                     "Warning", JOptionPane.WARNING_MESSAGE);
-            flag=false;
+            flag = false;
             return flag;
         }
-        for(int i=0;i<anAmount.length();i++){
-            if(!Character.isDigit(anAmount.charAt(i))){
-                flag=false;
+        for (int i = 0; i < anAmount.length(); i++) {
+            if (!Character.isDigit(anAmount.charAt(i))) {
+                flag = false;
                 JOptionPane.showMessageDialog(payment, "Please enter an amount!",
                         "Warning", JOptionPane.WARNING_MESSAGE);
                 break;
@@ -110,19 +133,18 @@ public class PaymentFrame extends JFrame {
         return flag;
     }
 
-    public boolean checkAmount(String anAmount, double balance){
+    public boolean checkAmount(String anAmount, double balance) {
         double amount = Double.parseDouble(anAmount);
-        boolean flag=true;
-        if(amount>balance)
-        {
+        boolean flag = true;
+        if (amount > balance) {
             JOptionPane.showMessageDialog(payment, "Please enter a smaller amount!",
                     "Warning", JOptionPane.ERROR_MESSAGE);
-            flag=false;
+            flag = false;
         }
 
         return flag;
 
     }
-
 }
+
 

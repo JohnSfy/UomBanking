@@ -36,6 +36,7 @@ public class MainFrame extends JFrame {
         mainFrame = new Template();
 
 //      Initializing components
+
         header = Utils.setHeader("Welcome back " + ClientDB.fetchClient(account.getClient()).getFirstName());
         expensesPanel = new ExpensesPanel(account);
         balancePanel = new BalancePanel(account);
