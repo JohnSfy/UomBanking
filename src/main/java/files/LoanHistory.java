@@ -99,7 +99,14 @@ public class LoanHistory {
                 data[i][0] = loan.getId();
                 data[i][1] = loan.getDateExp();
                 data[i][2] = loan.getDescription();
-                data[i][3] = String.valueOf(loan.getLoanAmount());
+
+                if(loan.getLoanAmount()==0.0){
+                    data[i][3] = String.valueOf(loan.getLoanAmount()+" (Paid)");
+                }
+                else {
+                    data[i][3] = String.valueOf(loan.getLoanAmount());
+                }
+
                 data[i][4] = String.valueOf(loan.getDoses());
 
             }
