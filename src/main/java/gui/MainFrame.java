@@ -65,7 +65,6 @@ public class MainFrame extends JFrame {
 //      Setting up createCard button
         createCardButton.setBounds(370, 710, 250, 30);
 
-<<<<<<< HEAD
         createCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,8 +72,6 @@ public class MainFrame extends JFrame {
                 mainFrame.dispose();
             }
         });
-
-=======
 
 
         if(CardDB.fetchCard(account.getID()) == null){
@@ -99,7 +96,6 @@ public class MainFrame extends JFrame {
 
         }
 
->>>>>>> 0a220e224893108c0283628d376fbe579031b18d
 //      Adding components to the frame
         mainFrame.add(header);
         mainFrame.add(expensesPanel);
@@ -110,7 +106,6 @@ public class MainFrame extends JFrame {
         mainFrame.add(createCardButton);
         mainFrame.add(loanPanel);
 
-<<<<<<< HEAD
         // if user has already create the card
         if(CardDB.fetchCard(account.getID()) == null){
             mainFrame.add(createCardButton);
@@ -118,10 +113,6 @@ public class MainFrame extends JFrame {
         else {
             Card card = CardDB.fetchCard(account.getID());
         }
-=======
-
-
->>>>>>> 0a220e224893108c0283628d376fbe579031b18d
 
      //Basic settings
         mainFrame.setVisible(true);
