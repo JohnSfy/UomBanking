@@ -20,9 +20,7 @@ public class CreateAccount extends JFrame {
     private JButton createAccountButton;
     private JLabel loginLabel;
     private JButton loginButton;
-
     public Client client;
-
     private Account account;
 
     public CreateAccount() {
