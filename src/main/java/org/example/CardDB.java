@@ -67,4 +67,27 @@ public class CardDB {
         session.close();
         return card;
     }
+
+    //  Delete Card
+    public static void deleteCard(String AccountID){
+
+//      Setting up the transaction between the app and the database
+        Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addResource("mapping.hbm.xml");
+        StandardServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession(); //using the session to fetch data from the database
+
+//      Beginning the transaction with the database
+        Transaction tx = session.beginTransaction();
+
+//      Deleting Card
+        Card card = new Card();
+        card = (Card) session.get(Card.class, AccountID);
+        session.delete(card);
+
+//      Saving and closing session
+        session.getTransaction().commit();
+        session.close();
+        System.out.println("Card deleted");
+    }
 }

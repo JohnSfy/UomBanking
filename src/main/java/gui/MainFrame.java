@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
     }
 
     public MainFrame(Account account){
-        mainFrame = new Template();
+        mainFrame = new TemplateMainFrame(account);
 
 //      Initializing components
 
@@ -66,6 +66,13 @@ public class MainFrame extends JFrame {
 //      Setting up createCard button
         createCardButton.setBounds(370, 710, 250, 30);
 
+        createCardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CreateNewCardFrame(account);
+                mainFrame.dispose();
+            }
+        });
 
 
         if(CardDB.fetchCard(account.getID()) == null){
@@ -100,13 +107,17 @@ public class MainFrame extends JFrame {
         mainFrame.add(createCardButton);
         mainFrame.add(loanPanel);
 
-
-
+        // if user has already create the card
+        if(CardDB.fetchCard(account.getID()) == null){
+            mainFrame.add(createCardButton);
+        }
+        else {
+            Card card = CardDB.fetchCard(account.getID());
+        }
 
      //Basic settings
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     public MainFrame() {
