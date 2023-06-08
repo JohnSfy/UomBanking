@@ -92,14 +92,42 @@ public class LoanDB {
         if(!results.isEmpty()){
             transactions.addAll(results);
         }
-        else{
-            transactions.add(new Loan("",0, "", "","",0,""));
-        }
 
 //      Saving and closing session
         session.getTransaction().commit();
         session.close();
         return transactions;
+    }
+
+//    Delete a Loan
+    public static void deleteLoan(Account account) {
+//      Setting up the transaction between the app and the database
+        Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addResource("mapping.hbm.xml");
+        StandardServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession(); //using the session to fetch data from the database
+
+//      Beginning the transaction with the database
+        Transaction tx = session.beginTransaction();
+
+//      Deleting the loan
+        String sql = "FROM Loan WHERE AccountID = '" + account.getID() + "'";
+        Query query = session.createQuery(sql);
+
+        List results = query.list();
+
+        ArrayList<Loan> loans = new ArrayList<>();
+        if(!results.isEmpty()){
+            loans.addAll(results);
+            for (Loan l : loans) {
+                session.delete(l);
+            }
+        }
+
+//      Saving and closing session
+        session.getTransaction().commit();
+        session.close();
+        System.out.println("Loan deleted");
     }
 }
 

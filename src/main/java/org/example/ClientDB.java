@@ -108,4 +108,26 @@ public class ClientDB {
 
         return found;
     }
+
+    //  Delete a Client
+    public static void deleteClient(String username) {
+//       Setting up the transaction between the app and the database
+        Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addResource("mapping.hbm.xml");
+        StandardServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession(); //using the session to fetch data from the database
+
+//       Beginning the transaction with the database
+        Transaction tx = session.beginTransaction();
+
+//       Deleting client
+        Client aClient = new Client();
+        aClient = (Client) session.get(Client.class, username);
+        session.delete(aClient);
+
+//       Saving and closing session
+        session.getTransaction().commit();
+        session.close();
+        System.out.println("Client deleted");
+    }
 }

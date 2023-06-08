@@ -9,13 +9,14 @@ import java.awt.event.MouseEvent;
 
 public class Template extends JFrame {
 
-//  Properties
+    //  Properties
     private JLabel logo;
     private JLabel name;
     private JLabel accountIcon;
     private JLabel clientName;
     private JComboBox<JButton> dropdown;
     private JButton logOut;
+
     public Template() {
 //      Setting layout manager to null for absolute positioning
         setLayout(null);

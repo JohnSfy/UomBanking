@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
     }
 
     public MainFrame(Account account){
-        mainFrame = new Template();
+        mainFrame = new TemplateMainFrame(account);
 
 //      Initializing components
         header = Utils.setHeader("Welcome back " + ClientDB.fetchClient(account.getClient()).getFirstName());
@@ -70,7 +70,6 @@ public class MainFrame extends JFrame {
 //      Setting up createCard button
         createCardButton.setBounds(370, 710, 250, 30);
 
-
         createCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,11 +77,6 @@ public class MainFrame extends JFrame {
                 mainFrame.dispose();
             }
         });
-
-//      Creating account
-       // account = new Account(0, "", "", client.getUsername(),"");
-
-//      Setting up newTransactionButton
 
 //      Adding components to the frame
         mainFrame.add(header);
@@ -93,21 +87,17 @@ public class MainFrame extends JFrame {
         mainFrame.add(cardPanel);
         mainFrame.add(loanPanel);
 
-
         // if user has already create the card
-//        if(CardDB.fetchCard(account.getID()) == null){
+        if(CardDB.fetchCard(account.getID()) == null){
             mainFrame.add(createCardButton);
-//
-//        }
-      //  else {
+        }
+        else {
             Card card = CardDB.fetchCard(account.getID());
-
-         //   }
+        }
 
 //      Basic settings
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     public MainFrame() {
@@ -443,7 +433,7 @@ class LoanPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = loanList.getSelectedIndex();
-                if (index > 0) {
+                if (index >= 0) {
                     Loan loanSelected = finalLoans.get(index);
                     MainFrame.getMainFrame().dispose();
                     new PayLoanFrame(account, loanSelected);
