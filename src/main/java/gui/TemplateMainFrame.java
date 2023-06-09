@@ -55,7 +55,7 @@ public class TemplateMainFrame extends JFrame {
         accountIcon.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 System.out.println("Label is pressed");
-                settingsPanel.setBounds(1000, 65, 170, 70);
+                settingsPanel.setBounds(920, 65, 250, 100);
                 settingsPanel.setVisible(!settingsPanel.isVisible());
             }
         });
@@ -81,6 +81,10 @@ class SettingsPanel extends JPanel{
 
     private JButton logOut;
     private JButton deleteAccount;
+    private JButton seeIBAN;
+    private JTextArea iban;
+
+
 
     public SettingsPanel(JFrame parent, Account account) {
 
@@ -88,6 +92,13 @@ class SettingsPanel extends JPanel{
         logOut.setPreferredSize(new Dimension(50, 30));
         deleteAccount = new JButton("Delete Account");
         deleteAccount.setPreferredSize(new Dimension(50, 30));
+        seeIBAN = new JButton("See your IBAN");
+        seeIBAN.setPreferredSize(new Dimension(50, 30));
+        iban = new JTextArea(account.getIBAN());
+//        iban.setPreferredSize(new Dimension(5,25));
+        iban.setEditable(false);
+        iban.setVisible(false);
+
 
         logOut.addActionListener(new ActionListener() {
             @Override
@@ -97,6 +108,13 @@ class SettingsPanel extends JPanel{
             }
         });
 
+        seeIBAN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                iban.setVisible(!iban.isVisible());
+
+            }
+        });
         deleteAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -130,9 +148,13 @@ class SettingsPanel extends JPanel{
 
         add(logOut);
         add(deleteAccount);
+        add(seeIBAN);
+        add(iban);
+
 
         setBorder(BorderFactory.createLineBorder(Color.BLACK));;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.LIGHT_GRAY);
     }
+
 }
