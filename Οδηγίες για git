@@ -1,9 +1,0 @@
-#Οδηγίες για το git
-1) Δημιουργήστε ένα φάκελο με mkdir <filename>
-2) Μπείτε σε αυτό το φάκελο με cd
-3) Κάντε initialize τη τοπική αποθήκη με git init
-4) Φέρτε την αποθήκη του github στον φάκελο με git pull https://github.com/UOMSystemX/UomBanking.git     
-5) Κάντε commits, branches κλπ
-6) Όταν τελειώσετε και θέλετε να ανεβάσετε τις αλλαγές σασ στο github κάντε git remote add origin https://github.com/UOMSystemX/UomBanking.git
-7) Μετά κάντε git remote set-url origin https://τοUsernameΣασ:τοTokenΣας/UOMSystemX/UomBanking.git
-8) Τέλος, κάντε push με git push origin main
