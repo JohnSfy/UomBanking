@@ -34,6 +34,3 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/
-/src/main/java/gui/MainTest.java
-
-/Database.db
