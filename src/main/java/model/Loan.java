@@ -90,7 +90,6 @@ public class Loan {
         return builder.toString();
     }
 
-
     public double getLoanAmount() {
         return loanAmount;
     }
@@ -142,7 +141,6 @@ public class Loan {
     public void setId(String id) {
         this.id = id;
     }
-
 }
 
 

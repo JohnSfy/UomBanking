@@ -1,9 +1,7 @@
 package model;
 
 import jakarta.persistence.*;
-
 import java.util.Random;
-
 
 @Entity
 @Table(name = "Transactions")
@@ -32,7 +30,6 @@ public class Transactions {
 
     }
 
-
     public Transactions(String ID, String date, double amount, String description, String clientusername) {
         this.ID = genID();
         this.date = date;
@@ -41,16 +38,12 @@ public class Transactions {
         this.clientusername = clientusername;
     }
 
-
-
-
     public double calculateNewBalance(double balance, double amount){
 
         balance += amount;
 
         return balance ;
     }
-
 
     public String genID(){
         //Δημιουργία ενός τυχαίου ID με 8 χαρακτήρες π.χ. kHFujh%4
@@ -104,10 +97,5 @@ public class Transactions {
 
     public void setClientusername(String clientusername) {
         this.clientusername = clientusername;
-    }
-
-    public void printTransaction(){
-
-
     }
 }

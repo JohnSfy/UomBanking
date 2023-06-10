@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class Utils {
 
-//  Used for setting a Jlabel with an icon
+    //  Used for setting a Jlabel with an icon
     public static ImageIcon setLabelIcon(String path, JLabel logo) {
 
         ImageIcon icon = new ImageIcon(path);
@@ -19,7 +19,7 @@ public class Utils {
         return new ImageIcon(newImg);
     }
 
-//  Used for setting a header
+    //  Used for setting a header
     public static JLabel setHeader(String text) {
         JLabel header = new JLabel(text);
         header.setBounds(350, 100, 1000, 100);
@@ -27,9 +27,9 @@ public class Utils {
         return header;
     }
 
-    public static JButton returnToMainPageButton(JFrame frame, Account account)  {
+    public static JButton returnToMainPageButton(JFrame frame, Account account) {
         JButton returnToMainPageButton = new JButton("Return to main page");
-        returnToMainPageButton.setFont(new Font("Tahoma", Font.PLAIN,15));
+        returnToMainPageButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         returnToMainPageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

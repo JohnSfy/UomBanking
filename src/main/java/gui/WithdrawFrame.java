@@ -51,8 +51,6 @@ public class WithdrawFrame extends JFrame {
 
         returnToMainPageButton.setBounds(950,700,200,35);
 
-
-
         //ActionListener
         continueButton.addActionListener(new ActionListener() {
             @Override
@@ -80,7 +78,6 @@ public class WithdrawFrame extends JFrame {
         withdraw.add(continueButton);
         withdraw.add(returnToMainPageButton);
 
-        withdraw.setVisible(true);
         withdraw.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

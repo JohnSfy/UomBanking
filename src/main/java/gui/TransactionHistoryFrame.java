@@ -16,7 +16,6 @@ public class TransactionHistoryFrame extends JFrame {
     private JFrame frame;
     private JButton downloadTranButton;
 
-
     public TransactionHistoryFrame(Account account, ArrayList<Transactions> transactions){
 
         frame = new Template();
@@ -58,7 +57,6 @@ public class TransactionHistoryFrame extends JFrame {
         returnToMainPageButton = Utils.returnToMainPageButton(frame, account);
         returnToMainPageButton.setBounds(485,480,200,30);
 
-
         header.setBounds(400,100,1000,100);
         subheader.setBounds(500,140,1500,100);
         sc.setBounds(320,250,500,100);
@@ -69,7 +67,6 @@ public class TransactionHistoryFrame extends JFrame {
         frame.add(sc);
         frame.add(downloadTranButton);
         frame.add(returnToMainPageButton);
-
 
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

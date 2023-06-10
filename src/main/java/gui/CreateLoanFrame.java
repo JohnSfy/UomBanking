@@ -31,16 +31,18 @@ public class CreateLoanFrame extends JFrame{
     private int doses;
 
     public CreateLoanFrame(Account account){
-        //balance = AccountDB.fetchAccount(accountId).getBalance();
+//      Setting up header
         header = Utils.setHeader("Take a loan");
         header.setBounds(500,100,300,50);
 
+//      Setting up label1
         label1 = new JLabel("Enter your information to register the loan");
         label1.setBounds(500, 110, 500, 100 );
         label1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
+//      Setting up amountField
         balance = account.getBalance();
-        amountField = new JTextField("The max amount you can loan is: " +balance*5);
+        amountField = new JTextField("The max amount you can loan is: " + balance * 5);
         amountLabel = new JLabel("Amount");
         amountLabel.setBounds(440,250,100,50);
         amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -84,12 +86,12 @@ public class CreateLoanFrame extends JFrame{
         dropDownList.setSelectedIndex(0);
         dropDownList.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-
-
+//      Setting up reasonLabel
         reasonLabel.setBounds(450,390,50,50);
         reasonLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
         dropDownList.setBounds(500,400,200,35);
 
+//      Setting up submitButton
         submitButton = new JButton("Submit");
         submitButton.setBounds(500,550,200,35);
         submitButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -97,7 +99,7 @@ public class CreateLoanFrame extends JFrame{
         returnToTheMainPageButton = Utils.returnToMainPageButton(frame,account);
         returnToTheMainPageButton.setBounds(970,720,200,35);
 
-
+//      Setting up the submit button
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String loanAmountString = amountField.getText();
@@ -137,7 +139,6 @@ public class CreateLoanFrame extends JFrame{
                     frame.dispose();
                 }
             }
-
         });
 
         frame.add(header);
@@ -155,6 +156,7 @@ public class CreateLoanFrame extends JFrame{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+//  Check if the loan amount is valid
     public boolean CheckLoanAmount(double loanAmount, double balance){
         if(balance*5 >= loanAmount)
             return true;
@@ -162,6 +164,7 @@ public class CreateLoanFrame extends JFrame{
             return  false;
     }
 
+//  Calculate the total loan amount
     public double CalculateTotalLoanAmount(double loanAmount, int doses){
         double totalLoanAmount = 0.0;
         double interests; //τόκοι

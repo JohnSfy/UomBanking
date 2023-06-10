@@ -19,7 +19,6 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class PayLoanFrame extends JFrame {
-
     JLabel header;
     JLabel line;
     JLabel amountLabel;
@@ -56,8 +55,6 @@ public class PayLoanFrame extends JFrame {
 
         returnToMainPageButton.setBounds(950, 700, 200, 35);
 
-
-
         //ActionListener
         continueButton.addActionListener(new ActionListener() {
             @Override
@@ -85,7 +82,6 @@ public class PayLoanFrame extends JFrame {
 
         payLoan.setVisible(true);
         payLoan.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     public boolean isCorrect(String anAmount) {

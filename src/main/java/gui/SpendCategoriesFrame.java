@@ -13,14 +13,9 @@ public class SpendCategoriesFrame extends JFrame {
 
     //defining variables
     private JLabel header;
-
     private JLabel message;
-
     private JButton ReturnToTheMainPage;
-
     private JTable SCTable;
-
-
 
     public SpendCategoriesFrame(Account account, ArrayList<Transactions> payments){
 
@@ -63,7 +58,6 @@ public class SpendCategoriesFrame extends JFrame {
         ReturnToTheMainPage = new JButton("Return to the main page");
         ReturnToTheMainPage = Utils.returnToMainPageButton(SpendCategories, account);
         ReturnToTheMainPage.setBounds(530,440,180,30);
-
 
         //putting all into template
         SpendCategories.add(header);

@@ -31,8 +31,6 @@ public class LoanSuccessFrame extends JFrame{
         label1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         label1.setBounds(500, 110, 700, 100 );
 
-
-
         Loan aLoan = new Loan(account.getID(),loanAmount,des,currentDate,expirationDate,doses,"");
         LoanDB.saveLoan(aLoan);
         
@@ -46,9 +44,6 @@ public class LoanSuccessFrame extends JFrame{
         returnToTheMainPageButton = Utils.returnToMainPageButton(frame,account);
         returnToTheMainPageButton.setBounds(480,650,200,35);
 
-
-
-
         ArrayList<Loan> loan = LoanDB.fetchAllLoans(account);
         //πίνακας δανείων μαζί με ημερομηνία λήξης
         String rowData[][] = new String[loan.size()][2];
@@ -61,7 +56,6 @@ public class LoanSuccessFrame extends JFrame{
             i++;
         }
 
-
         table= new JTable(rowData, columnNames);
         table.setForeground(Color.BLACK);
         table.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -69,7 +63,6 @@ public class LoanSuccessFrame extends JFrame{
         scrollPane.setBounds(270,350,600,100);
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         table.setEnabled(false);
-
 
         frame.add(header);
         frame.add(label1);

@@ -28,9 +28,6 @@ public class PaymentFrame extends JFrame {
     JFrame payment;
     private String anAmount;
     private String amountCheck;
-
-
-
     public PaymentFrame(Account account) {
         payment = new Template();
         JComboBox<String> cb = new JComboBox<String>(expenses);
