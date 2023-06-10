@@ -34,7 +34,6 @@ public class PreviewDepositFrame extends JFrame {
         returnToMainPageButton = Utils.returnToMainPageButton(successDeposit, account);
         receiptButton = new JButton("Download receipt");
 
-
         //Placing the elements
         header.setBounds(300, 100, 1000, 100);
         header.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -52,7 +51,6 @@ public class PreviewDepositFrame extends JFrame {
 
         receiptButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        
         receiptButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -77,7 +75,6 @@ public class PreviewDepositFrame extends JFrame {
 
         successDeposit.setVisible(true);
         successDeposit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 }
 

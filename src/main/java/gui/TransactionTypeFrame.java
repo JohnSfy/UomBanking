@@ -17,34 +17,33 @@ public class TransactionTypeFrame extends JFrame {
     private JLabel header;
     private JLabel line;
 
-
     public TransactionTypeFrame(Account account) {
 
         frame = new Template();
 
         header = Utils.setHeader("Transaction Type");
-        header.setBounds(400,100,1000,100);
+        header.setBounds(400, 100, 1000, 100);
 
         line = new JLabel("________________________________________________________________________________________________________");
-        line.setBounds(250,150,1000,100);
+        line.setBounds(250, 150, 1000, 100);
 
         depositButton = new JButton("Deposit");
         withdrawButton = new JButton("Withdraw");
         transferButton = new JButton("Transfer");
         paymentButton = new JButton("Payment");
 
-        depositButton.setFont(new Font("Tahoma",Font.PLAIN,15));
-        withdrawButton.setFont(new Font("Tahoma",Font.PLAIN,15));
-        transferButton.setFont(new Font("Tahoma",Font.PLAIN,15));
-        paymentButton.setFont(new Font("Tahoma",Font.PLAIN,15));
+        depositButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        withdrawButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        transferButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        paymentButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        depositButton.setBounds(520,250,120,30);
-        withdrawButton.setBounds(520,320,120,30);
-        transferButton.setBounds(520,390,120,30);
-        paymentButton.setBounds(520,460,120,30);
+        depositButton.setBounds(520, 250, 120, 30);
+        withdrawButton.setBounds(520, 320, 120, 30);
+        transferButton.setBounds(520, 390, 120, 30);
+        paymentButton.setBounds(520, 460, 120, 30);
 
         returnToMainPageButton = Utils.returnToMainPageButton(frame, account);
-        returnToMainPageButton.setBounds(480,560,200,30);
+        returnToMainPageButton.setBounds(480, 560, 200, 30);
 
         depositButton.addActionListener(new ActionListener() {
             @Override
@@ -85,7 +84,6 @@ public class TransactionTypeFrame extends JFrame {
         frame.add(transferButton);
         frame.add(paymentButton);
         frame.add(returnToMainPageButton);
-
 
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

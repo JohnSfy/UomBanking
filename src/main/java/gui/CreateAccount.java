@@ -46,7 +46,7 @@ public class CreateAccount extends JFrame {
 
 //      Setting up the create your account button
         createAccountButton.setBounds(450, 700, 200, 50);
-        createAccountButton.setFont(new Font("Tahoma",Font.PLAIN,15));
+        createAccountButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,9 +57,7 @@ public class CreateAccount extends JFrame {
                 String confirmPassword = infoPanel.getPasswordField2().getText();
                 JComboBox costPerTransaction = infoPanel.getCostPerTransaction();
 
-
                 if (checkData(email, phoneNumber, password, confirmPassword)) {
-
 //                  Creating the client and the client's account
                     client = new Client(infoPanel.getFirstName().getText(), infoPanel.getLastName().getText(), infoPanel.getPhoneNumber().getText(),
                             infoPanel.getEmail().getText(), infoPanel.getUsername().getText(), infoPanel.getPasswordField().getText());
@@ -85,7 +83,7 @@ public class CreateAccount extends JFrame {
 
 //      Setting up login button
         loginButton.setBounds(1090, 700, 100, 50);
-        loginButton.setFont(new Font("Tahoma",Font.PLAIN,15));
+        loginButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,6 +109,7 @@ public class CreateAccount extends JFrame {
         createAccount.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+//  Checking phone number validity
     public boolean checkPhoneNumber(String number) {
         char[] array = number.toCharArray();
         boolean flag = true;
@@ -129,6 +128,7 @@ public class CreateAccount extends JFrame {
         return flag;
     }
 
+//  Checking email validity
     public boolean checkEmail(String email) {
         char[] array = email.toCharArray();
         boolean flag = false;
@@ -142,6 +142,7 @@ public class CreateAccount extends JFrame {
         return flag;
     }
 
+//  Checking password confirmation
     public boolean checkPasswordConfirmation(String text1, String text2) {
         char[] array = text1.toCharArray();
         char[] array2 = text2.toCharArray();
@@ -156,6 +157,7 @@ public class CreateAccount extends JFrame {
         return flag;
     }
 
+//  Checking data validity
     public boolean checkData(String email, String phoneNumber, String pass1, String pass2) {
         if (!checkEmail(email)) {
             JOptionPane.showMessageDialog(null, "Please insert a valid email",

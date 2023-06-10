@@ -16,9 +16,7 @@ public class CreateAccountPanel extends JPanel {
     private JComboBox costPerTransaction;
     private JTextField phoneNumber;
     private JTextField email;
-
     private JTextField username;
-
     public JTextField getUsername() {
         return username;
     }
@@ -46,31 +44,28 @@ public class CreateAccountPanel extends JPanel {
     public JTextField getFirstName() {
         return firstName;
     }
-
     public JTextField getLastName() {
         return lastName;
     }
-
     private JTextField firstName;
     private JTextField lastName;
-
     private Client client;
 
 
     public CreateAccountPanel() {
-
+//      Initializing components
         showPassword = new JCheckBox("Show Password");
         passwordField = new JPasswordField(10);
         passwordField2 = new JPasswordField(10);
         message = new JLabel("Make sure to use a strong password");
         checkLabel = new JLabel();
         username = new JTextField(10);
-
         costPerTransaction = new JComboBox();
 
 //      Setting up the message label
         message.setFont(new Font("Tahoma", Font.PLAIN, 10));
 
+//      Setting up the showPassword field
         showPassword.setFont(new Font("Tahoma",Font.PLAIN,15));
 
 //      Setting up showPassword button
@@ -134,7 +129,6 @@ public class CreateAccountPanel extends JPanel {
 
 //      First row-First column
         gc.gridy = 0;
-
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridx = 0;
@@ -152,7 +146,6 @@ public class CreateAccountPanel extends JPanel {
 
 //      Second row-First column
         gc.gridy++;
-
         gc.weightx = 1;
         gc.weighty = 0.1;
         gc.gridx = 0;
@@ -202,6 +195,7 @@ public class CreateAccountPanel extends JPanel {
         gc.insets = new Insets(0, 0, 0, 0);
         add(email = new JTextField(10), gc);
 
+//      Fifth row-First column
         gc.gridy++;
         gc.gridx = 0;
         gc.weighty = 0.1;
@@ -212,12 +206,13 @@ public class CreateAccountPanel extends JPanel {
         userName.setFont(new Font("Tahoma",Font.PLAIN,15));
         add(userName, gc);
 
+//      Fifth row-Second column
         gc.gridx++;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);
         add(username, gc);
 
-//      Fifth row-First column
+//      Sixth row-First column
         gc.gridy++;
         gc.gridx = 0;
         gc.weighty = 0.1;
@@ -228,26 +223,17 @@ public class CreateAccountPanel extends JPanel {
         password.setFont(new Font("Tahoma",Font.PLAIN,15));
         add(password, gc);
 
-//      Fifth row-Second column
+//      Sixth row-Second column
         gc.gridx++;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);
         add(passwordField, gc);
 
-//      Fifth row-Third column
+//      Sixth row-Third column
         gc.gridx++;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
         gc.insets = new Insets(0, 0, 0, 0);
         add(showPassword, gc);
-
-//      Sixth row-First column
-//        gc.gridy++;
-//        gc.gridx++;
-//        gc.weighty = 0.1;
-//        gc.weightx = 1;
-//        gc.anchor = GridBagConstraints.LAST_LINE_END;
-//        gc.insets = new Insets(0, 0, 0, 0);
-//        add(message, gc);
 
 //      Seventh row-First column
         gc.gridy++;
@@ -290,16 +276,4 @@ public class CreateAccountPanel extends JPanel {
 
         return null;
     }
-
-    public void checkPhoneNumber(String number) {
-        char[] array = number.toCharArray();
-        for (char c: array) {
-            if (!Character.isDigit(c)) {
-                JOptionPane.showMessageDialog(this, "Please insert a valid phone number",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-
 }

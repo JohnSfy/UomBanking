@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoanPaid {
-
     private JPanel innerPanel = new JPanel();
     private JLabel header;
     private JLabel message;
@@ -36,7 +35,6 @@ public class LoanPaid {
         returnToMainPageButton = Utils.returnToMainPageButton(loanPaid, account);
         receiptButton = new JButton("Download Loan History");
 
-
         //Placing the elements
         header.setBounds(380, 100, 1000, 100);
         header.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -53,7 +51,6 @@ public class LoanPaid {
         receiptButton.setBounds(380,550,200,40);
 
         receiptButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
 
         receiptButton.addActionListener(new ActionListener() {
             @Override

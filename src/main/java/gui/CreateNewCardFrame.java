@@ -32,7 +32,6 @@ public class CreateNewCardFrame extends JFrame {
     private JPanel chipPanel; //υποθετικό τσιπ κάρτας
     public JColorChooser coChooser; //για επιλογή χρώματος
     private JLabel line;
-
     String pin1;
     String pin2;
     Color color;
@@ -40,6 +39,7 @@ public class CreateNewCardFrame extends JFrame {
     public CreateNewCardFrame(Account account) {
         this.setLayout(null);
 
+//      Initializing
         fr = new Template();
         nameText = new JTextField();
         type = new JComboBox();
@@ -103,7 +103,6 @@ public class CreateNewCardFrame extends JFrame {
         conPinLabel.setBounds(400, 400, 1000, 100);
         conPinField.setBounds(480, 440, 150, 20);
         createCardButton.setBounds(500, 480, 100, 25);
-        //  returnToMainPageButton.setBounds(450, 550, 200, 25);
 
         createCardButton.addActionListener(new ActionListener() {
             @Override
@@ -167,9 +166,9 @@ public class CreateNewCardFrame extends JFrame {
         fr.setVisible(true);
         fr.setDefaultCloseOperation(EXIT_ON_CLOSE);
         fr.setBackground(Color.LIGHT_GRAY);
-
     }
 
+//  Μέθοδος για τον έλεγχο του pin
     public boolean checkPin(String pin1, String pin2) {
 
         int le1, le2;

@@ -78,12 +78,11 @@ public class  DepositFrame extends JFrame {
         deposit.add(continueButton);
         deposit.add(returnToMainPageButton);
 
-
         deposit.setVisible(true);
         deposit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
+//  Checks if the amount is correct
     public boolean isCorrect(String anAmount){
         boolean flag = true;
         if(anAmount.isBlank()) {
@@ -100,6 +99,4 @@ public class  DepositFrame extends JFrame {
         }
         return flag;
     }
-
-
 }

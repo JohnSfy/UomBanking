@@ -1,32 +1,21 @@
 package model;
-import jakarta.persistence.Entity;
 
+import jakarta.persistence.Entity;
 import java.util.ArrayList;
 
-    /*  εφαρμογή στην main
-    
-        Type t1=new Type(1,1111222233334444L);
-        t1.saveData(t1.getCurrType(), t1.getCurIban());
-        t1.setCurrType(2);
-        t1.setCurIban(7777888899994444L);
-        t1.saveData(t1.getCurrType(), t1.getCurIban());
-        System.out.println(t1.toString());
-     */
 public class Type {
     private int currType; //curerent type
     private String curIban; //current iban
     private ArrayList<ArrayList<String>> mainArray = new ArrayList<>(); 
 
-    
-    
     public Type(){
 
     }
+
     public Type(int currType, String curIban) {
         this.currType = currType;
         this.curIban = curIban;
     }
-    
 
     public Type(int currType, String curIban,ArrayList<ArrayList<String>> mainArray) {
         this.currType = currType;
@@ -41,8 +30,6 @@ public class Type {
         else {
                 throw new Exception("Wrong IBAN\nPlease try again!");
         }
-        
-        
     }
 
     public long countDigit(long number){
@@ -68,14 +55,12 @@ public class Type {
         mainArray.add(iban);
         mainArray.add(type);
         return mainArray;
-        
     }
 
     public String toString(){
         return "Result: "+mainArray;
     }
 
-    
     public int getCurrType() {
         return currType;
     }
@@ -99,21 +84,4 @@ public class Type {
     public void setMainArray(ArrayList<ArrayList<String>> mainArray) {
         this.mainArray = mainArray;
     }
-
-    
-
-
-
-
-    
-
-    
-
-
-
-    
-
-    
-
-
 }

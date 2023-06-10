@@ -73,7 +73,6 @@ public class PreviewTransferFrame {
         successTransfer.add(receiptButton);
         successTransfer.add(returnToMainPageButton);
 
-
         successTransfer.setVisible(true);
         successTransfer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         successTransfer.getContentPane().setBackground(Color.LIGHT_GRAY);

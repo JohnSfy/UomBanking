@@ -36,7 +36,6 @@ public class LoanFrame extends JFrame {
 
         ArrayList<Loan> aLoan = LoanDB.fetchAllLoans(account);
 
-
         //creating new JTable to save our loans
         String[] LoansColumns = new String[]{"Amount", "Expiration Date"};
         String[][] LoansInfo = new String[aLoan.size()][2];
@@ -95,8 +94,7 @@ public class LoanFrame extends JFrame {
             }
         });
 
-
-        //add actionlistener to new loan button
+        //Setting up action listener for new loan button
         NewLoan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

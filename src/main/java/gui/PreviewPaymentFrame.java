@@ -40,7 +40,6 @@ public class PreviewPaymentFrame extends JFrame {
             }
         });
 
-
         //Placing the elements
         header.setBounds(330, 100, 1000, 100);
         header.setFont(new Font("Courier", Font.PLAIN, 30));

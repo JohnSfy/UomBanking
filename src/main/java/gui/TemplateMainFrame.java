@@ -54,7 +54,6 @@ public class TemplateMainFrame extends JFrame {
 //      Setting up Log out
         accountIcon.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                System.out.println("Label is pressed");
                 settingsPanel.setBounds(920, 65, 250, 100);
                 settingsPanel.setVisible(!settingsPanel.isVisible());
             }
@@ -84,21 +83,18 @@ class SettingsPanel extends JPanel{
     private JButton seeIBAN;
     private JTextArea iban;
 
-
-
     public SettingsPanel(JFrame parent, Account account) {
 
-        logOut = new JButton("Log out");
+        logOut = new JButton("Log Οut");
         logOut.setPreferredSize(new Dimension(50, 30));
         deleteAccount = new JButton("Delete Account");
         deleteAccount.setPreferredSize(new Dimension(50, 30));
         seeIBAN = new JButton("See your IBAN");
         seeIBAN.setPreferredSize(new Dimension(50, 30));
         iban = new JTextArea(account.getIBAN());
-//        iban.setPreferredSize(new Dimension(5,25));
+
         iban.setEditable(false);
         iban.setVisible(false);
-
 
         logOut.addActionListener(new ActionListener() {
             @Override
@@ -118,31 +114,35 @@ class SettingsPanel extends JPanel{
         deleteAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (CardDB.fetchCard(account.getID()) != null){
-                    System.out.println("Card exists");
-                    CardDB.deleteCard(account.getID());
-                } else {
-                    System.out.println("Card does not exist");
-                }
+                int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete yor account?", "Delete Account", JOptionPane.YES_NO_OPTION);
 
-                if (LoanDB.fetchAllLoans(account) != null){
-                    LoanDB.deleteLoan(account);
-                    System.out.println("Loan exists");
-                } else {
-                    System.out.println("Loan does not exist");
-                }
+                if (result == JOptionPane.YES_OPTION) {
+                    if (CardDB.fetchCard(account.getID()) != null){
+                        System.out.println("Card exists");
+                        CardDB.deleteCard(account.getID());
+                    } else {
+                        System.out.println("Card does not exist");
+                    }
 
-                if (ExpensesDB.fetchAllTransactions(account) != null){
-                    TransactionsDB.deleteTransactions(account);
-                    System.out.println("Transaction exists");
-                } else {
-                    System.out.println("Transaction does not exist");
-                }
+                    if (LoanDB.fetchAllLoans(account) != null){
+                        LoanDB.deleteLoan(account);
+                        System.out.println("Loan exists");
+                    } else {
+                        System.out.println("Loan does not exist");
+                    }
 
-                ClientDB.deleteClient(account.getClient());
-                AccountDB.deleteAccount(account);
-                parent.dispose();
-                new WelcomePage();
+                    if (ExpensesDB.fetchAllTransactions(account) != null){
+                        TransactionsDB.deleteTransactions(account);
+                        System.out.println("Transaction exists");
+                    } else {
+                        System.out.println("Transaction does not exist");
+                    }
+
+                    ClientDB.deleteClient(account.getClient());
+                    AccountDB.deleteAccount(account);
+                    parent.dispose();
+                    new WelcomePage();
+                }
             }
         });
 
@@ -150,7 +150,6 @@ class SettingsPanel extends JPanel{
         add(deleteAccount);
         add(seeIBAN);
         add(iban);
-
 
         setBorder(BorderFactory.createLineBorder(Color.BLACK));;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

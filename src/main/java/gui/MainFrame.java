@@ -7,6 +7,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,21 +23,18 @@ public class MainFrame extends JFrame {
     private JButton transactionHistoryButton;
     private JButton loanButton;
     private JButton createCardButton;
-
     protected static Account account;
     private JPanel loanPanel;
-
     public static JFrame mainFrame;
 
     public static JFrame getMainFrame() {
         return mainFrame;
     }
 
-    public MainFrame(Account account){
+    public MainFrame(Account account) {
         mainFrame = new TemplateMainFrame(account);
 
 //      Initializing components
-
         header = Utils.setHeader("Welcome back " + ClientDB.fetchClient(account.getClient()).getFirstName());
         expensesPanel = new ExpensesPanel(account);
         balancePanel = new BalancePanel(account);
@@ -74,19 +72,16 @@ public class MainFrame extends JFrame {
             }
         });
 
+        if (CardDB.fetchCard(account.getID()) == null) {
+            createCardButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
 
-        if(CardDB.fetchCard(account.getID()) == null){
-              createCardButton.addActionListener(new ActionListener() {
-                  @Override
-                  public void actionPerformed(ActionEvent e) {
+                    new CreateNewCardFrame(account);
 
-                      new CreateNewCardFrame(account);
-
-                  }
-              });
-        }
-        else {
-
+                }
+            });
+        } else {
             createCardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -94,7 +89,6 @@ public class MainFrame extends JFrame {
                             "Card Error", JOptionPane.ERROR_MESSAGE);
                 }
             });
-
         }
 
 //      Adding components to the frame
@@ -108,14 +102,13 @@ public class MainFrame extends JFrame {
         mainFrame.add(loanPanel);
 
         // if user has already create the card
-        if(CardDB.fetchCard(account.getID()) == null){
+        if (CardDB.fetchCard(account.getID()) == null) {
             mainFrame.add(createCardButton);
-        }
-        else {
+        } else {
             Card card = CardDB.fetchCard(account.getID());
         }
 
-     //Basic settings
+        //Basic settings
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -127,9 +120,8 @@ public class MainFrame extends JFrame {
 
 class CardPanel extends JPanel {
     private JLabel header;
-    private JLabel cardL,cardL1;
+    private JLabel cardL, cardL1;
     private JButton cardButton;
-
 
     public CardPanel(Account account) {
         header = Utils.setHeader("Card details");
@@ -151,15 +143,10 @@ class CardPanel extends JPanel {
         setBounds(320, 480, 350, 200);
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-
-
         if (CardDB.fetchCard(account.getID()) != null) {
-
             cardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-
-
                     String type = CardDB.fetchCard(account.getID()).getType();
                     long cardNum = CardDB.fetchCard(account.getID()).getCardNumber();
                     String cardExp = CardDB.fetchCard(account.getID()).getExpirationDate();
@@ -168,72 +155,52 @@ class CardPanel extends JPanel {
 
                     //Initialize color
                     String color = CardDB.fetchCard(account.getID()).getColor();
-                    color = color.replace("java.awt.color[","").replace("]","");
+                    color = color.replace("java.awt.color[", "").replace("]", "");
                     String[] rgbValues = color.split(",");
 
                     int red = Integer.parseInt(rgbValues[0].split("=")[1]);
                     int green = Integer.parseInt(rgbValues[1].split("=")[1]);
                     int blue = Integer.parseInt(rgbValues[2].split("=")[1]);
 
-                    Color finalColor = new Color(red,green,blue);
+                    Color finalColor = new Color(red, green, blue);
 
                     new PreviewCardFrame(account, type, cardNum, cardExp, cardName, cardCvv, finalColor);
                     MainFrame.mainFrame.dispose();
-
-
                 }
             });
-        }
-        else {
+        } else {
             cardButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-
                     JOptionPane.showMessageDialog(cardButton, "You don't have a card!",
                             "Card Warning", JOptionPane.WARNING_MESSAGE);
                 }
             });
-       }
+        }
 
         add(header);
         add(cardL);
         add(cardL1);
         add(cardButton);
-
     }
 
-        private Color decodeColor(String colorString) {
-            // Use the Color class to decode the named color string
-            try {
-                // Use reflection to get the named color field from the Color class
-                java.lang.reflect.Field field = Color.class.getField(colorString);
-                return (Color) field.get(null);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Handle the case where the named color is not found
-                return Color.BLACK;
-            }
+    private Color decodeColor(String colorString) {
+        // Use the Color class to decode the named color string
+        try {
+            // Use reflection to get the named color field from the Color class
+            java.lang.reflect.Field field = Color.class.getField(colorString);
+            return (Color) field.get(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle the case where the named color is not found
+            return Color.BLACK;
         }
-//        layoutComponents();
     }
-
-//    public LayoutManager layoutComponents() {
-//        setLayout(new GridBagLayout());
-//
-//        GridBagConstraints gc = new GridBagConstraints();
-//
-//        gc.gridy = 0;
-//        gc.gridx = 0;
-//        add(cardIcon, gc);
-//
-//        return null;
-//    }
-
+}
 
 class SpendCategoriesPanel extends JPanel {
     private JButton spendCategoriesButton;
     private ChartPanel chartPanel;
-
 
     public SpendCategoriesPanel(Account account) {
         spendCategoriesButton = new JButton("Spend Categories");
@@ -249,7 +216,7 @@ class SpendCategoriesPanel extends JPanel {
 //      Setting up the Chart
         DefaultPieDataset dataset = new DefaultPieDataset();
 
-        for (Transactions payment: payments) {
+        for (Transactions payment : payments) {
             dataset.setValue(payment.getDescription(), payment.getAmount());
         }
 
@@ -285,7 +252,6 @@ class SpendCategoriesPanel extends JPanel {
         });
 
         layoutComponents();
-
     }
 
     public LayoutManager layoutComponents() {
@@ -301,12 +267,11 @@ class SpendCategoriesPanel extends JPanel {
         gc.insets = new Insets(20, 0, 0, 0);
         add(spendCategoriesButton, gc);
 
-
         return null;
     }
 }
 
-class BalancePanel extends JPanel{
+class BalancePanel extends JPanel {
     private JLabel header;
     private JLabel balance;
     public static JButton newTransactionButton;
@@ -319,7 +284,7 @@ class BalancePanel extends JPanel{
 //      Initializing components
         header = Utils.setHeader("Your account balance");
 
-        balance = new JLabel(String.valueOf(account.getBalance())+"€");
+        balance = new JLabel(String.valueOf(account.getBalance()) + "€");
         newTransactionButton = new JButton("New Transaction");
         newTransactionButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
@@ -376,6 +341,7 @@ class ExpensesPanel extends JPanel {
     private JList expenseList;
     private DefaultListModel listModel;
     private JButton transactionHistoryButton;
+
     public ExpensesPanel(Account account) {
 
 //      Initializing components
@@ -402,17 +368,14 @@ class ExpensesPanel extends JPanel {
 
         if (transactions != null) {
             for (Transactions transaction : transactions) {
-                if(transaction.getClass().getName().equals("model.Deposit")){
-                    listModel.addElement("• Deposit, "+transaction.getAmount() +"€");
-                }
-                else if(transaction.getClass().getName().equals("model.Withdraw")){
-                    listModel.addElement("• Withdraw, " + transaction.getAmount() +"€");
-                }
-                else if(transaction.getClass().getName().equals("model.Transfer")){
-                    listModel.addElement("• " + transaction.getDescription() + transaction.getAmount() +"€");
-                }
-                else if(transaction.getClass().getName().equals("model.Payment")){
-                    listModel.addElement("• " + transaction.getDescription() + ", " + transaction.getAmount() +"€");
+                if (transaction.getClass().getName().equals("model.Deposit")) {
+                    listModel.addElement("• Deposit, " + transaction.getAmount() + "€");
+                } else if (transaction.getClass().getName().equals("model.Withdraw")) {
+                    listModel.addElement("• Withdraw, " + transaction.getAmount() + "€");
+                } else if (transaction.getClass().getName().equals("model.Transfer")) {
+                    listModel.addElement("• " + transaction.getDescription() + transaction.getAmount() + "€");
+                } else if (transaction.getClass().getName().equals("model.Payment")) {
+                    listModel.addElement("• " + transaction.getDescription() + ", " + transaction.getAmount() + "€");
                 }
             }
         }
@@ -420,7 +383,7 @@ class ExpensesPanel extends JPanel {
 //      Setting up transaction history button
         transactionHistoryButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
         transactionHistoryButton.setPreferredSize(new Dimension(180, 50));
-        transactionHistoryButton.setText("<html><center>"+"Check your transaction"+"<br>"+"history"+"</center></html>");
+        transactionHistoryButton.setText("<html><center>" + "Check your transaction" + "<br>" + "history" + "</center></html>");
         ArrayList<Transactions> finalTransactions = transactions;
         transactionHistoryButton.addActionListener(new ActionListener() {
             @Override
@@ -449,9 +412,6 @@ class ExpensesPanel extends JPanel {
 }
 
 
-
-
-
 class LoanPanel extends JPanel {
 
     private JLabel header;
@@ -459,6 +419,7 @@ class LoanPanel extends JPanel {
     private JList loanList;
     private DefaultListModel listModel;
     private JButton payLoanButton;
+
     public LoanPanel(Account account) {
 
 //      Initializing components
@@ -482,8 +443,8 @@ class LoanPanel extends JPanel {
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         scrollPane.setPreferredSize(new Dimension(150, 100));
 
-        if(loans != null){
-            for(Loan loan : loans){
+        if (loans != null) {
+            for (Loan loan : loans) {
                 listModel.addElement("• " + loan.getDescription() + ", " + loan.getLoanAmount() + "€");
             }
         }
@@ -491,19 +452,18 @@ class LoanPanel extends JPanel {
 //      Setting up transaction history button
         payLoanButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
         payLoanButton.setPreferredSize(new Dimension(180, 50));
-        payLoanButton.setText("<html><center>"+"Select your loan"+"<br>"+"and pay it"+"</center></html>");
+        payLoanButton.setText("<html><center>" + "Select your loan" + "<br>" + "and pay it" + "</center></html>");
 
         ArrayList<Loan> finalLoans = loans;
         payLoanButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = loanList.getSelectedIndex();
-                if (index >=  0) {
+                if (index >= 0) {
                     Loan loanSelected = finalLoans.get(index);
                     MainFrame.getMainFrame().dispose();
                     new PayLoanFrame(account, loanSelected);
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Please select a loan to pay");
                 }
 

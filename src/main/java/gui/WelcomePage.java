@@ -2,7 +2,6 @@ package gui;
 
 import model.Account;
 import model.Client;
-import model.Main;
 import org.example.AccountDB;
 import org.example.ClientDB;
 
@@ -11,9 +10,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class WelcomePage extends JFrame {
     private JLabel header;
@@ -48,7 +45,7 @@ public class WelcomePage extends JFrame {
         progressBar.setListener(new ProgressBarListener() {
             @Override
             public void progressBarCancelled() {
-                if(worker != null) {
+                if (worker != null) {
                     worker.cancel(true);
                 }
             }
@@ -100,10 +97,10 @@ public class WelcomePage extends JFrame {
         public InfoPanel() {
 //      Initializing components
             showPassword = new JCheckBox("Show Password");
-            showPassword.setFont(new Font("Tahoma", Font.PLAIN,15));
+            showPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
             passwordField = new JPasswordField(10);
             signInButton = new JButton("Sign In");
-            signInButton.setFont(new Font("Tahoma", Font.PLAIN,15));
+            signInButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 //      Setting up showPassword button
             passwordField.setEchoChar('•');
@@ -178,7 +175,7 @@ public class WelcomePage extends JFrame {
             gc.anchor = GridBagConstraints.LINE_END;
             gc.insets = new Insets(0, 0, 0, 5);
             JLabel username = new JLabel("Username");
-            username.setFont(new Font("Tahoma",Font.PLAIN,15));
+            username.setFont(new Font("Tahoma", Font.PLAIN, 15));
             add(username, gc);
 
 //      First row-Second column
@@ -196,7 +193,7 @@ public class WelcomePage extends JFrame {
             gc.anchor = GridBagConstraints.FIRST_LINE_END;
             gc.insets = new Insets(0, 0, 0, 5);
             JLabel password = new JLabel("Password");
-            password.setFont(new Font("Tahoma",Font.PLAIN,15));
+            password.setFont(new Font("Tahoma", Font.PLAIN, 15));
             add(password, gc);
 
 //      Second row-Second column
@@ -241,7 +238,7 @@ public class WelcomePage extends JFrame {
 
                 progressBar.setVisible(false);
 
-                if(isCancelled()) return;
+                if (isCancelled()) return;
             }
         };
 

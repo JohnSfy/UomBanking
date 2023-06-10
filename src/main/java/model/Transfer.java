@@ -15,16 +15,9 @@ public class Transfer extends Transactions {
     public Transfer() {
     }
 
-
-
     public Transfer(String ID, String date, double amount,String clientusername, String description, String IBAN) {
         super(ID, date, amount,clientusername, description);
         this.IBAN = IBAN;
-    }
-
-    @Override
-    public void printTransaction() {
-        super.printTransaction();
     }
 
     public String getIBAN() {

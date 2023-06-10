@@ -91,7 +91,6 @@ public class TransferFrame extends JFrame {
         trFrame.setVisible(true);
         trFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         trFrame.setBackground(Color.LIGHT_GRAY);
-
     }
 
     public boolean isCorrect(String anAmount){

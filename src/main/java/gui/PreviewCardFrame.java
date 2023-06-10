@@ -37,9 +37,8 @@ public class PreviewCardFrame extends JFrame {
     private JLabel deblabel;
     private JButton returnToMainPageButton;
 
-
-
     public PreviewCardFrame(Account account, String type, long cardNum, String cardExp, String cardName, int cardCVV, Color cardColor) {
+        setLayout(null);
 
         //Arxikopoihsh metavlhtwn
         prFrame = new Template();
@@ -59,8 +58,6 @@ public class PreviewCardFrame extends JFrame {
         deblabel = new JLabel("Debit card");
         String red,green,blue,hex;
 
-
-        this.setLayout(null);
         frontCardPanel.setLayout(null);
         backCardPanel.setLayout(null);
 
@@ -182,11 +179,9 @@ public class PreviewCardFrame extends JFrame {
         backCardPanel.add(cvvLabel);
         cvvLabel.setBounds(260, 80, 100, 50);
 
-
         PrePanel.setBackground(Color.LIGHT_GRAY);
         PrePanel.add(frontCardPanel);
         PrePanel.add(backCardPanel);
-
 
         prFrame.add(header);
         prFrame.add(PrePanel);

@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoanDeniedFrame extends JFrame {
-
     private JFrame frame = new Template();
     private JLabel header;
     private JLabel label1;
@@ -18,7 +17,6 @@ public class LoanDeniedFrame extends JFrame {
     private JButton loanPolicyButton;
     private JButton enterInfoAgainButton;
     private JButton returnToTheMainPageButton;
-
 
     public LoanDeniedFrame(Account account){
         header = Utils.setHeader("Your loan request was denied!");
