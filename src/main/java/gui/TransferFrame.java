@@ -56,23 +56,41 @@ public class TransferFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 String amount = amountField.getText();
-                amountCheck = AccountDB.fetchAccount(account.getClient()).getCostPerTransaction();
-                if (Integer.parseInt(amountCheck) >= Integer.parseInt(amount)) {
-                    if (isCorrect(amount) && checkAmount(amount, account.getBalance())) {
+                String IBAN = ibanField.getText();
+
+                //Checking if characters after the 2 first Letters of IBAN are numbers
+                boolean fl=true;
+                for(int i=2;i<IBAN.length();i++){
+                    if(Character.isLetter(IBAN.charAt(i))) fl=false;
+                }
+
+                if(IBAN.length()>=2 && IBAN.length()<=34 && IBAN.charAt(0)=='G' && Character.isLetter(IBAN.charAt(1))){
+                    amountCheck = AccountDB.fetchAccount(account.getClient()).getCostPerTransaction();
+                    if (Integer.parseInt(amountCheck) >= Integer.parseInt(amount)) {
+                        if (isCorrect(amount) && checkAmount(amount, account.getBalance())) {
 //                  Setting up amountField
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
-                        LocalDateTime now = LocalDateTime.now();
-                        TransactionsDB.saveTransaction(new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText()));
-                        Transactions trans = new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText());
-                        account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
-                        trFrame.dispose();
-                        new PreviewTransferFrame(account, trans);
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd_HH.mm.ss");
+                            LocalDateTime now = LocalDateTime.now();
+                            TransactionsDB.saveTransaction(new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText()));
+                            Transactions trans = new Transfer("", dtf.format(now), parseDouble(amount), "Transfer to " + ibanField.getText() + ", ", account.getClient(), ibanField.getText());
+                            account.setBalance(account.getBalance() - parseDouble(amountField.getText()));
+                            trFrame.dispose();
+                            new PreviewTransferFrame(account, trans);
+                        }
                     }
+                    else{
+                        JOptionPane.showMessageDialog(continueButton, "Τhe money transfer cannot be carried out. Your limit per transaction is "+ amountCheck +"€.Please give a smaller amount",
+                                "Amount Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
                 }
-                else{
-                    JOptionPane.showMessageDialog(continueButton, "Τhe money transfer cannot be carried out. Your limit per transaction is "+ amountCheck +"€.Please give a smaller amount",
-                            "Amount Error", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(continueButton, "Τhe IBAN is invalid",
+                            "IBAN Error", JOptionPane.ERROR_MESSAGE);
+
                 }
+
+
             }
         });
 
