@@ -7,6 +7,8 @@ FOR DEVS: 1) Make sure to load this code in a maven project.
           4) You don't need to install any libraries, because the maven project does that for you.
           5) If you change the version of Hibernate, you might need to change the SQLite dialect dependency.
           6) Load this project in Intellij IDEA, because ECLIPSE has a problem with the packages.
+          7) For SDK use the openJDK 20.0.1
+          8) To run the application, run the App class in gui package
           
           
 
